@@ -1,5 +1,5 @@
 # Lista samochodów
-cars = ["Audi", "BMW", "Toyota", "Ford", "Mercedes"]
+cars = ["Audi", "BMW", "Toyota", "Ford", "Mercedes", "Kia"]
 
 # Komunikat
 print("Lista samochodów:\n")
