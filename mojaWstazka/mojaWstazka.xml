@@ -1,0 +1,11 @@
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+	<ribbon>
+		<tabs>
+			<tab id="CustomTab" label="Abbinder Check" >
+				<group id="SampleGroup" label="Abbinder Check">
+					<button id="Button_1" label="Start" size="large" imageMso="BevelShapeGallery" onAction="Abbinder_Check" />
+				</group>
+			</tab>
+		</tabs>
+	</ribbon>
+</customUI>				
