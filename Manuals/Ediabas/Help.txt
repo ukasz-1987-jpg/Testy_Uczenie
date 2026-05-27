@@ -1,0 +1,3461 @@
+EDIABAS-Benutzerhandbuch
+· Benutzerhandbuch/Installationshandbuch
+· Fehlerreferenz
+· Steuergeräte-Simulator
+EDIABAS-Benutzerhandbuch
+Benutzerhandbuch und Installationshandbuch
+More:
+1. Änderungshistorie
+2. Einführung
+3. Allgemeines
+4. Installation und Administration
+5. Hilfsprogramme
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch
+1. Änderungshistorie
+Version 3.0 Erstellung von Übersicht und Installations- und Benutzerhandbuch
+Version 3.0A Zusammenfassung dieser Dokumente
+Version 3.0B Hinzufügen der Änderungsdoku, des Glossars und der Einleitung
+Version 4.1 Überarbeitung für EDIABAS V4.1.0
+Version 5 Überarbeitung für EDIABAS V5.1.0
+Version 5a Erweitert für EDIABAS V5.5.0
+Version 5b Erweitert für die Ferndiagnose Win32
+Version 5c Konfiguration für IFH-Trace
+Version 5d Überarbeitung der XTRACT-Ausgabefunktionalität
+Version 5e Erweitert für QNX
+Version 6 Erweitert für EDIABAS V6.0.0
+Version 6a Überarbeitung für EDIABAS V6.4.0
+Version 6b Überarbeitung für EDIABAS V6.4.3
+Version 6c Erweitert für WinCE
+Version 6d Erweitert für EDIABAS V6.4.6/6.4.7
+Version 6e Erweitert für EDIABAS V6.5.0
+EDIABAS-Benutzerhandbuch Page 1 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Version 6e Erweitert für EDIABAS V6.9.0/V6.10.0
+Keine Unterstützung mehr für DOS, Win16, QNX
+Version 7 Erweitert für EDIABAS V7.0.0
+Keine Unterstützung mehr für Win9x/98/ME
+Version 7a Erweitert für EDIABAS V7.1.0
+BEST/2-Compiler für Win32
+Unterstützung für Pocket PC 2005/Windows Mobile 2005 (WinCE),
+XTRACT mit optionaler XML-Ausgabe
+Version 7b Erweiterte Hilfsprogramme für EDIABAS V7.1.6
+Version 7c Überarbeitet für PocketPC2003/Windows Mobile 2003 (WinCE),
+Erläuterung der ediabas.ini-Parameter des XEthernet-Interfaces,
+Keine Unterstützung mehr für SCO-UNIX
+Version 7d Erweitert für EDIABAS V7.2.0
+Unterstützung für Windows Vista (Win32)
+Version 7e Erweitert für EDIABAS V7.2.0
+Überarbeitung von Konfigurationsübersichten
+Überarbeitung für Tracer-Erweiterungen
+Version 7f Erweitert für EDIABAS V7.2.0
+Überarbeitung von Lieferpaketsübersichten
+Version 7g Erweitert für EDIABAS V7.2.0
+Überarbeitung von Lieferpaketsübersichten,
+Keine Unterstützung mehr für Pocket PC 2005/Windows Mobile 2005
+(WinCE)
+Version 7h Erweitert für EDIABAS V7.2.0
+Aktualisierung von Konfigurationsübersicht
+Version 7i Überarbeitung für EDIABAS V7.2.0
+Version 7k Erweitert für EDIABAS V7.2.0
+Aktualisierung von Lieferpaketsübersicht (XNUL)
+Version 7l Erweitert für EDIABAS V7.2.0
+Aktualisierung von Lieferpaketsübersicht (BestView-Online-Hilfe)
+Version 7m Erweitert für EDIABAS V7.2.0
+Aktualisierung von Lieferpaketsübersicht (.NET4.0/VC2010/Win7SDK)
+Version 7n Erweitert für EDIABAS V7.2.0
+Überarbeitung von Konfigurationsübersicht für XEthernet
+Version 7o Erweitert für EDIABAS V7.3.0
+Unterstützung für Windows 7 (Win7)
+Überarbeitung von Lieferpaketsübersicht (BEST2/BEST2WIN)
+Erweitert für Hilfsprogramm PE (Exit-Codes)
+Version 7p Erweitert für EDIABAS V7.3.0
+Unterstützung für Win64 (x64)
+Version 7q Erweitert für EDIABAS V7.3.0
+Unterstützung für IPv6
+Version 7r Erweitert für EDIABAS V7.3.0
+Erweiterung von Lieferpaketsübersicht (Java 7/6)
+EDIABAS-Benutzerhandbuch Page 2 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Version 7s Erweitert für EDIABAS V7.3.0
+Unterstützung für Windows 8 (Win8)
+Version 7t Erweitert für EDIABAS V7.3.0
+Erweiterung für ECC (Lieferpaketsübersicht, Lizenzen)
+Keine Unterstützung mehr für .NET1.1
+Version 7u Erweitert für EDIABAS V7.3.0
+Aktualisierung von Lieferpaketsübersicht (.NET4.5/VC2012)
+Version 7v Erweitert für EDIABAS V7.3.0
+Erweiterung für XENET+ (Konfiguration, Lieferpaketsübersicht)
+Aktualisierung von Lieferpaketsübersicht (.NET3.5/4.0/4.5/Win64)
+Version 7w Erweitert für EDIABAS V7.3.0
+Unterstützung von Leerzeichen in Verzeichnis/Datei-Namen
+Unterstützung für Windows 8.1 (Win8)
+Version 7x Erweitert für EDIABAS V7.3.0
+Erweiterung für XENET/XENET+ (Konfiguration)
+Version 7y Erweitert für EDIABAS V7.4.0
+Unterstützung für Windows 10 (Win10)
+Unterstützung für .NET4.5.1
+Unterstützung für VC2013, VC#2013, VB2013
+Keine Unterstützung mehr für Windows 8.1 (Win8)
+Keine Unterstützung mehr für Windows XP (WinXP)
+Keine Unterstützung mehr für .NET2.0, .NET4.5
+Keine Unterstützung mehr für Java 6
+Keine Unterstützung mehr für VC2003, VC2005, VC2008, VC2012
+Keine Unterstützung mehr für VC#2012
+Keine Unterstützung mehr für VB4, VB2003, VB2005, VB2012
+Aktualisierung von Lieferpaketsübersicht
+Version 7z Erweitert für EDIABAS V7.4.0
+Erweiterung für TraceXML/TRACE-API.XSD
+Keine Unterstützung mehr für VB2008
+Erweiterung von Lieferpaketsübersicht (Java 7/8)
+Version 7za Erweitert für EDIABAS V7.4.0
+Erweiterung von Lieferpaketsübersicht (VC2017, .NET4.6)
+Version 7.5 Erweitert für EDIABAS V7.5.0
+Erweiterung von Lieferpaketsübersicht
+EDIABAS für Win64 inkl. Multi-Threading-Support
+BEST1, BEST2(WIN) und BestView für Win64
+Keine Unterstützung mehr für XEDIC(C)/XREMOTE/XTELE
+Umbenennung von XENETP in XENET
+Erweitert für XSIM
+Erweiterte Konfigurationsübersicht (LoadWin64)
+Erweiterte Java/.NET-Installation
+Keine Unterstützung mehr für VC6/VB6
+Version 7.5a Erweitert für EDIABAS V7.5.1
+Erweiterung von Lieferpaketsübersicht (Runtime System für Win64)
+Aktualisierte Konfigurationsübersicht (ohne ENETP)
+Version 7.5b Erweitert für EDIABAS V7.5.1
+Erweiterung von Lieferpaketsübersicht (Runtime System für Win64)
+Version 7.5c Erweitert für EDIABAS V7.5.1
+Erweiterung von Lieferpaketsübersicht (VC2019, .NET4.8)
+Keine Unterstützung mehr für VC2010/.NET4.0
+Version 7.5d Erweitert für EDIABAS V7.5.3
+Keine Unterstützung mehr für Windows 7 (Win7)
+EDIABAS-Benutzerhandbuch Page 3 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Erweiterung von Lieferpaketsübersicht (Win32/Win64-Mapping, XSIM)
+Aktualisierte Konfigurationsübersicht (LoadWin64)
+Version 7.5e Erweitert für EDIABAS V7.5.3
+Unterstützung für Azul OpenJava 11 (Win32/Win64)
+Keine Unterstützung mehr für Java 7
+Aktualisierte Lieferpaketsübersicht (Win32/Win64)
+Aktualisierte Konfigurationsübersicht (ENET)
+Erweiterte Konfigurationsübersicht (XRPLUS/ICOM-Adressermittlung)
+Version 7.5f Erweitert für EDIABAS V7.5.4
+Erweiterte Konfigurationsübersicht (XRPLUS/ICOM-Adressermittlung)
+Version 7.5g Erweitert für EDIABAS V7.5.3/V7.5.4
+Aktualisierte Konfigurationsübersicht (Interface)
+Erweiterte Konfigurationsübersicht (ENET)
+Version 7.5h Erweitert für EDIABAS V7.5.4
+Aktualisierte Konfigurationsübersicht (ENET/HSFZ)
+Erweiterte Konfigurationsübersicht (ENET/DoIP)
+EDIABAS-Benutzerhandbuch Page 4 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Version 7.5i Erweitert für EDIABAS V7.5.4
+Aktualisierte Konfigurationsübersicht (ENET)
+Erweiterte Konfigurationsübersicht (ENET)
+Version 7.6 Erweitert für EDIABAS V7.6.0
+Unterstützung für LINUX/UBUNTU
+Version 7.6b Erweitert für EDIABAS V7.6.0
+Keine Unterstützung mehr für .NET4.5 und .NET4.6
+Erweiterte Konfigurationsübersicht (XRPLUS/ICOM-Adressermittlung)
+Version 7.6c Erweitert für EDIABAS V7.6.0
+Erweiterte Konfigurationsübersicht (ENET)
+Version 7.6d Erweitert für EDIABAS V7.6.0
+Erweiterte Konfigurationsübersicht (PDU)
+Version 7.6e Erweitert für EDIABAS V7.6.0
+Aktualisierte Konfigurationsübersicht (ENET)
+Version 7.6f Erweitert für EDIABAS V7.6.0
+Unterstützung für Azul OpenJava 17 (Win64)
+Keine Unterstützung mehr für Java 8
+Aktualisierte Lieferpaketsübersicht (Win32/Win64)
+Erweiterte Konfigurationsübersicht (ENET)
+Version 7.6g Erweitert für EDIABAS V7.6.0
+Erweiterte Konfigurationsübersicht (PDU)
+Version 7.6h Erweitert für EDIABAS V7.6.0
+Erweiterte Lizenzangaben (CURL, JSONXX, ISO8601)
+Aktualisierte Lieferpaketsübersicht (Win32/Win64)
+Version 7.7 Erweitert für EDIABAS V7.7.0
+Erweiterte Konfigurationsübersicht (Authentication)
+Erweiterte Konfigurationsübersicht (SSL, S29)
+Erweiterte Lizenzangaben (OpenSSL)
+Aktualisierte Lieferpaketsübersicht (Win32/Win64)
+Version 7.7a Erweitert für EDIABAS V7.7.0
+Erweiterte Lizenzangaben (Crypto++, Base64)
+Aktualisierte Lieferpaketsübersicht (Win32/Win64)
+Version 7.7b Erweitert für EDIABAS V7.7.0
+Erweiterte Konfigurationsübersicht (SSL)
+Version 7.7c Erweitert für EDIABAS V7.7.1
+Aktualisierte Konfigurationsübersicht (NetworkProtocol)
+Aktualisierte Konfigurationsübersicht (SSL, SSLSecurityPath)
+Erweiterte Konfigurationsübersicht (SSL, SelectCertificate)
+Aktualisierte Konfigurationsübersicht (SSL, SSLPort)
+Aktualisierte Konfigurationsübersicht (XEthernet, VehicleProtocol)
+Aktualisierte Konfigurationsübersicht (XEthernet, DoipGatewayAddress)
+Version 7.7d Erweitert für EDIABAS V7.7.1
+Unterstützung für Windows 11 (Win11)
+Aktualisierte Konfigurationsübersicht (SSL, SSLSecurityPath)
+Aktualisierte Konfigurationsübersicht (SSL, SSLPort)
+Aktualisierte Konfigurationsübersicht (S29, SecurityPath)
+Aktualisierte Konfigurationsübersicht (S29, SelectCertificate)
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch
+EDIABAS-Benutzerhandbuch Page 5 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+2. Einführung
+More:
+2.1 Über diese Dokumentation
+2.2 Konventionen
+2.3 Besonderheiten, Begriffe, Akronyme
+2.4 Warenzeichen
+2.5 Lizenzen
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 2. Einführung
+2.1 Über diese Dokumentation
+Diese Dokumentation beschreibt die Handhabung und Funktion des Elektronik Diagnose Basissystem.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 2. Einführung
+2.2 Konventionen
+Diese Dokumentation verwendet die folgenden typographischen Konventionen:
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 2. Einführung
+2.3 Besonderheiten, Begriffe, Akronyme
+Beispiel Beschreibung
+SAMPLE.B2V Großschrift kennzeichnet Dateinamen, Register und
+Betriebssystemkommandos.
+job, string, while Fettschrift kennzeichnet Schlüsselwörter und Operatoren
+der Sprachen BEST/2 und BEST/1 sowie der APIFunktionen.
+In Beschreibungen der Syntax müssen diese Wörter wie
+angegeben geschrieben werden.
+ausdruck Kursivschrift kennzeichnet Platzhalter für vom
+Programmierer einzutragende Werte, wie z.B. Dateinamen.
+[option] Wörter in eckigen Klammern bedeuten optionale Angaben.
+{ result |
+argument }
+Geschweifte Klammern und senkrechte Striche
+kennzeichnen Eingaben, von denen jeweils eine gewählt
+werden muß, außer wenn sie in eckigen Klammern steht.
+[constant...] job... Drei Punkte, die direkt einem Ausdruck folgen,
+kennzeichnen, daß mehrere Ausdrücke der selben Form
+folgen können.
+hallo="Test"; Diese Schriftart kennzeichnet Beispiele, Benutzereingaben,
+Programmausgaben und Fehlermeldungen.
+while() {
+.
+.}
+Eine Spalte oder eine Zeile aus drei Punkten kennzeichnet,
+daß ein Teil eines Beispiels absichtlich weggelassen wurde.
+[1] Verweis auf ein Dokument aus dem Literaturverzeichnis.
+EDIABAS-Benutzerhandbuch Page 6 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Eine Erklärung der in dieser und allen anderen EDIABAS-Dokumentationen verwendeten Abkürzungen befinden
+sich im Kapitel "GLOSSAR".
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 2. Einführung
+2.4 Warenzeichen
+Microsoft, MS, MS-DOS, Windows, Windows Vista, Win32, Win64 und Pocket PC sind registrierte Warenzeichen
+der Microsoft Corporation.
+SCO, SCO UNIX und OpenServer sind registrierte Warenzeichen der Santa Cruz Operation, Inc.
+LINUX ist registriertes Warenzeichen von Linus Torwalds. UBUNTU ist registriertes Warenzeichen der Canonical
+Limited.
+Java ist registriertes Warenzeichen der Oracle Corp.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 2. Einführung
+2.5 Lizenzen
+Für das WPF Extended Toolkit gilt die Microsoft Public License (Ms-PL).
+Für das DotNetZip Toolkit gilt die Microsoft Public License (Ms-PL).
+Für die EDIABAS-LINUX/UBUNTU-Unterstützung gilt die GNU General Public License (GPLv3).
+Für CURL gilt eine an MIT/X angelehnte Lizenz.
+Für JSONXX und ISO8601 gilt die MIT/X Lizenz.
+Für OpenSSL gilt die Apache-2-Lizenz.
+Für Crypto++ gilt die Boost Software Lizenz 1.0.
+Für Base64 gelten die zugehörigen Bedingungen.
+Alle entsprechenden Lizenzinformationen befinden sich im Lieferumfang des EDIABAS-Laufzeitsystems.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch
+3. Allgemeines
+More:
+3.1. Diagnose und Codierung von elektronischen Steuergeräten
+3.2. Problemstellung
+3.3. Lösungsansatz
+3.4. Lösungsrealisierung mit EDIABAS
+3.5. Struktur
+EDIABAS-Benutzerhandbuch Page 7 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+3.6. Jobkonzept
+3.7. Beschreibungssprache
+3.8. Abläufe
+3.9. Verfügbarkeit
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.1. Diagnose und Codierung von elektronischen Steuergeräten
+Elektronische Steuergeräte werden bei Zulieferern der Automobilindustrie, bei den Fahrzeugherstellern selbst sowie
+bei beauftragten Unternehmen entwickelt. Die bei Zulieferern gefertigten und getesteten Steuergeräte werden beim
+Automobilhersteller in das Fahrzeug verbaut, gegebenenfalls über ihre Diagnoseschnittstelle fahrzeugspezifisch
+codiert (programmiert) und auf ihre Funktion im Fahrzeug geprüft. Bei Auftreten eines Fehlers wird mittels
+elektronischer Diagnose und eines rechnergestützten Testsystems die Fehlerursache ermittelt und der Fehler
+behoben. Nach Auslieferung des Fahrzeugs werden im Rahmen von Inspektion und Service auftretende Fehler in der
+Werkstatt wiederum mit Unterstützung der elektronischen Diagnose behoben. Beim Tausch eines elektronischen
+Steuergerätes in der Werkstatt wird das defekte Gerät beim Hersteller instandgesetzt und seine korrekte Funktion
+mittels elektronischer Diagnose überprüft. Das neu eingebaute Steuergerät muß eventuell vor Ort fahrzeugspezifisch
+nachcodiert werden.
+Codierung und Prüfung von elektronischen Steuergeräten ist gemäß diesem »Lebenslauf« eine mehrmals
+wiederkehrende Aufgabenstellung bei:
+• Entwicklung des Steuergerätes
+• Labortests des Steuergerätes
+• Versuchen im Testfahrzeug
+• Fertigung des Steuergerätes
+• Endprüfung des Steuergerätes
+• Verbau und Check des Steuergerätes in der Vormontage
+• fahrzeugbezogener Codierung des Steuergerätes
+• Funktionstest im Fahrzeug
+• Endprüfung des Fahrzeugs
+• Service oder Fehlersuche im Rahmen des Kundendienstes
+• Austausch und Neuprogrammierung in der Werkstatt
+• Reparatur des Steuergerätes
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.2. Problemstellung
+Wird in mehreren Modellreihen in den Fahrzeugen eine größere Anzahl von Steuergeräten eingesetzt, die zum Teil
+EDIABAS-Benutzerhandbuch Page 8 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+von mehreren Herstellern entwickelt und geliefert werden, so entsteht ein sehr hoher »Fluktuationsanteil« von
+Steuergeräten, da in der Laufzeit einer Fahrzeugreihe ständig Weiterentwicklungen der Subsysteme stattfinden.
+Vergleichend können hier Motore betrachtet werden, die in mehreren unterschiedlichen Ausführungen in der
+gleichen Karosse einer Fahrzeugreihe eingesetzt werden.
+Durch Auslauf und Neueinsatz von Steuergeräten sowie Änderungen an Steuergeräten wachsen die notwendigen
+Änderungen in den Codier- und Prüfsystemen (Änderung, Inbetriebnahme, Test) überproportional an. Steigen die
+Aufwendungen für Dokumentation und die Fehlerrisiken.
+Durch die starke »Zergliederung« von Aufgaben in großen Unternehmen, sowie durch sequentielles Arbeiten führen
+die oben genannten Schritte von der Entwicklung eines Steuergerätes über die Fertigung bis zum Kundendienst zu
+einer mehrfachen Bearbeitung:
+Bild 3.2-1: Bisheriger Zustand
+Codier- und Prüfprogramme werden beim Steuergeräteentwickler, in der Versuchsabteilung, in der
+Fertigungsvorbereitung, im Kundendienst und für die Reparatur der Steuergeräte jeweils individuell erstellt. Das
+heißt, auf Basis einer Dokumentation zum Steuergerät werden die Schritte Entwicklung bzw. Weiterentwicklung
+und Test von Programmen mehrfach durchlaufen. Die offensichtlichen Unterschiede in den Aufgabenstellungen und
+Zielsetzungen der einzelnen Phasen trüben den Blick für die Gemeinsamkeit, nämlich die jeweils gleiche
+Komponente Steuergerät.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.3. Lösungsansatz
+Die Gleichteile der o.g. Systeme können nach einer einmaligen Erstellungsphase von allen
+Anwendungsprogrammen mehrfach genutzt werden. Dies geschieht im Sinne einer Art »Betriebssystem« für
+Steuergerätekommuniktion, das für jedes Steuergerät einen passenden »Kommunikationstreiber« zur Verfügung
+stellt.
+EDIABAS-Benutzerhandbuch Page 9 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Bild 3.3-1: Gewünschter Zustand
+So wie ein herkömmliches Betriebssystem Informationen über den genauen Zugriff auf Festplatten oder den
+Bildschirm hinter speziellen Funktionen verbirgt, so verbirgt dieses »Betriebssystem« die genauen Informationen
+über den Zugriff auf ein Steuergerät.
+Dieses »Betriebssystem« ist nicht fest an die Anwendungsprogramme gebunden oder gar in Datenbereichen
+miteinander verknüpft. Es stellt nur »Dienste« zur Verfügung. Diese Dienste können vom Anwendungsprogramm
+ausgelöst werden und laufen dann (wenn gewünscht) zeitlich unabhängig von dieser ab. Das Ergebnis dieses
+»Dienstes« kann nach dessen Abarbeitung dann vom Anwendungsprogramm bearbeitet werden. Das
+Anwendungsprogramm (der »Client«) und das »Betriebssystem« (der »Server«) tauschen untereinander nur
+Nachrichten und Daten aus.
+Der Server übersetzt die vom Steuergerät kommenden Rohdaten in die vom Anwendungsprogramm gewünschten
+symbolischen Daten.
+Bild 3.3-2: Übersetzerfunktion
+Dabei ist der Server an sich nicht mit eigener Intelligenz ausgestattet, sondern speichert sein Wissen über die
+einzelnen Steuergeräte, in leicht (d.h. auch zur Laufzeit) austauschbaren Datenmodulen. Diese Datenmodule
+enthalten das komplette (oder nur das benötigte) Wissen über die Übersetzung der binären Steuergerätedaten in
+symbolische Daten.
+Jedem Client (sprich Anwendungsprogramm) wird eine Softwareschnittstelle zur Verfügung gestellt, die den
+betriebssystemabhängigen Teil zum Austausch der Nachrichten unter einer einheitlichen prozeduralen Schnittstelle
+verbirgt. Mehrere Anwendungsprogramme können dem Server im Time-Sharing-Verfahren ihre Aufträge
+übermitteln. Das heißt, sobald ein Anwendungsprogramm den Server freigibt, kann die nächste ihren Auftrag an den
+Server senden.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.4. Lösungsrealisierung mit EDIABAS
+EDIABAS-Benutzerhandbuch Page 10 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Die oben genannten Lösungsansätze wurden alle in EDIABAS realisiert. EDIABAS kann somit als
+»Betriebssystem zur Kommunikation mit Steuergeräten in Client/Server Architektur« betrachtet werden. Da der
+Begriff »Betriebssystem« in diesem Zusammenhang jedoch äußerst mißverständlich wäre, und hier eine
+gemeinsame Basis für andere Anwendungsprogramme geschaffen wurde, wird von SOFTING der Begriff
+»Basissystem« verwendet. Wegen des einheitlichen Zweckes der elektronischen Diagnose heißt es:
+Elektronik DIAgnose BASissystem = EDIABAS
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.5. Struktur
+EDIABAS hat unabhängig vom verwendeten Betriebssystem eine feste Struktur.
+Bild 3.5-1: EDIABAS-Struktur
+Bild 3.5-1 zeigt ein grobes Abbild der einzelnen Teilkomponenten und der Daten- und Kommunikationspfade.
+Das steuergerätespezifische Wissen von EDIABAS steht in den Steuergerätebeschreibungsdateien (SGBDen). Die
+SGBDen sind variantenorientiert erstellt. Das heißt, für jede Steuergerätevariante gibt es genau eine
+EDIABAS-Benutzerhandbuch Page 11 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+variantenspezifische SGBD. Für alle Steuergeräte einer Gruppe, das sind im allgemeinen Steuergeräte mit gleicher
+Adresse, kann eine übergeordnete Gruppenbeschreibungsdatei existieren. Diese Datei enthält Methoden mit denen
+sich feststellen läßt, welche Variante dieser Gruppe am Diagnosebus angeschlossen ist.
+Die SGBDen werden vom EDIABAS Laufzeitsystem, bei Auftragserteilung durch ein Anwendungsprogramm,
+geladen und interpretiert. Der Dateiname der SGBD (ohne Extension) ist der Name mit dem die
+Anwendungsprogramme eine Steuergerätevariante oder Steuergerätegruppe referenzieren.
+Bild 3.5-2: SGBD u Gruppen SGBD
+Wesentlicher Bestandteil von EDIABAS ist das Laufzeitsystem. Dieses Laufzeitsystem gliedert sich in drei
+wesentliche Bestandteile:
+• Ablaufsteuerung (Kernel)
+• SGBD-Interpreter
+• Interfacehandler (IFH)
+Die Ablaufsteuerung bestimmt das Verhalten des Gesamtsystems und beinhaltet die Kommunikationsschnittstelle zu
+den Anwendungsprogrammen. Sie ist verantwortlich für die Dateiverwaltung und die Fehlerverwaltung.
+Der SGBD-Interpreter übernimmt die eigentliche Umsetzung der binären Steuergerätedaten in symbolische Daten.
+Er interpretiert die in den SGBDen enthaltenen Daten, Methoden und Abläufe, initiiert die Kommunikation mit dem
+Steuergerät und liefert die von ihm gewonnenen Ergebnisse der Ablaufsteuerung zur Weiterleitung an das
+Anwendungsprogramm zurück.
+Der Interfacehandler ist ein austauschbares Softwaremodul, das je nach verwendetem Hardwareinterface in
+verschiedenen Versionen vom Benutzer hinzugebunden wird. Eine Datenanforderung an das Steuergerät wird vom
+Interfacehandler in einen Auftrag an das jeweils verwendete Hardwareinterface umgesetzt. Die von diesem
+zurückgelieferten Daten werden von interfaceabhängigen Anteilen bereinigt und können so unabhängig von der
+verwendeten Interfacehardware ausgewertet werden. Auch vom Interface zurückgegebene Fehler werden auf die
+internen Fehlermeldungen normiert. Der Interfacehandler bietet außerdem eine Simulation von Steuergeräten an.
+Somit können auf EDIABAS basierende Anwendungsprogramme auch dann getestet werden, wenn die verwendeten
+Steuergeräte nicht vorhanden sind.
+EDIABAS-Benutzerhandbuch Page 12 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Um den Zugriff auf EDIABAS zu vereinfachen, wird jedem Anwendungsprogramm eine Softwareschnittstelle
+hinzugebunden, die den Zugriff auf EDIABAS über eine fest definierte prozedurale Schnittstelle regelt. Dieses
+sogenannte »Application Programmers Interface« (EDIABAS-API) übernimmt die systemabhängige
+Kommunikation zum Laufzeitsystem. Die vom Laufzeitsystem empfangenen Daten werden innerhalb des
+EDIABAS-API für das Anwendungsprogramm verwaltet. Dadurch wird das Laufzeitsystem von der Verwaltung
+dieser Daten entlastet und konnte somit weitaus kompakter gestaltet werden.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.6. Jobkonzept
+Wie in den generellen Lösungsansätzen bereits gezeigt, bietet EDIABAS als Server den Clients Dienste an. Die
+Dienste, die EDIABAS anbietet, werden Jobs genannt. Ein Job ist ein in sich abgeschlossener Auftrag, Daten vom
+Steuergerät auszulesen und auszuwerten. Er darf jederzeit ohne Berücksichtigung der Auftragsreihenfolge
+aufgerufen werden (Grundsatz der Abgeschlossenheit). Der Job liefert nach Bearbeitungsende Ergebnisse zurück,
+die vom Anwendungsprogramm verwendet werden können. Die Jobs sind nicht fest in EDIABAS programmiert,
+sondern sind Bestandteil der SGDBen. Sie werden nach ihrer Funktion benannt, wie z.B.
+FEHLERSPEICHER_LESEN oder DREHZAHL_LESEN. Es gibt auch Jobs, die automatisch vom Laufzeitsystem
+aufgerufen werden und somit in jeder Beschreibungsdatei obligatorisch oder optional vorhanden sein müssen. Dazu
+gehört der Job INITIALISIERUNG zur Initialisierung der SGBD, der optionale Job ENDE zur Deinitialisierung der
+SGBD und der Job IDENTIFIKATION in einer Gruppenbeschreibungsdatei, der die aktuell verbaute
+Steuergerätevariante ermittelt.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.7. Beschreibungssprache
+Formuliert werden Jobs in einer eigenen BEschreibungssprache für STeuergeräte (BEST). Diese
+Beschreibungssprache existiert in zwei Variationen. Es gibt eine low-level, assemblerähnliche Sprache mit Namen
+BEST/1 und die Hochsprachenversion BEST/2 mit 'C'-ähnlicher Syntax.
+Im allgemeinen werden alle SGBDen in BEST/2 formuliert. In BEST/2 werden Jobs ähnlich wie Funktionen
+definiert. Das heißt, es gibt einen Jobheader, der alle Ein- und Ausgangsparameter auflistet. Innerhalb eines Jobs
+können Variablen und Felder definiert und benutzt werden. Es stehen alle nötigen arithmetischen Operatoren zur
+Verfügung. Eine umfangreiche Bibliothek enthält Funktionen zur Manipulation von Daten und zur Kommunikation
+mit dem Steuergerät. Die Sprache selbst enthält fast alle aus 'C' bekannten Kontrollstrukturen. Die so formulierten
+SGBDen müssen vor der Benutzung in EDIABAS mit einem Compiler (BEST2 bzw. BEST2WIN) in ein für das
+Laufzeitsystem lesbares Format gebracht werden. Dies geschieht zum einen aus Perfomancegründen und zum
+anderen sind damit auch Syntaxfehler während der Laufzeit ausgeschlossen.
+Zum Test der übersetzten BEST/2 Beschreibungsdateien existiert der Quelltextdebugger BestView. Mit Hilfe von
+BestView kann der Ablauf eines Jobs genau verfolgt werden; man kann Variableninhalte überwachen, anzeigen und
+ändern.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.8. Abläufe
+Die Auslösung eines Jobs geschieht im Anwendungsprogramm mittels der API-Funktionen apiJob, apiJobData
+oder apiJobExt. Diese Funktionen benötigen mindestens zwei Angaben: Das anzusprechende Steuergerät bzw. die
+Steuergerätegruppe und der Job der ausgeführt werden soll.
+Diese beiden Daten werden an das EDIABAS Laufzeitsystem übertragen. Dieses stellt zuerst fest ob es sich um eine
+Steuergerätevariante oder um eine Steuergerätegruppe handelt. Wurde eine Gruppe angesprochen, so wird
+automatisch der Job IDENTIFIKATION in der Gruppenbeschreibungsdatei abgearbeitet. Wurde vom Job
+IDENTIFIKATION eine gültige Steuergerätevariante ermittelt, wird mit Hilfe des Ergebnisses VARIANTE
+EDIABAS-Benutzerhandbuch Page 13 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+automatisch die zugehörige Variantendatei geladen, so als wäre der Name bereits vom Anwendungsprogramm
+übergeben worden. In der Variantendatei wird der vom Anwendungsprogramm geforderte Job bearbeitet. Ein Job
+kann entweder direkt in der Variantendatei stehen oder er kann in einer Basisdatei stehen. Basisdateien sind
+SGBDen, auf die von der Variantendatei aus verwiesen wird und die als Teil der Variantendatei betrachtet werden
+können. Danach werden die Ergebnisse dieses Jobs dem Anwendungsprogramm zur Verfügung gestellt.
+Immer wenn eine Beschreibungsdatei neu angesprochen wird, das heißt nach jedem Wechsel, wird zuerst der Job
+ENDE, der zuletzt geladenen SGBD aufgerufen. Dieser Aufruf erfolgt nur, wenn der Job ENDE in der Datei
+existiert. Er ermöglicht eine Deinitialisierung der Hardware. Danach wird in der neuen Beschreibungsdatei der Job
+INITIALISIERUNG aufgerufen. Dieser Job muß obligatorisch in jeder Beschreibungsdatei vorhanden sein, und
+kann zur Initialisierung der Interfacehardware dienen. Erst jetzt wird der im Auftrag angegebene Job ausgeführt.
+Nach dem erneuten Aufruf des gleichen Jobs wird kein Standardjob mehr ausgeführt.
+Tritt bei der Verarbeitung eines Jobs ein Fehler in einer der Teilkomponenten auf, so wird die Verarbeitung sofort
+abgebrochen und eine Fehlermeldung an das Anwendungsprogramm zurückgegeben. Eventuelle Ergebnisse werden
+in diesem Fall gelöscht. Vor dem erneuten Aufruf des gleichen Jobs wird in diesem Fall automatisch wieder der Job
+INITIALISIERUNG aufgerufen.
+Bild 3.8-1: SGBD u. Job Auswahl
+Während der Abarbeitung eines Jobs werden dessen Befehle sequentiell interpretiert. Eventuelle
+Kommunikationsaufträge zum Steuergerät werden vom Interfacehandler weitergereicht und verarbeitet. Die
+ermittelten Ergebnisse werden an das Anwendungsprogramm übermittelt.
+EDIABAS-Benutzerhandbuch Page 14 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Bild 3.8-2: Job Ablauf
+Das Anwendungsprogramm kann die von EDIABAS gelieferten Ergebnisse mittels der Funktion apiResultXXX in
+verschiedenen Formaten auslesen. Dabei wird wenn möglich eine Konvertierung durchgeführt. So kann z.B. Das
+Ergebnis Drehzahl, das als Integer in der Beschreibungsdatei errechnet wurde, vom Anwendungsprogramm im
+Realformat angefordert werden.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 3. Allgemeines
+3.9. Verfügbarkeit
+Applikation EDIABAS Steuergerät
+int data;
+apiJob("DMEV3",
+"DREHZAHL_LESEN"...);
+job ( name:
+DREHZAHL_LESEN;
+result:
+DREHZAHL;
+send_and_receive
+(antwort,
+tel_drehzahllesen);
+-> 59 04 02 03
+<- 59 05 03 05
+05
+DREHZAHL=antwort[3]
+*256 +
+antwort[4];
+}
+apiResultInt
+(&variable,
+"DREHZAHL",set);
+printf("Drehzahl: %d",
+variable);
+type: integer
+... ) {
+char antwort[];
+EDIABAS-Benutzerhandbuch Page 15 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Das EDIABAS Laufzeitsystem und die EDIABAS-Applikationsentwicklungsumgebung sind als einfach portierbare
+Systeme entworfen worden. Sie sind derzeit für folgende Plattformen verfügbar:
+• MS-WINDOWS 10 (WIN32/x86)
+• MS-WINDOWS 10 (WIN64/x64)
+• MS-WINDOWS 11 (WIN64/x64)
+• UBUNTU 20.04 LTS (LINUX/x64)
+Im Rest des Dokuments wird der Begriff MS-WINDOWS verwendet, wenn eine Darstellung für WIN32/WIN64
+gültig ist.
+Im Rest des Dokuments wird der Begriff LINUX64 verwendet, wenn eine Darstellung für LINUX/x64 gültig ist.
+Die Entwicklungsumgebung für SGBDen ist nur unter MS-WINDOWS verfügbar.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch
+4. Installation und Administration
+More:
+4.1. Übersicht der Lieferpakete
+4.2. Systemvoraussetzungen
+4.3. Erstinstallation
+4.4. Environment-Variable für EDIABAS-Programme
+4.5. EDIABAS-Konfiguration
+4.6. Starten und Beenden von EDIABAS
+4.7. Deinstallation
+4.8. Schutzmechanismus
+4.9. Ferndiagnose
+4.10. Proxy-Betrieb
+4.11. EDIABAS-Parallelbetrieb
+4.12. EDIABAS-Controller-Service-Betrieb
+4.13. EDIABAS-Multi-Threading-Betrieb
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.1. Übersicht der Lieferpakete
+Insgesamt sind derzeit drei Pakete verfügbar, deren Umfänge im folgenden näher erläutert werden. Dies sind die
+Pakete
+EDIABAS-Benutzerhandbuch Page 16 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+• RUNTIME SYSTEM
+• APPLICATION DEVELOPMENT KIT
+• BEST DEVELOPMENT KIT
+More:
+4.1.1. RUNTIME SYSTEM
+4.1.2. APPLICATION DEVELOPMENT KIT
+4.1.3. BEST DEVELOPMENT KIT
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete
+4.1.1. RUNTIME SYSTEM
+Das RUNTIME SYSTEM ist für alle im Kapitel "Verfügbarkeit" aufgeführten Systeme verfügbar. Dieses
+Lieferpaket ist die Grundlage für alle weiteren EDIABAS-Lieferpakete. Das RUNTIME-SYSTEM muß immer
+installiert werden.
+Das Paket ermöglicht den Anwendungsprogrammen Diagnoseabläufe über EDIABAS zu betreiben.
+More:
+4.1.1.1. Dateien unter WIN32/WIN64
+4.1.1.2. Dateien unter LINUX64
+4.1.1.3. Dokumente
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.1. RUNTIME SYSTEM
+4.1.1.1. Dateien unter WIN32/WIN64
+Das Lieferpaket RUNTIME SYSTEM enthält folgende Dateien:
+README32 Installationshinweise
+BIN\ediabas.epf Der Name der Passwortdatei mit der Extension .epf.
+BIN\API32.DLL Zugriff auf das EDIABAS-Laufzeitsystem (WIN32)
+BIN\API32.EXE WIN32/WIN64-API-Mapper
+BIN\API64.DLL Zugriff auf das EDIABAS-Laufzeitsystem (WIN64)
+BIN\API64.EXE WIN64/WIN32-API-Mapper
+BIN\APIJAV1132.DLL Zugriff auf das EDIABAS-Laufzeitsystem via Azul OpenJava
+11 (WIN32)
+BIN\APIJAV1164.DLL Zugriff auf das EDIABAS-Laufzeitsystem via Azul OpenJava
+11 (WIN64)
+BIN\APIJAV1764.DLL Zugriff auf das EDIABAS-Laufzeitsystem via Azul OpenJava
+17 (WIN64)
+BIN\APINET232.DLL Zugriff auf das EDIABAS-Laufzeitsystem via .NET
+Framework 3.5 (WIN32)
+BIN\APINET264.DLL Zugriff auf das EDIABAS-Laufzeitsystem via .NET
+Framework 3.5 (WIN64)
+EDIABAS-Benutzerhandbuch Page 17 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+BIN\APINET432.DLL Zugriff auf das EDIABAS-Laufzeitsystem via .NET
+Framework 4.8 (WIN32)
+BIN\APINET464.DLL Zugriff auf das EDIABAS-Laufzeitsystem via .NET
+Framework 4.8 (WIN64)
+BIN\APIVB32.DLL Visual-Basic-Zugriff auf das EDIABAS-Laufzeitsystem
+(WIN32)
+BIN\APIVBNET232.DLL Visual-Basic-Zugriff auf das EDIABAS-Laufzeitsystem
+via .NET Framework 3.5 (WIN32)
+BIN\APIVBNET264.DLL Visual-Basic-Zugriff auf das EDIABAS-Laufzeitsystem
+via .NET Framework 3.5 (WIN64)
+BIN\APIVBNET432.DLL Visual-Basic-Zugriff auf das EDIABAS-Laufzeitsystem
+via .NET Framework 4.8 (WIN32)
+BIN\APIVBNET464.DLL Visual-Basic-Zugriff auf das EDIABAS-Laufzeitsystem
+via .NET Framework 4.8 (WIN64)
+BIN\BESTINFO.EXE Inhaltsanzeige von BEST-Objektdateien (WIN32)
+BIN\BESTINFO64.EXE Inhaltsanzeige von BEST-Objektdateien (WIN64)
+BIN\BESTVER.EXE Versionskontrolle von BEST-Objektdateien (WIN32)
+BIN\BESTVER64.EXE Versionskontrolle von BEST-Objektdateien (WIN64)
+BIN\EBAS32.DLL EDIABAS-Laufzeitsystem (WIN32)
+BIN\EBAS32.EXE EDIABAS-Visualisierung (WIN32)
+BIN\EBAS64.DLL EDIABAS-Laufzeitsystem (WIN64)
+BIN\EBAS64.EXE EDIABAS-Visualisierung (WIN64)
+BIN\EBASCC32.DLL EDIABAS-Controller-Service-Anbindung
+BIN\EBASCS32.EXE EDIABAS-Controller-Service
+BIN\EBASMT32.DLL EDIABAS-MultiThreading-Laufzeitsystem (WIN32)
+BIN\EBASMT32.EXE EDIABAS-MultiThreading-Hilfsprozess (WIN32)
+BIN\EBASMT64.DLL EDIABAS-MultiThreading-Laufzeitsystem (WIN64)
+BIN\EBASMT64.EXE EDIABAS-MultiThreading-Hilfsprozess (WIN64)
+BIN\ECC.EXE EDIABAS-Configuration-Center (WIN32)
+BIN\EDIABAS.INI.Example EDIABAS-Konfigurationsdatei (Beispiel)
+BIN\IFHMAN32.DLL IFH Manager (WIN32)
+BIN\IFHMAN64.DLL IFH Manager (WIN64)
+BIN\IFHPRO32.EXE IFH Proxy (WIN32)
+BIN\IFHPRO64.EXE IFH Proxy (WIN64)
+BIN\IFHSRV32.EXE IFH Server für die Ferndiagnose (WIN32)
+BIN\IFHSRV64.EXE IFH Server für die Ferndiagnose (WIN64)
+BIN\IONIC.ZIP.REDUCED.DLL DotNetZip Toolkit für ECC (WIN32)
+BIN\LIBCRYPTO-3-X64.DLL OpenSSL v3 DLL (WIN64)
+BIN\LIBCURL.DLL CURL v8.5 DLL (WIN32)
+BIN\LIBCURL-X64.DLL CURL v8.5 DLL (WIN64)
+BIN\LIBSSL-3-X64.DLL OpenSSL v3 DLL (WIN64)
+BIN\NETPRO32.DLL Netzwerkanbindung (WIN32)
+BIN\NETPRO64.DLL Netzwerkanbindung (WIN64)
+BIN\NETSSL64.DLL Netzwerkanbindung (WIN64: OpenSSL)
+BIN\NETTCP32.DLL Netzwerkanbindung (WIN32: IPv4)
+BIN\NETTCP64.DLL Netzwerkanbindung (WIN64: IPv4)
+BIN\NETTCP632.DLL Netzwerkanbindung (WIN32: IPv4/IPv6)
+BIN\NETTCP664.DLL Netzwerkanbindung (WIN64: IPv4/IPv6)
+BIN\NMSIFHPLUS32.DLL NMSIFHPLUS für Ferndiagnose mit IFH-Server/XRPLUS
+(WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\NMSIFHPLUS64.DLL NMSIFHPLUS für Ferndiagnose mit IFH-Server/XRPLUS
+(WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\PE.EXE Passworteditor (WIN32)
+BIN\PE64.EXE Passworteditor (WIN64)
+BIN\PREP.EXE Package-Aufbereitungs-Tool (Version-Tools)
+EDIABAS-Benutzerhandbuch Page 18 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+BIN\PSIGN.EXE Package-Signierungs-Tool (Version-Tools)
+BIN\RDRIFH32.EXE IFH Redirector für Proxy-Betrieb (WIN32)
+BIN\RDRIFH64.EXE IFH Redirector für Proxy-Betrieb (WIN64)
+BIN\SDKHLP32.DLL Win7/10-SDK-Anbindung (WIN32)
+BIN\SDKHLP64.DLL Win7/10-SDK-Anbindung (WIN64)
+BIN\SECMAN64.DLL Security-Manager (WIN64)
+BIN\SECMANC64.DLL Security-Manager-Anbindung (WIN64)
+BIN\SECPLUG32.DLL Security-Plugin (WIN32)
+BIN\SECPLUG64.DLL Security-Plugin (WIN64)
+BIN\STRIP.EXE Entfernen der Debug- und Hilfstexte in BEST-Objektdateien
+(WIN32)
+BIN\STRIP64.EXE Entfernen der Debug- und Hilfstexte in BEST-Objektdateien
+(WIN64)
+BIN\TRACE.CSS CSS/XML-Template für TraceXML
+BIN\TRACE-API.XSD XSD für API-Trace-Konvertierung mit TraceXML
+BIN\TRACEX32.DLL Trace-Anbindung (WIN32)
+BIN\TRACEX64.DLL Trace-Anbindung (WIN64)
+BIN\TRACEXML.EXE Trace-Converter/Merger (WIN32)
+BIN\TRACEXML64.EXE Trace-Converter/Merger (WIN64)
+BIN\TWFILE32.DLL Trace-Writer für lokale Dateiausgabe (WIN32)
+BIN\TWFILE64.DLL Trace-Writer für lokale Dateiausgabe (WIN64)
+BIN\VC.EXE Version-Checker (Version-Tools)
+BIN\VCLOG.EXE Version-Filter-Tool (Version-Tools)
+BIN\VMC32.DLL Verbindungsmanager-Anbindung für Ferndiagnose via
+XRPLUS (WIN32)
+BIN\VMC64.DLL Verbindungsmanager-Anbindung für Ferndiagnose via
+XRPLUS (WIN64)
+BIN\VMCICOM32.DLL Verbindungsmanager-Anbindung für Ferndiagnose via
+XRPLUS (WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\VMCICOM64.DLL Verbindungsmanager-Anbindung für Ferndiagnose via
+XRPLUS (WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\VMCVCPI32.DLL Verbindungsmanager-Anbindung für VCPI via XENET und
+XPDU (WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\VMCVCPI64.DLL Verbindungsmanager-Anbindung für VCPI via XENET und
+XPDU (WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\VMFCHK32.EXE Hilfsprozess für Verbindungsmanager-Anbindung (WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\VMFCHK64.EXE Hilfsprozess für Verbindungsmanager-Anbindung (WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\VSIGN.EXE Installations-Signierungs-Tool (Version-Tools)
+BIN\XCEED.WPF.TOOLKIT.DLL WPF Extended Toolkit für ECC (WIN32)
+BIN\XENET32.DLL Ethernet(-Plus)-IFH (WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XENET64.DLL Ethernet(-Plus)-IFH (WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XNUL32.DLL IFH-Dummy (WIN32)
+BIN\XNUL64.DLL IFH-Dummy (WIN64)
+EDIABAS-Benutzerhandbuch Page 19 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.1. RUNTIME SYSTEM
+4.1.1.2. Dateien unter LINUX64
+Das Lieferpaket RUNTIME SYSTEM enthält folgende Dateien (relativ zum Verzeichnis /opt/ediabas):
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.1. RUNTIME SYSTEM
+4.1.1.3. Dokumente
+Folgende Dokumente beziehen sich auf das RUNTIME-SYSTEM Paket, oder auf EDIABAS im allgemeinen:
+BEMERKUNGEN Anmerkungen speziell zu dieser Version (optional)
+BIN\XPDU32.DLL D-PDU-API-IFH (WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XPDU64.DLL D-PDU-API-IFH (WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XPROXY32.DLL IFH für Proxy-Betrieb (WIN32)
+BIN\XPROXY64.DLL IFH für Proxy-Betrieb (WIN64)
+BIN\XRPLUS32.DLL IFH für Ferndiagnose mit IFH-Server/NMSIFHPLUS
+(WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XRPLUS64.DLL IFH für Ferndiagnose mit IFH-Server/NMSIFHPLUS
+(WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XSIM32.DLL SIM-IFH (WIN32)
+BIN\XSIM64.DLL SIM-IFH (WIN64)
+BIN\XSTD32.DLL STD-IFH (WIN32)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XSTD64.DLL STD-IFH (WIN64)
+Hinweis: Nicht im Standard-Lieferumfang enthalten!
+BIN\XTRACT.CSS CSS für die Anzeige von XTRACT-XML-Ausgaben
+BIN\XTRACT.EXE Anzeige der Hilfstexte in BEST-Objektdateien (WIN32)
+BIN\XTRACT64.EXE Anzeige der Hilfstexte in BEST-Objektdateien (WIN64)
+BIN\XTRACT.XSD XSD für die Verarbeitung von XTRACT-XML Ausgaben
+LICENCES\*.* Lizenzinformationen (Ms-PL) für WPF Extended Toolkit und
+DotNetZip Toolkit
+readme.rts Installationshinweise
+bin/ediabas.epf Der Name der Passwortdatei mit der Extension .epf.
+bin/ediabas.ini EDIABAS-Konfigurationsdatei (Beispiel)
+bin/libapijav1164.so Zugriff auf das EDIABAS-Laufzeitsystem via AdaptOpenJDK
+11 (LINUX64)
+bin/libebas64.so EDIABAS-Laufzeitsystem (LINUX64)
+bin/libtracex64.so Trace-Anbindung (LINUX64)
+bin/libvdm64.so VDM-Anbindung (LINUX64)
+bin/libvdmjav1164.so VDM-Zugriff via AdaptOpenJDK 11 (LINUX64)
+bin/libxvhs64.so IFH für VHS/VDM-Betrieb (LINUX64)
+licenses\*.* Lizenzinformationen (GPLv3) für LINUX64 Support
+EDIABAS-Benutzerhandbuch Page 20 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+BENUTZERHANDBUCH UND
+INSTALLATIONSHANDBUCH Dieses Dokument
+FEHLERREFERENZ Enthält eine Übersicht aller EDIABAS Fehlermeldungen
+STEUERGERÄTE-SIMULATOR Beschreibung des Steuergeräte-Simulators
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete
+4.1.2. APPLICATION DEVELOPMENT KIT
+Der APPLICATION DEVELOPMENT KIT ist für alle im Kapitel "Verfügbarkeit" aufgeführten Systeme verfügbar.
+Dieses Lieferpaket ermöglicht die Entwicklung von Anwendungsprogrammen, die EDIABAS benutzen wollen.
+Folgende Entwicklungssysteme werden unter MS-WINDOWS unterstützt:
+MS Visual C/C++ 2019 (WIN32, WIN64)
+MS Visual C/C++ 2017 (WIN32, WIN64)
+MS Visual C/C++ 2013 (WIN32, WIN64)
+MS Visual C#.NET / .NET Framework 4.8 (WIN32, WIN64)
+MS Visual Basic.NET + .NET Framework 4.8 (WIN32, WIN64)
+MS Visual C#.NET + .NET Framework 3.5 (WIN32, WIN64)
+MS Visual Basic.NET + .NET Framework 3.5 (WIN32, WIN64)
+Folgende Entwicklungssysteme werden unter LINUX unterstützt:
+gcc 9.4 (LINUX64) / Eclipse 2020-09 (LINUX64)
+Folgende Java-Entwicklungssysteme werden unter MS-WINDOWS unterstützt:
+Azul OpenJava 11 (WIN32, WIN64)
+Azul OpenJava 17 (WIN64)
+Folgende Java-Entwicklungssysteme werden unter LINUX unterstützt:
+AdaptOpenJDK11 (LINUX64)
+More:
+4.1.2.1. Dateien unter WIN32
+4.1.2.2. Dateien unter WIN64
+4.1.2.3. Dateien unter LINUX64
+4.1.2.4. Dateien für Java 11/17 (WIN32/WIN64)
+4.1.2.5. Dateien für Java 11 (LINUX64)
+4.1.2.6. Dokumente
+EDIABAS-Benutzerhandbuch Page 21 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.2. APPLICATION DEVELOPMENT KIT
+4.1.2.1. Dateien unter WIN32
+Das Lieferpaket APPLICATION DEVELOPMENT KIT enthält folgende Dateien:
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.2. APPLICATION DEVELOPMENT KIT
+4.1.2.2. Dateien unter WIN64
+Das Lieferpaket APPLICATION DEVELOPMENT KIT enthält folgende Dateien:
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.2. APPLICATION DEVELOPMENT KIT
+4.1.2.3. Dateien unter LINUX64
+Das Lieferpaket APPLICATION DEVELOPMENT KIT enthält folgende Dateien (relativ zum
+Verzeichnis /opt/ediabas):
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.2. APPLICATION DEVELOPMENT KIT
+4.1.2.4. Dateien für Java 11/17 (WIN32/WIN64)
+Das Lieferpaket APPLICATION DEVELOPMENT KIT enthält folgende Dateien für Azul OpenJava 11:
+README32.ADK Installationshinweise
+API\WIN32\API.H Allgemeines C/C++ Headerfile für alle Bibliotheken
+API\WIN32\APICALLS.C C/C++ Quellcode zu API-Bibliotheken
+API\WIN32\APIDLL.H C/C++ Headerfile zu API32.DLL
+(Windows-DLL-Schnittstelle)
+API\WIN32\VC2013\API32.LIB API-Library für Visual C/C++ 2013
+API\WIN32\VC2017\API32.LIB API-Library für Visual C/C++ 2017
+API\WIN32\VC2019\API32.LIB API-Library für Visual C/C++ 2019
+API\NET\VB2008\API.VB Basic-Modul für Visual Basic.NET 2008 / Visual
+Studio 2008 mit .NET Framework 3.5
+API\NET\VB2019\API.VB Basic-Modul für Visual Basic.NET 2019 / Visual
+Studio 2019 mit .NET Framework 4.8
+BIN\APITAL32.EXE EDIABAS Testapplikation
+README64.ADK Installationshinweise
+API\WIN64\API.H Allgemeines C/C++ Headerfile für alle Bibliotheken
+API\WIN64\APICALLS.C C/C++ Quellcode zu API-Bibliotheken
+API\WIN64\APIDLL.H C/C++ Headerfile zu API64.DLL
+(Windows-DLL-Schnittstelle)
+API\WIN64\VC2013\API64.LIB API-Library für Visual C/C++ 2013
+API\WIN64\VC2017\API64.LIB API-Library für Visual C/C++ 2017
+API\WIN64\VC2019\API64.LIB API-Library für Visual C/C++ 2019
+BIN\APITAL64.EXE EDIABAS Testapplikation
+readme.adk Installationshinweise
+include/api.h Allgemeines C/C++ Headerfile für alle Bibliotheken
+lib/libapi64.a API-Library für gcc
+bin/apitalk64 EDIABAS Testapplikation
+EDIABAS-Benutzerhandbuch Page 22 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Das Lieferpaket APPLICATION DEVELOPMENT KIT enthält folgende Dateien für Azul OpenJava 17:
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.2. APPLICATION DEVELOPMENT KIT
+4.1.2.5. Dateien für Java 11 (LINUX64)
+Das Lieferpaket APPLICATION DEVELOPMENT KIT enthält folgende Dateien für AdaptOpenJDK 11 (relativ
+zum Verzeichnis /opt/ediabas):
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.2. APPLICATION DEVELOPMENT KIT
+4.1.2.6. Dokumente
+Folgende Dokumente beziehen sich auf das APPLICATION-DEVELOPMENT-KIT Paket:
+API-BENUTZERHANDBUCH Beschreibung der Verwendung der API-Bibliotheken.
+Programmbeispiele. Bedienung des APITEST-Programms.
+API-SCHNITTSTELLENBESCHREIBUNG Beschreibung der API-Schnittstelle und Ihrer Bedienung.
+API-FUNKTIONSREFERENZ Beschreibung der API-Funktionen
+TRANSPARENTMODE- Beschreibung der Schnittstelle zum
+SCHNITTSTELLENBESCHREIBUNG Transparentmode
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete
+4.1.3. BEST DEVELOPMENT KIT
+Der BEST DEVELOPMENT KIT ist nur für MS-WINDOWS verfügbar. Dieses Lieferpaket ermöglicht die
+Entwicklung von Steuergerätebeschreibungsdateien.
+Das Lieferpaket umfaßt u.a. BEST/2 Übersetzer, BEST/2 Debugger und BEST-Entwicklungsumgebung.
+Folgende Dateien sind auf der Lieferdiskette BEST-DEVELOPMENT-KIT enthalten:
+More:
+4.1.3.1. Dateien unter WIN32
+4.1.3.2. Dateien unter WIN64
+4.1.3.3. Dokumente
+BIN\ediabas11.jar EDIABAS-Java-Package
+BIN\testjava11.jar Java-Testapplikation
+BIN\ediabas17.jar EDIABAS-Java-Package
+BIN\testjava17.jar Java-Testapplikation
+bin/ediabas11.jar EDIABAS-Java-Package
+bin/testjava11.jar Java-Testapplikation
+bin/vdm11.jar VDM-Java-Package
+EDIABAS-Benutzerhandbuch Page 23 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.3. BEST DEVELOPMENT KIT
+4.1.3.1. Dateien unter WIN32
+Das Lieferpaket BEST-DEVELOPMENT-KIT enthält folgende Dateien:
+README32.BDK Installationshinweise
+BIN\BEST1.EXE BEST/1 Assembler (Win32)
+BIN\BEST2.CHM Hilfedatei für BEST/2 Compiler
+BIN\BEST2.EXE BEST/2 Compiler (Win32)
+BIN\BEST2WIN.EXE BEST/2 Compiler (Win32)
+BIN\BEST32.DLL BEST-Anbindung für BEST2WIN (Win32)
+BIN\B2RUNTIM.LIB BEST/2 Laufzeitbibliothek
+BIN\BESTVIEW.CHM Hilfedatei zum BEST/2 Debugger
+BIN\BESTVW32.EXE BEST/2 Debugger: BestView
+TUTORIAL\*.* BEST-Tutorial Dateien
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.3. BEST DEVELOPMENT KIT
+4.1.3.2. Dateien unter WIN64
+Das Lieferpaket BEST-DEVELOPMENT-KIT enthält folgende Dateien:
+README64.BDK Installationshinweise
+BIN\BEST164.EXE BEST/1 Assembler (Win64)
+BIN\BEST2.CHM Hilfedatei für BEST/2 Compiler
+BIN\BEST264.EXE BEST/2 Compiler (Win64)
+BIN\BEST2WIN64.EXE BEST/2 Compiler (Win64)
+BIN\BEST64.DLL BEST-Anbindung für BEST2WIN (Win64)
+BIN\B2RUNTIM.LIB BEST/2 Laufzeitbibliothek
+BIN\BESTVIEW.CHM Hilfedatei zum BEST/2 Debugger
+BIN\BESTVW64.EXE BEST/2 Debugger: BestView
+TUTORIAL\*.* BEST-Tutorial Dateien
+EDIABAS-Benutzerhandbuch Page 24 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.1.
+Übersicht der Lieferpakete > 4.1.3. BEST DEVELOPMENT KIT
+4.1.3.3. Dokumente
+Folgende Dokumente beziehen sich auf das BEST-DEVELOPMENT-KIT Paket:
+BEST-BENUTZERHANDBUCH Beschreibung der Programmierung einer BEST/2
+Beschreibungsdatei. Bedienung des mitgelieferten Programme.
+BEST/2-FUNKTIONSREFERENZ Beschreibung der BEST/2-Funktionen
+BEST/2-SPRACHBESCHREIBUNG Syntaktische Beschreibung der BEST/2 Sprache.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.2. Systemvoraussetzungen
+More:
+4.2.1. MS-WINDOWS
+4.2.2. LINUX
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.2.
+Systemvoraussetzungen
+4.2.1. MS-WINDOWS
+Um EDIABAS unter MS-WINDOWS benutzen zu können sind die Voraussetzungen für das jeweilige System zu
+erfüllen. Es wird ein IBM PC/AT bzw. 100% kompatibles System mit Pentium Prozessor oder besser vorausgesetzt.
+Für die Benutzung der Ferndiagnose- oder Proxy- Funktionalität des EDIABAS RUNTIME SYSTEM für WIN32 ist
+eine Netzwerkinstallation mit TCP/IP erforderlich.
+Für den Zugriff von .NET Applications auf EDIABAS ist das entsprechende EDIABAS RUNTIME SYSTEM
+erforderlich. Darüberhinaus muss sich auf dem Zielsystem das entsprechende .NET Framework 3.5/4.x befinden.
+Für den Zugriff von Java Applikationen auf EDIABAS ist das entsprechende EDIABAS RUNTIME SYSTEM
+erforderlich. Darüberhinaus muss sich auf dem Zielsystem das JRE 11/17 befinden und der EDIABASProgrammpfad
+in der Java-Laufzeitumgebung gesetzt sein.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.2.
+Systemvoraussetzungen
+4.2.2. LINUX
+Um EDIABAS unter LINUX benutzen zu können sind die Voraussetzungen für UBUNTU V20/x64 (mit
+Unterstützung von SVR4, POSIX-API und Shared-Libraries) zu erfüllen.
+Für den Zugriff von Java Applikationen auf EDIABAS muss sich auf dem Zielsystem das AdoptOpenJDK 11
+befinden und die notwendigen Environment-Variablen für EDIABAS in der Java-Laufzeitumgebung gesetzt sein.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+EDIABAS-Benutzerhandbuch Page 25 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+4.3. Erstinstallation
+More:
+4.3.1. MS-WINDOWS
+4.3.2. LINUX
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.3.
+Erstinstallation
+4.3.1. MS-WINDOWS
+Die Installationsbeschreibung unter MS-WINDOWS ist nicht Bestandteil dieses Dokuments.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.3.
+Erstinstallation
+4.3.2. LINUX
+Die Installationsbeschreibung unter LINUX ist nicht Bestandteil dieses Dokuments.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.4. Environment-Variable für EDIABAS-Programme
+More:
+4.4.1. MS-WINDOWS
+4.4.2. LINUX
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.4.
+Environment-Variable für EDIABAS-Programme
+4.4.1. MS-WINDOWS
+Das EDIABAS-Unterverzeichnis BIN ist in den Suchpfad des Systems aufzunehmen.
+Beispiel:
+PATH=%PATH%;c:\ediabas\bin
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.4.
+Environment-Variable für EDIABAS-Programme
+4.4.2. LINUX
+Das EDIABAS-Verzeichnis /opt/ediabas/bin ist im Such- und Bibliothekenpfad des Systems aufzunehmen. Zudem
+müssen die Environment-Variablen EDIABAS_CONFIG_DIR und EDIABAS_PASSWORD_DIR auf das
+EDIABAS-Programmverzeichnis gesetzt sein.
+EDIABAS-Benutzerhandbuch Page 26 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Beispiel (ggf. sind noch entsprechende export-Anweisungen notwendig):
+PATH=$PATH:/opt/ediabas/bin
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ediabas/bin
+EDIABAS_CONFIG_DIR=/opt/ediabas/bin
+EDIABAS_PASSWORD_DIR=/opt/ediabas/bin
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.5. EDIABAS-Konfiguration
+Das Laufzeitverhalten von EDIABAS ist über die EDIABAS-Konfiguration beeinflußbar.
+Die EDIABAS-Konfiguration besteht aus Informationspaaren, welche im Bereich [Configuration] der Datei
+ediabas.ini aufgeführt sind. Jede Zeile beschreibt dabei ein Konfigurationselement und dessen
+Konfigurationseinstellung:
+Konfigurationselement = Konfigurationseinstellung
+Zum Zeitpunkt der ersten Initialisierung von EDIABAS werden die Konfigurationseinstellungen aus der Datei
+ediabas.ini eingelesen. Bei fehlenden Konfigurationseinstellungen wird die Default-Einstellung (s. Tabelle Kap.
+4.5.1) angenommen, ebenso wenn die Datei ediabas.ini nicht vorhanden ist.
+Alle Konfigurationseinstellungen der Datei ediabas.ini müssen manuell vorgenommen werden. Die dabei
+durchgeführten Änderungen werden beim nächsten Start von EDIABAS berücksichtigt.
+Bestimmte Konfigurationselemente können auch von Anwendungsprogrammen zur Laufzeit von EDIABAS
+geändert werden. Diese Konfigurationsänderungen sind aber nur bis zur nächsten Initialisierung von EDIABAS
+gültig.
+Auch Steuergeräte-Beschreibungsdateien können zur Laufzeit von EDIABAS bestimmte Konfigurationsänderungen
+vornehmen, diese sind aber nur während des Jobs gültig.
+More:
+4.5.1. Suchreihenfolge von ediabas.ini
+4.5.2. Konfigurationsübersicht
+4.5.3. Auswahl des Hardwareinterfaces
+4.5.4. Verzeichnis der Steuergerätebeschreibungsdateien
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.5.
+EDIABAS-Konfiguration
+4.5.1. Suchreihenfolge von ediabas.ini
+Unter MS-WINDOWS sucht EDIABAS die Datei ediabas.ini zuerst entsprechend der Environment-Variable
+EDIABAS_CONFIG_DIR. Wenn die Environment-Variable nicht gesetzt ist oder im angegebenen Verzeichnis die
+Datei nicht vorliegt, wird die Suche im Windows-Verzeichnis fortgesetzt. Falls die Datei auch im Windows-
+Verzeichnis nicht gefunden wurde, erfolgt die Suche im EDIABAS-Programmverzeichnis (Unterverzeichnis BIN).
+EDIABAS-Benutzerhandbuch Page 27 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.5.
+EDIABAS-Konfiguration
+4.5.2. Konfigurationsübersicht
+Nachfolgend sind alle Konfigurationselemente mit Einstellungmöglichkeiten und Default-Einstellung aufgeführt.
+Für jedes Konfigurationselement ist beschrieben, ob und wie eine Änderung vorgenommen werden kann (INI: über
+ediabas.ini, API: durch Anwendung, BEST: durch Steuergeräte-Beschreibungsdatei).
+Alle Konfigurationselement in der nachfolgenden Tabelle stehen in der Sektion CONFIGURATION.
+ELEMENT BEMERKUNG EINSTELLUNG ÄNDERUNG DEFAULT
+ApiTrace Steuerung von API-Trace 0 (aus)
+1 User-Trace
+2 + Zeitstempel
+3 + Prozeß-ID**
+4 API-Trace
+5 + Zeitstempel
+6 + Laufzeit
+7 + Prozeß-ID**
+8 Debug-Trace
+INI API
+BEST
+0
+Authentication Konfigurations-Section-Name in
+EDIABAS.INI für
+Authentifizierung (ohne Angabe
+erfolgt keine Authentifizierung)
+String INI API
+BEST
+BipDebugLevel Debug-Level in Steuergeräte-
+Beschreibungsdateien
+0 .. 32767 INI API
+BEST
+0
+BipEcuFile Dateititel der aktuell geladenen
+Steuergeräte-Beschreibungsdatei
+(Gruppen- bzw. Variantendatei):
+Nur gültig während einer Job-
+Verarbeitung
+String INI API
+BEST
+-
+BipErrorLevel Error-Level in Steuergeräte-
+Beschreibungsdateien
+0 .. 32767 INI API
+BEST
+0
+ClampHandling Dieses Konfigurationselement ist
+nur für die Interfaces XSTD und
+XREMOTE/XRPLUS wirksam:
+XSTD: Klemmen für Zündung
+und Versorgungsspannung
+automatisch abfragen
+XREMOTE/XRPLUS: Überträgt
+Abfragen des Klemmenstatus für
+Zündung und
+0 (aus)
+1 (ein)
+INI API
+BEST
+1
+EDIABAS-Benutzerhandbuch Page 28 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Versorgungsspannung über die
+Fernverbindung
+EcuPath Pfad der Steuergeräte-
+Beschreibungsdateien
+Pfad INI API
+BEST
+.
+EdiabasIniPath Pfad der verwendeten
+Konfigurationsdatei ediabas.ini
+(nur falls diese vorhanden ist)
+Pfad INI API
+BEST
+EdiabasUnload Entladen von EDIABAS bei
+Session-Ende (apiEnd)
+0 (kein Entladen)
+1 (Entladen)
+INI API
+BEST
+0
+EdiabasVersion EDIABAS-Version String INI API
+BEST
+IfhTrace Steuerung von IFH-Trace 0 (aus)
+1 User
+Schnittstelle
+2 + Interface
+Schnittstelle
+3 + Zeitstempel
+INI API
+BEST
+0
+IfhnTrace Steuerung von IFH-Netzwerk-
+Trace. Dieser Trace ist nur im
+XREMOTE verfügbar.
+0 (aus)
+1 User
+Schnittstelle
+2 + Interface
+Schnittstelle
+3 + Zeitstempel
+INI API
+BEST
+0
+IfhVersion IFH-Version String INI API
+BEST
+Interface Hardwareinterface String INI API
+BEST
+EDIC
+IgnitionHandling Zündung ein/aus wie Fehler
+behandeln
+0 (aus)
+1 (ein)
+INI API
+BEST
+1
+LoadWin32 Auswahl des zu verwendenden
+EDIABAS-Systems für WIN16-
+Anwendungen (EDIABAS für
+WIN16 oder automatische
+Umsetzung auf EDIABAS für
+WIN32)
+0 (EDIABAS für
+WIN16)
+..
+1 (EDIABAS für
+WIN32)
+INI API
+BEST
+Windows
+9x: 0
+Windows
+NT/2000/XP/7/10:
+1
+LoadWin64 Auswahl des zu verwendenden
+EDIABAS-Systems für
+Anwendungen (EDIABAS für
+WIN32 oder WIN64 ggf. mit
+automatischer Umsetzung)
+0 (EDIABAS für
+WIN32)
+..
+1 (EDIABAS für
+WIN64)
+INI API
+BEST
+Win32: 0
+Win64: 1
+LogLevel Logging fataler Fehler in
+EDIABAS.LOG
+(WIN32/WIN64)
+0 (aus) .. 1 (ein) INI API
+BEST
+0
+LogCheck Level von Checkpoint-Logging
+in Millisekunden (nur falls
+0..59000 INI API
+BEST
+500
+EDIABAS-Benutzerhandbuch Page 29 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Checkpoints enthalten sind)
+NetworkProtocol Auswahl der Netzwerkprotokolls
+für die Ferndiagnose (IPv4 bzw.
+IPv4/IPv6-Dual-Stack oder
+SSL/TLS).
+Eine Änderung des
+Netzwerkprotokolls wird nur bei
+XENET unterstützt und ist nur
+vor dem ersten Job-Aufruf
+möglich.
+IPv6 wird z.Zt. nur von XRPLUS
+unterstützt.
+SSL/TLS wird z.Zt. nur von
+XENET/WIN64 unterstützt.
+TCP (IPv4)
+TCP6 (IPv4/v6)
+SSL (SSL/TLS)
+INI API
+BEST
+TCP
+RetryComm Wiederholung bei Kommunikationsfehler
+0 (aus) .. 1 (ein) INI API
+BEST
+1
+Session Name der EDIABAS-Session String INI API
+BEST
+ShowIcon Anzeige von EDIABAS-Icons im
+System-Tray (WIN32/WIN64)
+0 (aus) .. 1 (ein) INI API
+BEST
+1
+Simulation Steuerung von Steuergeräte-
+Simulation
+0 (aus) .. 1 (ein) INI API
+BEST
+0
+SimulationPath Pfad der Steuergeräte-
+Simulationsdateien
+Pfad INI API
+BEST
+.
+SystemResults Steuerung ob Zündungs-,
+Versorgungsspannungs-, und
+Jobstatus- Systemergebnisse
+anzulegen sind
+0 (nicht anlegen)
+..
+1 (anlegen)
+INI API
+BEST
+1
+TaskPriority Einstellung der Priorität für
+EDIABAS (0 = optimale
+Einstellung, 1 = Niedrigste
+Priorität)
+0 .. 10 INI API
+BEST
+0
+TraceBuffering Pufferung von Trace-Dateien
+(WIN32/WIN64)
+0 (aus) .. 1 (ein) INI API
+BEST
+0
+TraceHistory Ablage veralteter Trace-Dateien
+(WIN32/WIN64), 0 =
+Kompatibilitätsmodus
+0 .. 999 INI API
+BEST
+0
+TracePath Pfad der Trace-Dateien Pfad INI API
+BEST
+.
+TraceSize max. Trace-Dateiengröße in KB 0 .. 32767 INI API
+BEST
+1024
+TraceSync Ausgabe von Sync-
+Informationen in Trace-Dateien
+(WIN32/WIN64)
+0 (aus) .. 1 (ein) INI API
+BEST
+1
+TraceWriter Trace-Writer (WIN32/WIN64):
+Vollständiger DLL-Name mit
+Pfad
+<DLL> INI API
+BEST
+UbattHandling Versorgungsspannung ein/aus 0 (aus) .. 1 (ein) INI API 1
+EDIABAS-Benutzerhandbuch Page 30 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+** Hinweis: Prozeß-ID wird nur bei EDIABAS für WIN32/WIN64 ausgegeben
+In der nachfolgenden Tabelle stehen die Konfigurationselemente für das Netzwerkprotokoll TCP (Sektion TCP).
+Diese Sektion wird nur benötigt, wenn in der Sektion CONFIGURATION dem Konfigurationselement
+NetworkProtocol der Wert TCP oder TCP6 zugewiesen wurde.
+In der nachfolgenden Tabelle stehen die Konfigurationselemente für das Netzwerkprotokoll SSL/TLS (Sektion
+SSL). Diese Sektion wird nur benötigt, wenn in der Sektion CONFIGURATION dem Konfigurationselement
+NetworkProtocol der Wert SSL zugewiesen wurde.
+wie Fehler behandeln BEST
+ELEMENT [TCP] BEMERKUNG EINSTELLUNG ÄNDERUNG DEFAULT
+Port Portnummer 1000...30000 INI API
+BEST
+-
+RemoteHost Name oder IP-Adresse
+des fernzusteuernden
+Rechners
+(IPv6-Adressen sind in
+eckige Klammern zu
+setzen, z.B. [::1])
+Name/Adresse INI API
+BEST
+-
+TimeoutConnect Timeout in Millisekunden
+für den
+Verbindungsaufbau
+1000 ... 59000 INI API
+BEST
+5000
+TimeoutReceive Timeout in Millisekunden
+für den Empfang einer
+Message
+1000 ... 59000 INI API
+BEST
+5000
+TimeResponsePending Zeit in Millisekunden
+zwischen den Alive-
+Messages (Wird von
+EDIABAS V6.4.0 nicht
+unterstützt)
+500 ... 59000 INI API
+BEST
+2000
+TimeoutFunction Timeout in Millisekunden
+für die Bearbeitung einer
+langen IFH-Funktion (z.B.
+send_and_receive). Der
+Gesamt-Timeout
+berechnet sich aus
+TimeoutFunction +
+TimeoutReceive.
+5000 ... 59000 INI API
+BEST
+59000
+DisconnectOnApiEnd Verbindungsabbau
+(Disconnect) bei Ausführung
+von apiEnd.
+0 (aus) .. 1 (ein) INI API
+BEST
+0
+InitCmd0
+InitCmd1
+…
+InitCmdn
+Initialisierungskommando,
+das als Konfigurationselement
+an den Slave
+(speziell OPPS)
+übergeben wird.
+Hex-String
+z.B.
+InitCmd1=FE,04,00,03,01
+INI API
+BEST
+-
+ELEMENT [SSL] BEMERKUNG EINSTELLUNG ÄNDERUNG DEFAULT
+RemoteHost Name oder IP-Adresse
+des fernzusteuernden
+Rechners
+Name/Adresse INI API
+BEST
+-
+EDIABAS-Benutzerhandbuch Page 31 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+In der nachfolgenden Tabelle stehen die Konfigurationselemente für die S29-Authentifizierung (Sektion S29). Diese
+Sektion wird nur benötigt, wenn in der Sektion CONFIGURATION dem Konfigurationselement Authentication
+der Wert S29 zugewiesen wurde.
+In der nachfolgenden Tabelle stehen die interfacespezifischen Konfigurationselemente für das EDIABAS-eigene
+Ethernet-Interface ENET (Sektion XETHERNET). Diese Sektion wird nur benötigt, wenn in der Sektion
+CONFIGURATION dem Konfigurationselement Interface der Wert ENET zugewiesen wurde.
+SSLSecurityPath Pfad für KeyPairs und
+KeyStores
+Pfad INI API
+BEST
+.
+SSLPort SSL/TLS Portnummer.
+Eine Änderung des Ports
+ist nur vor dem ersten
+Job-Aufruf möglich.
+1000...59000 INI API
+BEST
+3496
+SSLProtocolVersion TLS-Protokollversion
+(derzeit wird nur TLS1.3
+unterstützt).
+Ohne Angabe der TLSProtokollversion
+erfolgt
+keine Verschlüsselung.
+TLS1.3 INI API
+BEST
+-
+SSLKeylogfilepath Dateiname inklusive Pfad
+für Keylog-Dateiausgabe
+Keylog-Datei INI API
+BEST
+-
+CreateSSLKeylogfile Keylog-Dateiausgabe 0 (aus) .. 1 (ein) INI API
+BEST
+0
+ELEMENT [S29] BEMERKUNG EINSTELLUNG ÄNDERUNG DEFAULT
+SecurityPath Pfad für S29-Zertifikate.
+Eine Änderung des Pfades
+ist nur vor dem ersten
+Job-Aufruf möglich.
+Pfad INI API
+BEST
+.
+SelectCertificate Dateiname ohne Pfad und
+ohne Extension der
+Zertifikatsdatei.
+Die Zertifikatsdatei wird
+im Pfad für S29-
+Zertifikate erwartet
+(SecurityPath).
+Zertifikatsdatei INI API
+BEST
+JSONRequestPath Pfad für JSON-Request-
+Dateien
+Pfad INI API
+BEST
+.
+JSONResponsePath Pfad für JSON-Response-
+Dateien
+Pfad INI API
+BEST
+.
+ELEMENT BEMERKUNG EINSTELLUNG ÄNDERUNG DEFAULT
+VehicleProtocol Anzuwendendes
+Kommunikationsprotokoll
+HSFZ (= 0 oder hsfz)
+oder DoIP (= 1 oder
+doip).
+0..1
+ODER
+hsfz
+ODER
+INI API
+BEST
+0,1
+EDIABAS-Benutzerhandbuch Page 32 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Werden beide Protokolle
+angegeben (0,1 ODER
+hsfz,doip), so werden die
+Kommunikationsprotokolle
+entsprechend der
+angegebenen Reihenfolge
+verwendet.
+Bei HSFZ wird immer das
+Netzwerkprotokoll TCP
+verwendet (unabhängig
+von der Konfiguration
+NetworkProtocol).
+doip
+ODER
+0,1
+ODER
+hsfz,doip
+RemoteHost Name oder IP-Adresse
+des Fahrzeugs, über das
+Schlüsselwort Autodetect
+automatische Verbindung
+(nur bei linklokalen IPAdressen
+möglich, d.h.
+IP-Bereich 169.254.0.0)
+oder mittels Angabe der
+VIN (VIN:<VIN>)
+Name/Adresse
+ODER
+Autodetect
+ODER
+VIN:<VIN>
+INI API
+BEST
+-
+IfhRemoteHost Name oder IP-Adresse
+des Fahrzeugs oder über
+das Schlüsselwort
+Autodetect automatische
+Verbindung (nur bei
+linklokalen IP-Adressen
+möglich, d.h. IP-Bereich
+169.254.0.0).
+Name/Adresse
+ODER
+Autodetect
+INI API
+BEST
+-
+Headerformat Bestimmt das Format des
+verwendeten Paket-
+Headers auf der
+Netzwerkschnittstelle.
+0=6-Byte-Header,
+1=3-Byte-Header
+(nur HSFZ)
+0 .. 1 INI API
+BEST
+0
+Testeraddress Reihe möglicher Testeradressen,
+durch die die
+Standardadresse F1 ersetzt
+wird.
+(nur HSFZ)
+Hex-String
+F1..FF
+INI API
+BEST
+-
+DoIPTesteraddress Reihe möglicher DoIPTester-
+Adressen, durch
+die die Standardadresse
+F1 ersetzt wird.
+(nur DoIP)
+Hex-String
+0EF1..0EFF
+INI API
+BEST
+-
+DoIPGatewayaddress DoIP-Gateway-Adresse.
+Bei Angabe der Adresse
+FFFF werden alle
+Gateway-Adressen
+angenommen.
+Hex-String
+0000..FFFF
+INI API
+BEST
+0010
+EDIABAS-Benutzerhandbuch Page 33 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+(nur DoIP)
+ControlPort TCP-Portnummer des
+Controlports
+(nur HSFZ)
+1000...59000 INI API
+BEST
+6811
+DiagnosticPort TCP-Portnummer des
+Diagnoseports
+(nur HSFZ)
+1000...59000 INI API
+BEST
+6801
+TimeoutConnect Timeout in Millisekunden
+für den
+Verbindungsaufbau zum
+Fahrzeug
+1000 ... 59000 INI API
+BEST
+5000
+IgnitionCacheInterval Vorhaltezeit in
+Millisekunden des zuletzt
+vom Fahrzeug
+abgefragten
+Spannungswertes der
+Zündung. Nach Ablauf
+dieser Zeit wird die
+Zündungsspannung bei
+erneuter Abfrage durch
+die SGBD wieder vom
+Fahrzeug bezogen.
+(nur HSFZ)
+0 ... 10000 INI API
+BEST
+500
+HostIdentService Broadcast-Adresse für
+Autodetect.
+Adress-Maske INI API
+BEST
+169.254.
+255.255
+TimeoutIdentService Broadcast-Timeout für
+Autodetect in
+Millisekunden.
+500 ... 59000 INI API
+BEST
+5000
+PortDoIP TCP-Diagnose-
+Portnummer und UDPIdentifikations-
+Portnummer für DoIP
+(nur DoIP)
+1000...59000 INI API
+BEST
+13400
+TimeoutFunction Timeout in Millisekunden
+für die Bearbeitung einer
+langen IFH-Funktion (z.B.
+send_and_receive). Der
+Gesamt-Timeout
+berechnet sich aus
+TimeoutFunction +
+TimeoutReceive.
+0 ... 59000 INI API
+BEST
+-1
+TimeoutAcknowledge Timeout in Millisekunden
+bis zum Empfang des
+Acknowledge vom
+Gateway.
+1000 ... 59000 INI API
+BEST
+2000
+EnableTcpKeepAlive Aktivierung von TCPKeep-
+Alive:
+0=Nicht aktiviert,
+1=Aktiviert
+0 ... 1 INI API
+BEST
+0
+EDIABAS-Benutzerhandbuch Page 34 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+In der nachfolgenden Tabelle stehen interfacespezifische Konfigurationselemente für die ICOM-Adressermittlung
+(Sektion ICOM). Diese Sektion wird nur benötigt, wenn für das EDIABAS-eigene Interface RPLUS eine ICOMAdressermittlung
+vorgesehen ist (INI: über ediabas.ini oder RPLUS.INI).
+(nur DoIP)
+TcpKeepAliveTime Idle-Zeit vor dem Senden
+der ersten Keep-Alive-
+Nachricht in Sekunden.
+(nur DoIP)
+1 … 10000 INI API
+BEST
+1
+TcpKeepAliveInterval Zeit zwischen nicht
+quittierten Alive-
+Nachrichten.
+(nur DoIP)
+1 ... 59000 INI API
+BEST
+1000
+TcpKeepAliveRetries Anzahl der nicht
+quittierten Keep-Alive-
+Nachrichten, bevor die
+Verbindung getrennt wird.
+Hinweis:
+Unter Windows wird die
+Einstellung ignoriert.
+(nur DoIP)
+0 .. 100 INI API
+BEST
+0
+UpdateVehicleListOnlyOnError Aktualisierung der
+Fahrzeugverbauliste bei
+open_communication:
+0=Immer,
+1=Nur bei Diagnosefehler
+0 ... 1 INI API
+BEST
+0
+ELEMENT BEMERKUNG EINSTELLUNG ÄNDERUNG DEFAULT
+VINPath Suchpfad für XMLDateien
+Pfad INI API
+BEST
+-
+VINPath2 Suchpfad für XMLDateien
+(alternativ)
+Pfad INI API
+BEST
+-
+VINTimeout Timeout für XML-Suche
+(pro Suchpfad) in
+Millisekunden
+0 .. INI API
+BEST
+20000
+VINDelay Verzögerung der Suche
+im alternativen Suchpfad
+in Millisekunden.
+0 .. INI API
+BEST
+0
+VINExit Timeout für Terminierung
+der Suche in
+Millisekunden (keine
+Terminierung bei 0).
+0 .. INI API
+BEST
+0
+VINCompare Vergleich der XMLDateien
+bei 2 Suchpfaden:
+0 ... 1 INI API
+BEST
+0
+EDIABAS-Benutzerhandbuch Page 35 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+In der nachfolgenden Tabelle stehen die interfacespezifischen Konfigurationselemente für das EDIABAS-eigene DPDU-
+API-Interface PDU (INI: über PDU.INI).
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.5.
+EDIABAS-Konfiguration
+4.5.3. Auswahl des Hardwareinterfaces
+Die Bestimmung des zu verwendenden Hardwareinterfaces erfolgt über die Konfigurationsdatei ediabas.ini
+(Interface).
+0=Kein Vergleich des
+Änderungsdatums (die
+zuerst gefundene XMLDatei
+wird ausgewählt)
+1=Vergleich des
+Änderungsdatums mit
+Auswahl der Datei mit
+dem neueren
+Änderungsdatum (bei
+identischem
+Änderungsdatum wird die
+Datei gewählt, welche
+zuerst gefunden wurde).
+ELEMENT BEMERKUNG EINSTELLUNG ÄNDERUNG DEFAULT
+[Common]
+ModuleName
+Auswahl des zu
+verwendenden VCI
+(Module)
+Module-Name INI API
+BEST
+-
+[<ModuleName>]
+LibraryFile32
+Vollständiger Pfad zu der
+PDU API DLL (Win32).
+Pfad INI API
+BEST
+-
+[<ModuleName>]
+LibraryFile64
+Vollständiger Pfad zu der
+PDU API DLL (Win64).
+Pfad INI API
+BEST
+-
+[<ModuleName>]
+RemoteHost
+Name oder IP-Adresse des
+VCI.
+Name/Adresse INI API
+BEST
+-
+[<ModuleName>]
+Type
+Typ-ID des VCI
+(Bezeichner oder dezimaler
+Wert)
+VINING2000|569
+oder
+BMW_VCPI|570
+oder
+<dezimaler
+Wert>
+INI API
+BEST
+-
+EDIABAS-Benutzerhandbuch Page 36 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.5.
+EDIABAS-Konfiguration
+4.5.4. Verzeichnis der Steuergerätebeschreibungsdateien
+Das Verzeichnis der zu verwendenden Steuergerätebeschreibungsdateien ist manuell in die Konfigurationsdatei
+ediabas.ini einzutragen (EcuPath).
+Weitere Informationen sind in dem Kap. Administration nachzulesen.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.6. Starten und Beenden von EDIABAS
+More:
+4.6.1. WIN32
+4.6.2. WIN64
+4.6.3. LINUX64
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.6.
+Starten und Beenden von EDIABAS
+4.6.1. WIN32
+Beim Start einer Anwendung mit Zugriff auf EDIABAS werden automatisch die EDIABAS-Komponenten
+API32.DLL, EBAS32.DLL, EBAS32.EXE, EBASCC32.DLL und TRACEX32.DLL geladen. EBAS32.DLL lädt
+beim ersten Zugriff auf EDIABAS den konfigurierten Interface-Handler.
+Im Multi-Threading-Modus wird die EDIABAS-Komponente EBASMT32.DLL anstatt EBAS32.DLL geladen. Für
+jeden weiteren Anwendungs-Thread wird automatisch eine Instanz der EDIABAS-Komponente EBASMT32.EXE
+gestartet und bei Beendigung der Anwendung wieder beendet.
+Der Zugriff von Anwendungen auf EDIABAS erfolgt über API32.DLL.
+Der Multi-Threading-Modus wird bei Win64-Umleitung (s.a. Konfiguration LoadWin64) nicht unterstützt.
+Der Zugriff von .NET Applikationen (x86) auf EDIABAS erfolgt über APINET232.DLL/ APINET432.DLL.
+Der Zugriff von Java Applikationen (x86) auf EDIABAS erfolgt über APIJAV1132.DLL.
+EDIABAS beendet sich automatisch bei Beendigung der jeweiligen Anwendung.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.6.
+Starten und Beenden von EDIABAS
+4.6.2. WIN64
+Beim Start einer Anwendung mit Zugriff auf EDIABAS werden automatisch die EDIABAS-Komponenten
+API64.DLL und das EDIABAS/WIN64-Laufzeitsystem geladen.
+Im Multi-Threading-Modus wird die EDIABAS-Komponente EBASMT64.DLL anstatt EBAS64.DLL geladen. Für
+EDIABAS-Benutzerhandbuch Page 37 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+jeden weiteren Anwendungs-Thread wird automatisch eine Instanz der EDIABAS-Komponente EBASMT64.EXE
+gestartet und bei Beendigung der Anwendung wieder beendet.
+Der Zugriff von Anwendungen auf EDIABAS erfolgt über API64.DLL.
+Der Multi-Threading-Modus wird bei Win32-Umleitung (s.a. Konfiguration LoadWin64) nicht unterstützt.
+Der Zugriff von .NET Applikationen (x64) auf EDIABAS erfolgt über APINET264.DLL/ APINET464.DLL.
+Der Zugriff von Java Applikationen (x64) auf EDIABAS erfolgt über APIJAV1164.DLL/ APIJAV1764.DLL.
+EDIABAS beendet sich automatisch bei Beendigung der jeweiligen Anwendung.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.6.
+Starten und Beenden von EDIABAS
+4.6.3. LINUX64
+Beim Start einer Anwendung mit Zugriff auf EDIABAS wird automatisch die EDIABAS-Komponente libebas64.so
+inklusive dem EDIABAS/LINUX64-Laufzeitsystem geladen.
+Der Zugriff von Anwendungen auf EDIABAS erfolgt über libapi64.a.
+Der Zugriff von Java Applikationen (x64) auf EDIABAS erfolgt über libapijav1164.so.
+EDIABAS beendet sich automatisch mit Beendigung der jeweiligen Anwendung.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.7. Deinstallation
+More:
+4.7.1. MS-WINDOWS
+4.7.2. LINUX
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.7.
+Deinstallation
+4.7.1. MS-WINDOWS
+Die Deinstallationsbeschreibung ist nicht Bestandteil dieses Dokuments.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.7.
+Deinstallation
+4.7.2. LINUX
+Die Deinstallationsbeschreibung ist nicht Bestandteil dieses Dokuments.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+EDIABAS-Benutzerhandbuch Page 38 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+4.8. Schutzmechanismus
+EDIABAS greift zur Bearbeitung von API-Aufträgen auf Steuergeräte-Beschreibungsdateien (SGBDen) zu (siehe
+Kapitel 3). SGBDen werden als Sourcecode (B2V-, bzw. B2G-Datei) in BEST/2 entwickelt und danach für den
+Einsatz mit EDIABAS mit dem BEST-Compiler in ein Objektformat (PRG-, bzw. GRP-Datei) übersetzt. Zur
+Laufzeit werden die Objektdateien vom Laufzeitsystem geladen und ausgeführt.
+Um SGBDen im Objektformat zum einen gegen das unbefugte Auslesen von Dateiinhalten (Jobnamen,
+Tabellennamen, Tabelleninhalte usw.), zum anderen, gegen die Benutzung von unbefugten Anwendern (nicht
+autorisierte Fremdfirmen oder Privatpersonen) zu schützen, bietet EDIABAS einen Schutzmechanismus für
+SGBDen. Die SGBDen werden geschützt, indem Informationen in einer SGBD nicht im Klartext stehen und unter
+einem nicht autorisierten EDIABAS-Laufzeitsystem nicht ablauffähig sind, d.h. von EDIABAS nicht geladen
+werden. Damit können weder Informationen aus den SGBDen gelesen noch darin enthaltene Jobs ausgeführt
+werden.
+Nach der Installation befindet sich das EDIABAS-Laufzeitsystem zunächst in einem Zustand, in dem nur
+ungeschützte SGBDen ausgeführt werden können. Der Schutz der SGBDen erfolgt über die Vergabe von
+Paßwörtern für das Laufzeitsystem und für die SGBDen. Die Paßwörter für das Laufzeitsystem werden mit dem
+Paßworteditor (PE) vergeben (siehe Kapitel 5.3). Der Eintrag der Paßwörter in die SGBDen erfolgt mit dem
+BEST-Compiler BEST2 bzw. BEST2WIN (siehe BEST Benutzerhandbuch Kapitel 5.1 und 5.2).
+Für die Vergabe von Paßwörtern können nur die zu einer EDIABAS-Installation gehörenden Programme
+PE und BEST2/BEST2WIN verwendet werde.
+Der Schutz eines EDIABAS-Systems erfolgt in zwei Schritten:
+1. Um das EDIABAS-Laufzeitsystem zu schützen müssen dem System mit dem Paßworteditor zuerst Paßwörter
+(mindestens eins) bekannt gemacht werden (siehe Kapitel 5.3).
+2. Als nächstes müssen alle verwendeten SGBDen mit mindestens einem Paßwort aus der Liste der oben
+eingegebenen Paßwörter übersetzt werden (siehe BEST Benutzerhandbuch Kapitel 5.1 und 5.2).
+Zur Laufzeit werden beim Laden einer SGBD die eingelesenen Daten zuerst entschlüsselt. Danach wird vom
+Laufzeitsystem geprüft, ob eines der Paßwörter aus der SGBD dem Laufzeitsystem bekannt ist. Ist dem
+Laufzeitsystem mindestens ein Paßwort aus der SGBD bekannt, kann die SGBD ausgeführt werden. SGBDen, die
+nicht mit einem Paßwort geschützt sind, können von jedem EDIABAS-Laufzeitsystem (geschützt oder
+ungeschützt) ab der Version 5.5 ausgeführt werden.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.9. Ferndiagnose
+EDIABAS für WIN32 ermöglicht den Zugriff auf Diagnose-Interfaces und damit verbundene Steuergeräte, welche
+an einem anderen PC angeschlossen sind.
+Voraussetzung hierfür ist eine Netzwerkverbindung von lokalem und fernzusteuerndem PC über TCP/IP sowie ein
+von EDIABAS unterstütztes WIN32-Betriebssystem.
+Auf dem lokalen PC laufen Anwendung und EDIABAS, auf dem fernzusteuernden PC laufen Interface-Handler
+(IFH) sowie IFH-Server. Vor dem Zugriff auf den fernzusteuernden PC ist dort der IFH-Server
+IFHSRV32.EXE/IFHSRV64.EXE zu starten.
+Die Fernsteuerung wird über die EDIABAS-Konfigurationsdatei ediabas.ini eingeschaltet bzw. gesteuert. Die
+EDIABAS-Konfiguration ist auf beiden PC's manuell vorzunehmen.
+Die EDIABAS-Konfigurationen TracePath und SimulationPath werden nicht vom lokalen PC an den
+fernzusteuernden PC übertragen, sondern die entsprechenden Konfigurationen der auf dem fernzusteuerndem PC
+sich befindenden Datei ediabas.ini verwendet.
+Auf beiden PC's ist das Netzwerkprotokoll TCP bzw. TCP6 (Konfiguration NetworkProtocol) sowie eine frei
+EDIABAS-Benutzerhandbuch Page 39 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+wählbare Portnummer anzugeben. Die Portnummer muß auf beiden PC's identisch sein und darf nicht mit anderen
+TCP-Anwendungen kollidieren (1000 < Portnummer < 30000).
+More:
+4.9.1. ediabas.ini auf dem lokalem PC
+4.9.2. ediabas.ini auf dem fernzusteuerndem PC
+4.9.3. Vorgehensweise für die Ferndiagnose
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.9.
+Ferndiagnose
+4.9.1. ediabas.ini auf dem lokalem PC
+Auf dem lokalen PC muß die Konfigurationsdatei ediabas.ini entsprechend der unten dargestellten Liste erweitert
+werden. Die Zuweisung RPLUS an das Konfigurationselement Interface bewirkt die Fernsteuerung des PC's,
+welcher mit dem Eintrag RemoteHost angegeben wird (IPv6-Adressen sind in eckige Klammern zu setzen). Die
+Angabe eines logischen Computernamens erfordert eine entsprechende HOSTS-Datei bzw. einen DNS-Service.
+[Configuration]
+Interface = RPLUS
+NetworkProtocol = TCP|TCP6
+[TCP]
+RemoteHost = <Name/Adresse von fernzusteuerndem PC>
+Port = <Port von fernzusteuerndem IFH>
+TimeoutConnect=<Timeout für Verbindungsaufbau>
+TimeoutReceive=<Timeout für Empfang>
+TimeoutFunction=<Timeout für Verarbeitung im IFH>
+Beispiel für die ediabas.ini des lokalen PC's (IPv4):
+[Configuration]
+Interface=RPLUS
+NetworkProtocol=TCP
+[TCP]
+RemoteHost=193.29.29.175
+Port=5000
+TimeoutConnect=2000
+TimeoutReceive=2000
+TimeoutFunction=50000
+Beispiel für die ediabas.ini des lokalen PC's (IPv6):
+[Configuration]
+Interface=RPLUS
+NetworkProtocol=TCP6
+EDIABAS-Benutzerhandbuch Page 40 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+[TCP]
+RemoteHost=[fe80::0212:34ff:fe56:789a]
+Port=5000
+TimeoutConnect=2000
+TimeoutReceive=2000
+TimeoutFunction=50000
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.9.
+Ferndiagnose
+4.9.2. ediabas.ini auf dem fernzusteuerndem PC
+Auf dem fernzusteuernden PC muß die Konfigurationsdatei ediabas.ini entsprechend der unten dargestellten Liste
+erweitert werden.
+[Configuration]
+Interface=<Interface>
+NetworkProtocol=TCP|TCP6
+[TCP]
+Port=<Port von ferngesteuertem IFH>
+Beispiel für ediabas.ini des fernzusteuernden PC's (IPv4):
+[Configuration]
+Interface=ENET
+NetworkProtocol=TCP
+[TCP]
+Port=5000
+Beispiel für ediabas.ini des fernzusteuernden PC's (IPv6):
+[Configuration]
+Interface=ENET
+NetworkProtocol=TCP6
+[TCP]
+Port=5000
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration > 4.9.
+Ferndiagnose
+4.9.3. Vorgehensweise für die Ferndiagnose
+1. EDIABAS auf dem lokalem und fernzusteuerndem PC installieren
+2. EDIABAS-Konfiguration auf dem lokalem und fernzusteuerndem PC einrichten
+3. IFH-Server auf dem fernzusteuerndem PC starten
+4. Anwendung auf dem lokalem PC starten
+EDIABAS-Benutzerhandbuch Page 41 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.10. Proxy-Betrieb
+Hinweis: Die in diesem Kapitel beschriebene Funktionalität ist im Standard-Lieferumfang nicht enthalten!
+Die Proxy-Interface-Anbindung ermöglicht eine zentrale Interface-Verarbeitung mit getrenntem Senden und
+Empfangen von Telegrammen unter Win32/Win64.
+Im Proxy-Betrieb werden alle Zugriffe eines Interface-Typs an einen im Hintergrund laufenden Proxy übergeben,
+welcher dann die Interface-Zugriffe stellvertretend abarbeitet. Pro Interface-Typ wird der Proxy automatisch 1x
+gestartet, welcher dann alle EDIABAS-Anwendungen für dieses Interface zentral bedient. Pro Proxy können bis zu
+16 EDIABAS-Anwendungen gleichzeitig bedient werden.
+Greifen mehrere EDIABAS-Anwendungen gleichzeitig auf einen Proxy zu, so gelten die Vorgaben der 1.
+EDIABAS-Anwendung. Die anderen EDIABAS-Anwendungen dürfen keine Diagnose-Interface-Parameter
+einstellen, welche mit denen der 1. EDIABAS-Anwendung kollidieren. Gleichzeitige Zugriffe auf eine
+Steuergeräteadresse werden vom Proxy serialisiert, d.h. bei bereits laufendem Senden/Empfangen werden weitere
+Zugriffe auf das betreffende Steuergerät solange verzögert bis das vorangegangene Senden/Empfangen
+abgeschlossen ist. Der Proxy-Betrieb ist im Zusammenhang mit dem EDIABAS-Server-Betrieb nicht kombinierbar.
+Funktionale Adressierungen sind im Proxy-Betrieb nicht zulässig.
+Der Proxy-Betrieb ist nur bei Interfaces einsetzbar, welche das getrennte Senden und Empfangen von Telegrammen
+unter Win32/Win64 unterstützen.
+Die Aktivierung des Proxy-Betriebs ist über die Konfigurationsdatei ediabas.ini oder zur Laufzeit mit apiInitExt
+möglich. Hierzu ist dem eigentlich zu verwendenen Interface die Bezeichnung proxy (mit Doppelpunkt getrennt)
+voranzustellen.
+Die Kommunikation zwischen Proxy-Anbindung (XPROXY32.DLL/XPROXY64.DLL) und Proxy
+(IFHPRO32.EXE/IFHPRO64.EXE) erfolgt über einen konfigurierbaren TCP/IP-Bereich, welcher standardmäßig ab
+Port 6700 beginnt. Alle unbekannten Interface-Typen werden über den Port-Offset +0 behandelt, d.h. es kann immer
+nur 1 unbekannter Interface-Typ gleichzeitig betrieben werden.
+Der verwendete Port-Bereich kann über ediabas.ini konfiguriert werden:
+[IfhProxy]
+Port=6700 ; Anfang des Port-Bereichs, Default = 6700
+Bei vorhandener Firewall muss der verwendete Port-Bereich entsprechend freigeschaltet sein.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.11. EDIABAS-Parallelbetrieb
+EDIABAS für MS-WINDOWS ermöglicht den gleichzeitigen Zugriff mehrerer Anwendungsprogramme auf
+EDIABAS. Für jedes Anwendungsprogramm läuft ein eigenes EDIABAS, welches automatisch gestartet (und
+wieder beendet) wird.
+Der Parallelbetrieb mehrerer Interfaces gleichen Typs ist nur dann möglich, wenn dies von der jeweiligen Interface-
+Software unterstützt wird.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+EDIABAS-Benutzerhandbuch Page 42 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+4.12. EDIABAS-Controller-Service-Betrieb
+Der optionale EDIABAS-Controller-Service für WIN32 bietet eine Überwachungsfunktion entsprechend den
+früheren EDIABAS Versionen bis 7.1. Der gleichzeitige Zugriff mehrerer Anwendungen auf ein Interface
+(Parallelbetrieb) wird bei laufendem EDIABAS-Controller-Service verhindert (Interface-Locking).
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 4. Installation und Administration
+4.13. EDIABAS-Multi-Threading-Betrieb
+EDIABAS für Win32/Win64 ermöglicht standardmässig eine Parallelverarbeitung auf Prozessbasis. Alle Threads
+einer Anwendung teilen sich hierbei ein gemeinsames EDIABAS-Laufzeitsystem.
+EDIABAS für Win32/Win64 bietet jedoch die Funktion, in den Multi-Threading-Betrieb umzuschalten. Im Multi-
+Threading-Betrieb wird jedem Anwendungs-Thread ein eigenes EDIABAS-Laufzeitsystem zugeteilt. Zum Zeitpunkt
+der Umschaltung darf noch KEINE Anwendung bei EDIABAS angemeldet sein, d.h. die Umschaltung muss VOR
+dem ersten Aufruf von apiInit/apiInitExt..apiEnd einer Anwendung erfolgen.
+Nach erfolgter Aktivierung der Multi-Threading-Funktionalität ist eine spätere Deaktivierung nicht mehr möglich.
+Standardmäßig ist die Multi-Threading-Funktionalität deaktiviert.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch
+5. Hilfsprogramme
+More:
+5.1 PE
+5.2. BESTINFO
+5.3. BESTVER
+5.4. XTRACT
+5.5. STRIP
+5.6. ECC
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 5. Hilfsprogramme
+5.1 PE
+Mit dem Paßworteditor werden die Paßwörter eines geschützten EDIABAS verwaltet. Der Paßworteditor hat den
+Namen PE.EXE/PE64.EXE. Ein Paßworteintrag besteht aus einem öffentlichen Label und dem zugehörigen
+geheimen Paßwort. Das Paßwort wird nur einmal bei der Eingabe verwendet. Für alle weiteren Zugriffe wird nur
+noch das Label des Paßwortes verwendet.
+Es können maximal 10 Label/Paßwörter eingegeben werden.
+Einmal eingegebene Label/Paßwörter können nicht mehr entfernt werden. Falls dies erwünscht ist, muß EDIABAS
+neu installiert werden.
+EDIABAS-Benutzerhandbuch Page 43 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Jedes Label/Paßwort kann gesperrt oder freigegeben werden (mehrfach möglich). Ein gesperrtes Label /Paßwort
+verhält sich zur Laufzeit wie nicht vorhanden.
+Ein <Label> besteht aus 1 bis 10 ASCII-Zeichen im ANSI Code. Dabei sind nur ASCII-Zeichen zugelassen im
+Bereich: 20h <= <ASCII-Zeichen> <= 7Eh. Das Zeichen '@' (40h) ist nicht erlaubt.
+Ein <Paßwort> besteht aus 6 bis 10 ASCII-Zeichen im ANSI Code. Dabei sind nur ASCII-Zeichen zugelassen im
+Bereich: 20h <= <ASCII-Zeichen> <= 7Eh.
+Der Paßworteditor wird über die Kommandozeile gesteuert. Der Editor bietet folgende Funktionalitäten:
+Anzeigen aller Kommandos des Paßworteditors
+Diese Funktion des Paßworteditors stellt eine Hilfefunktion dar und zeigt alle verfügbaren Kommandos an.
+Aufruf: pe
+Anzeigen (view) aller Labels der Paßwortdatei
+Mit dem Paßworteditor können die Labels aller Paßwörter, die dem Laufzeitsystem bekannt sind, mit ihrem
+Status (freigegeben/gesperrt) angezeigt werden.
+Aufruf: pe -v
+Eingabe (add) eines neuen Eintrags in die Paßwortdatei
+Eintragen eines neuen Label/Paßworts in das EDIABAS-Laufzeitsystem. Es können insgesamt maximal 10
+Einträge gemacht werden. Bei der Eingabe erhalten die Einträge automatisch den Status "freigegeben".
+Aufruf: pe -a <Label>=<Paßwort>
+Freigeben (enable) eines Eintrags der Paßwortdatei
+Gesperrte Einträge können wieder freigegeben werden. Mehfach möglich.
+Aufruf: pe -e <Label>
+Sperren (disable) eines Eintrags der Paßwortdatei
+Eingegebene Einträge können gesperrt werden. Gesperrte Einträge verhalten sich beim Ablauf von SGBDen
+wie nicht vorhandene Einträge. Mehrfach möglich.
+Aufruf: pe -d <Label>
+Prüfen (check), ob eine SGBD auf dem installierten EDIABAS-System lauffähig wäre.
+Mit dem Paßworteditor kann außerdem geprüft werden, ob SGBDen in Verbindung mit dem installierten
+EDIABAS-Systems ablauffähig sind. Für diese Prüfung holt sich der Paßworteditor die Paßwörter aus der
+SGBD und vergleicht sie mit den Paßwörtern des Systems.
+Aufruf: pe -c "<SGBD>"
+Der Paßworteditor fordert bei Programmende zu einer Quittierung mittels beliebiger Taste durch den Anwender auf.
+Die Quittierung kann durch Übergabe des Kommandozeilenparameters –Q unterdrückt werden.
+Der Paßworteditor liefert als Exitcode im Fehlerfall den Wert 1, sonst 0.
+Im Falle der Funktion Prüfen (check) gelten abweichende Exit-Codes:
+EDIABAS-Benutzerhandbuch Page 44 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+0 falls mind. 1 SGBD-Passwort übereinstimmt
+= "EXECUTABLE (on installed EDIABAS)"
+1 bei allgemeinem Fehler (z.B. Passwortfehler)
+2 falls kein SGBD-Passwort übereinstimmt
+= "NOT EXECUTABLE (on installed EDIABAS)"
+3 falls kein SGBD-Passwort definiert ist
+= "EXECUTABLE (not protected)"
+Es kann nur der zu einer EDIABAS-Installation gehörende Paßworteditor verwendet werden.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 5. Hilfsprogramme
+5.2. BESTINFO
+Inhaltsanzeige von Steuergeräte-Beschreibungsdateien
+Das Programm BESTINFO ermöglicht die Ausgabe folgender Informationen bezüglich der angegebenen
+Steuergeräte-Beschreibungsdatei (Objektformat):
+Dateiname
+Revisionsnummer
+Letzter Bearbeiter (Ausgabe von max. 63 Zeichen), Datum der letzten Änderung
+Liste aller Jobs
+Aufruf:
+BESTINFO [-Q] "<sgbd>"
+BESTINFO64 [-Q] "<sgbd>"
+Beispiel:
+bestinfo "testv.prg"
+Erzeugt folgende Ausgabe (Beispiel) :
+BEST object file : testv.prg
+BIP version : 03.03.00.00
+Revision number : 2.0
+Last modification by softing.sag.Os , Thu Mar 25 16:33:10 1993
+EDIABAS-Benutzerhandbuch Page 45 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+5 Jobs:
+INITIALISIERUNG
+IDENT
+CHECK
+BINPARA
+WAIT
+BESTINFO ready.
+BESTINFO fordert bei Programmende zu einer Quittierung mittels beliebiger Taste durch den Anwender auf. Die
+Quittierung kann durch Übergabe des Kommandozeilenparameters –Q unterdrückt werden.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 5. Hilfsprogramme
+5.3. BESTVER
+Versionskontrolle von Steuergeräte-Beschreibungsdateien
+Dieses Programm ist nur unter MS-WINDOWS verfügbar. Es ermöglicht die Durchführung einer Versionskontrolle
+von Steuergeräte-Beschreibungsdateien (Objektformat). Es ermöglicht die Vergabe einer einheitlichen
+Paketversionsnummer für mehrere Beschreibungsdateien.
+Aufruf:
+BESTVER [-Q] [-R RevMAJ.RevMIN username] [-V Packageversion] "<sgbd(en)>"
+BESTVER64 [-Q] [-R RevMAJ.RevMIN username] [-V Packageversion] "<sgbd(en)>"
+Beispiel:
+bestver -R 1.6 Softing -V 20 "testv.prg"
+Ändert den Revisionseintrag (Revision 2.0 wird 1.6 und Autor wird Softing) und vergibt ein Paketversionsnummer
+(20). Es wird folgendes ausgegeben :
+TESTV.PRG
+BIP version : 03.03.00.00
+Revisionnumber : 2.0
+Last change : Thu Mar 25 16:33:10 1993
+By : softing.sag.Os
+EDIABAS-Benutzerhandbuch Page 46 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Package version : 00000000
+==>
+Revisionnumber : 1.6
+Last change : Wed Nov 24 12:41:50 1993
+By : Softing
+Package version : 00000020
+Die Ausgabe des letzten Bearbeiters ist auf max. 63 Zeichen beschränkt.
+BESTVER fordert bei Programmende zu einer Quittierung mittels beliebiger Taste durch den Anwender auf. Die
+Quittierung kann durch Übergabe des Kommandozeilenparameters –Q unterdrückt werden.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 5. Hilfsprogramme
+5.4. XTRACT
+Anzeige von Hilfstexten aus Steuergeräte-Beschreibungsdateien
+Dieses Programm ist nur unter MS-WINDOWS verfügbar. Mit dem Programm XTRACT können die in den BESTObjectdateien
+angelegten Hilfetexte angezeigt werden.
+Aufruf:
+XTRACT [-Q] [-F -X[ML]] "<objectfile(s)>" ["<outdir>"]
+XTRACT64 [-Q] [-F -X[ML]] "<objectfile(s)>" ["<outdir>"]
+XTRACT[64] -? (Zeigt eine Optionsübersicht)
+Die Option -F leitet die Ausgabe in eine Datei mit der Extension .biv oder .big um. Die Optionen –X und –XML
+bewirken eine Ausgabe im XML-Format (Datei mit der Extension .xml). Es kann das Directory angegeben werden,
+wo die Ausgabedatei erzeugt werden soll. In objectfile können Wildcard verwendet werden.
+Die XML-Ausgabedatei enthält Verweise auf die Dateien XTRACT.CSS und XTRACT.XSD, welche von
+XTRACT automatisch in das Ausgabeverzeichnis kopiert werden (nur sofern diese nicht bereits existieren).
+XTRACT fordert bei Programmende zu einer Quittierung mittels beliebiger Taste durch den Anwender auf. Die
+Quittierung kann durch Übergabe des Kommandozeilenparameters –Q unterdrückt werden.
+Beispiel:
+xtract -F "testv.prg"
+Erzeugt eine Datei testv.biv mit folgendem Inhalt:
+ECU:TESTV
+ORIGIN:softing.sag.Os
+REVISION:2.0
+EDIABAS-Benutzerhandbuch Page 47 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+AUTHOR:softing.sag.Os
+ECUCOMMENT:Beschreibungsdatei OHNE Zugriff auf das Interface
+ECUCOMMENT:Ursprung: TESTV.B1V
+JOBNAME:initialisierung
+JOBCOMMENT:INITIALISIERUNG
+RESULT:DONE
+RESULTTYPE:int
+RESULTCOMMENT:1 falls ok, sonst 0
+JOBNAME:IDENT
+JOBCOMMENT:Ermittlung des Identifikations-Strings
+RESULT:JOB_STATUS
+RESULTTYPE:string
+RESULTCOMMENT:Liefert: OKAY od. ERROR_PARAMETER
+...
+RESULTCOMMENT:Liefert: OKAY oder ERROR_PARAMETER
+Automatische Tabellenausgabe:
+Zur besseren Dokumentationsmöglichkeit von BEST-Objects bietet XTRACT auch die Funktionalität, anstelle eines
+BEST/2-Kommentars die Einträge einer Tabelle auszugeben. Ein BEST/2-Kommentar muß hierfür folgenden
+Aufbau aufweisen:
+comment: table <Tabellenname> <Spalte> [ <Spalte> ... ]
+Beispiel einer BEST/2-Quelldatei:
+...
+table beispielTabelle[2][]=
+{
+{ "SPALTE1", "SPALTE2", "SPALTE3" },
+{ "Zeile1", "xtract", "generiert" },
+{ "Zeile2", "diese", "Texte" },
+{ "Zeile3", "automatisch", "!" }
+};
+EDIABAS-Benutzerhandbuch Page 48 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+job ( name = beispielJob;
+comment : Kommentaranfang
+comment : table beispielTabelle SPALTE2 SPALTE3
+comment : Kommentarende
+...
+XTRACT gibt für obiges Beispiel folgende Zeilen aus:
+...
+JOBNAME:beispielJob
+JOBCOMMENT:Kommentaranfang
+JOBCOMMENT: "xtract" "generiert"
+JOBCOMMENT: "diese" "Texte"
+JOBCOMMENT: "automatisch" "!"
+JOBCOMMENT:Kommentarende
+...
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 5. Hilfsprogramme
+5.5. STRIP
+Entfernen von Zusatzinformationen aus Steuergeräte-Beschreibungsdateien
+Dieses Programm ist nur unter MS-WINDOWS verfügbar. Mit dem Programm STRIP können die in den BESTObjectdateien
+angelegten Hilfetextes und Debuginformation entfernt werden.
+Aufruf:
+STRIP [-Q] [-N] dh "<objectfile(s)>" ["<outdir>"]
+STRIP64 [-Q] [-N] dh "<objectfile(s)>" ["<outdir>"]
+STRIP[64] -? (Zeigt eine Optionsübersicht)
+Der Parameter d zeigt an, das die Debuginformation entfernt werden sollen. Der Parameter h bedeutet, daß die
+Hilfetexte entfernt werden. Es kann das Directory angegeben werden, wo die Ausgabedatei erzeugt werden soll.
+Wird eine bereits bestehende Objectdatei überschrieben, so fragt STRIP den Benutzer davor. Diese Abfrage kann
+mit der Option -N unterbunden werden.
+STRIP fordert bei Programmende zu einer Quittierung mittels beliebiger Taste durch den Anwender auf. Die
+Quittierung kann durch Übergabe des Kommandozeilenparameters –Q unterdrückt werden.
+Beispiel:
+EDIABAS-Benutzerhandbuch Page 49 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+strip -N dh "testv.prg"
+Entfernt die Debuginformation und die Hilfetexte aus der Datei testv.prg.
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch > 5. Hilfsprogramme
+5.6. ECC
+Anzeige und Bearbeitung der EDIABAS/Interface-Konfiguration.
+Dieses Programm ist nur unter MS-WINDOWS verfügbar und benötigt das .NET Framework 3.5.
+Aufruf:
+ecc
+EDIABAS-Benutzerhandbuch > Benutzer- / Installationshandbuch
+GLOSSAR
+API
+Applikation
+BEST
+Beschreibungsdatei
+BMW-Fast
+CAN
+Device
+Diagnosekonzepte
+Diagnostics_on_CAN
+DLL
+ECM
+ECU
+EDIABAS
+EDIC
+EdicApi
+EDIABAS-Benutzerhandbuch Page 50 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+IFH
+Job
+KWP-2000
+KWP2000*
+Laufzeitsystem
+SGBD
+SG
+Steuergerätevariante
+EDIABAS-Benutzerhandbuch
+Fehlerreferenz
+More:
+1. Änderungshistorie
+2. Einführung
+3. Allgemeines
+4. Fehlerliste
+A. Literaturverzeichnis
+EDIABAS-Benutzerhandbuch > Fehlerreferenz
+1. Änderungshistorie
+Version 3.0 Erstellung
+Version 3.0A Bessere Beschreibungen der Fehlermeldungen (Teile)
+Version 3.0B Bessere Beschreibungen der Fehlermeldungen (Alles)
+Version 4.1 Überarbeitung für EDIABAS V4.1.0
+Version 5 Überarbeitung für EDIABAS V5.1.0
+Version 5a Fehlerkorrektur
+Erweitert für EDIABAS 5.5.0
+Version 5b Neu IFH-0037 bis IFH-0040
+EDIABAS-Benutzerhandbuch Page 51 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Version 5c Erweitert für QNX
+Version 6 Erweitert für EDIABAS 6.0.0: BIP-0012, BIP-0013 und IFH-0041 bis
+IFH-0059
+Version 6a Erweitert für EDIABAS 6.4.0: RUN-0000 bis RUN-0099
+Version 6b Erweitert für EDIABAS 6.4.5: NET-0021, NET-0022
+Version 6c Erweitert für EDIABAS 6.9.0: BIP-0017
+Version 6d Aktualisiert für EDIABAS 6.9.1: IFH-0060 bis IFH-0065
+Erweitert für EDIABAS 6.9.1: IFH-0066 bis IFH-0071
+Version 6e Erweitert für EDIABAS 6.10.0: IFH-0072 bis IFH-0073
+Version 7 Erweitert für EDIABAS 7.0.0: BIP-0018, API-0016 bis API-0017
+Keine Unterstützung mehr für DOS, WIN16, QNX
+Version 7a Verbesserung der Beschreibungen bzgl. Interfacefehler
+Keine Unterstützung mehr für SCO UNIX
+Version 7b Überarbeitet für EDIABAS 7.2.0
+Version 7c Überarbeitet für EDIABAS 7.2.0
+Version 7.5 Überarbeitet für EDIABAS 7.5.0
+Version 7.5a Korrektur für EDIABAS 7.5.3 (IFH-0034)
+Version 7.6 Erweitert für EDIABAS 7.6.0
+Version 7.7 Erweitert für EDIABAS 7.7.0: IFH-0074
+Erweitert für EDIABAS 7.7.0: SEC-0000 bis SEC-0045
+EDIABAS-Benutzerhandbuch > Fehlerreferenz
+2. Einführung
+More:
+2.1. Über diese Dokumentation
+2.2. Konventionen
+2.3. Besonderheiten, Begriffe, Akronyme
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 2. Einführung
+2.1. Über diese Dokumentation
+EDIABAS-Benutzerhandbuch Page 52 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Diese Dokumentation beschreibt den allgemeinen Aufbau eines Fehlers. Alle beim EDIABAS möglichen Fehler
+sind aufgelistet und die jeweilige Behebung des Fehlers ist erklärt. Allgemeines über EDIABAS und über
+Steuergerätebeschreibungsdateien wird in [2] beschrieben.
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 2. Einführung
+2.2. Konventionen
+Diese Dokumentation verwendet die folgenden typographischen Konventionen:
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 2. Einführung
+2.3. Besonderheiten, Begriffe, Akronyme
+Eine Erklärung der in dieser und allen anderen EDIABAS-Dokumentationen verwendeten Abkürzungen finden Sie
+in der Dokumentation "EDIABAS Benutzerhandbuch" im Kapitel "GLOSSAR"
+EDIABAS-Benutzerhandbuch > Fehlerreferenz
+3. Allgemeines
+Während des Ablaufs des EDIABAS können Fehlfunktionen, wie z.B. Time-Out während der Steuergeräte-
+Kommunikation, auftreten. Eine von EDIABAS erkannte Fehlfunktion wird durch einen EDIABAS-Fehler
+abgebildet.
+More:
+Beispiel Beschreibung
+SAMPLE.B2V Großschrift kennzeichnet Dateinamen, Register und
+Betriebssystemkommandos.
+job, string, while Fettschrift kennzeichnet Schlüsselwörter und Operatoren
+der Sprachen BEST/2 und BEST/1 sowie der APIFunktionen.
+In Beschreibungen der Syntax müssen diese Wörter wie
+angegeben geschrieben werden.
+ausdruck Kursivschrift kennzeichnet Platzhalter für vom
+Programmierer einzutragende Werte, wie z.B. Dateinamen.
+[option] Wörter in eckigen Klammern bedeuten optionale Angaben.
+{ result |
+argument }
+Geschweifte Klammern und senkrechte Striche
+kennzeichnen Eingaben, von denen jeweils eine gewählt
+werden muß, außer wenn sie in eckigen Klammern steht.
+[constant...] job... Drei Punkte, die direkt einem Ausdruck folgen,
+kennzeichnen, daß mehrere Ausdrücke der selben Form
+folgen können.
+hallo="Test"; Diese Schriftart kennzeichnet Beispiele, Benutzereingaben,
+Programmausgaben und Fehlermeldungen.
+while() {
+.
+.}
+Eine Spalte oder eine Zeile aus drei Punkten kennzeichnet,
+daß ein Teil eines Beispiels absichtlich weggelassen wurde.
+[1] Verweis auf ein Dokument aus dem Literaturverzeichnis.
+EDIABAS-Benutzerhandbuch Page 53 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+3.1. Fehlersymbol und Fehlercode
+3.2. Meldung und Ausgabe eines Fehlers
+3.3. Auswirkungen eines Fehlers auf den Ablauf
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 3. Allgemeines
+3.1. Fehlersymbol und Fehlercode
+Jedem Fehler ist ein Fehlersymbol mit folgendem Aufbau zugeordnet:
+Der Ursprungsbereich eines Fehlers kennzeichnet den EDIABAS-internen Programmbereich der Fehlererkennung.
+Folgende Bereiche sind möglich:
+IFH Interface-Handler (Laufzeitsystem)
+BIP BEST Interpreter (Laufzeitsystem)
+SYS Laufzeitsystem (Laufzeitsystem)
+API API (Anwendungsprogramm)
+NET Netzwerk (Laufzeitsystem)
+RUN SGBD (Steuergerätebeschreibungsdatei)
+SEC Sicherheit (Laufzeitsystem)
+Fehler mit gleichem Ursprungsbereich können anhand der 4-stelligen Fehlernummer unterschieden werden. Liegt
+kein Fehler vor, so wird dies durch das Pseudo-Fehlersymbol EDIABAS_ERR_NONE gekennzeichnet.
+Jedem Fehlersymbol ist ein ganzzahliger Wert, der Fehlercode, zugeordnet. Der Wert 0 zeigt an, daß kein Fehler von
+EDIABAS erkannt wurde (Fehlersymbol EDIABAS_ERR_NONE).
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 3. Allgemeines
+3.2. Meldung und Ausgabe eines Fehlers
+Ein von EDIABAS erkannter Fehler wird an das Anwendungsprogramm gemeldet und kann nur hier ausgegeben
+werden.
+Ein Anwendungsprogramm kann die Art und Weise der Fehlerbehandlung selbst bestimmen, wobei grundsätzlich
+nur folgende Fehlerinformationen vom EDIABAS abgeholt werden können:
+Fehlercode ( mit API-Funktion apiErrorCode )
+EDIABAS-Benutzerhandbuch Page 54 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Fehlertext ( mit API-Funktion apiErrorText )
+Im Dokument [1] ist die Vorgehensweise zur Erkennung und Ausgabe eines Fehlers durch ein
+Anwendungsprogramm detailliert beschrieben.
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 3. Allgemeines
+3.3. Auswirkungen eines Fehlers auf den Ablauf
+Das Auftreten eines Fehlers während der Job-Abarbeitung bewirkt den Abbruch des Jobs und Meldung des Fehlers
+an das Anwendungsprogramm. Alle bis dahin gespeicherten Job-Ergebnisse werden gelöscht. Tritt der Fehler
+während der Initialisierung von EDIABAS (apiInitXxx) durch das Anwendungsprogramm auf, so wird diese
+abgebrochen.
+Ein Fehler bleibt solange gespeichert bis ein neuer Job durch das Anwendungsprogramm gestartet (apiJobXxx-
+Aufruf), die erneute Initialisierung durch apiInitXxx oder ein Device-Wechsel mit apiSwitchDevice durchgeführt
+wird.
+Die Fehler API-0005 und API-0014 werden zudem bei der nächsten Ergebnisabfrage (apiResultXxx) gelöscht.
+EDIABAS-Benutzerhandbuch > Fehlerreferenz
+4. Fehlerliste
+In diesem Kapitel sind alle Fehler aufgelistet, welche vom EDIABAS gemeldet werden. Entsprechend dem
+Ursprungsbereich des Fehlers ist eine Unterteilung in IFH, BIP, SYS und API vorgenommen.
+Die Darstellung ist für alle Fehler gleich:
+Der Fehlercode stellt den vom EDIABAS gemeldeten Fehler als Wert dar. Dieser Wert kann durch das
+Anwendungsprogramm mittels der Funktion apiErrorCode vom EDIABAS abgeholt werden.
+Der Fehlertext zeigt den vom EDIABAS gemeldeten Fehler in Textformat. Dieser Fehlertext kann durch das
+Anwendungsprogramm mittels der Funktion apiErrorText vom EDIABAS abgeholt werden.
+Das Fehlersymbol entspricht der Fehlerzuordnung in der Datei API.H. Darin wird das Fehlersymbol als Konstante
+definiert.
+Die Beschreibung eines Fehlers umfaßt jeweils die Absätze Bedeutung, Ursachen, mögliche Fehlerbehebung und
+Zielsystem. Eine Erklärung des Fehlers wird im Absatz Bedeutung vorgenommen. Die Ursachen eines Fehlers
+werden im entsprechenden Absatz beschrieben. Die im Absatz Fehlerbehebung aufgeführten Maßnahmen sind zur
+Behebung des Fehlers zu beachten bzw. vorzunehmen.
+Der Absatz Zielsystem informiert, unter welchem EDIABAS-Zielsystem der Fehler auftreten kann. Kann ein Fehler
+auf einem EDIABAS-Zielsystem nicht auftreten, so ist das entsprechende Zielsystem durchgestrichen.
+Jedem Zielsystem ist ein Kürzel zugeordnet:
+Fehlercode Fehlertext Fehlersymbol
+Bedeutung:
+Ursachen:
+Fehlerbehebung:
+Zielsystem WIN
+EDIABAS-Benutzerhandbuch Page 55 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+WIN = EDIABAS / MS-WINDOWS
+LINUX = EDIABAS / UBUNTU LINUX
+More:
+4.1. IFH, InterfaceHandler
+4.2. Laufzeitsystem
+4.3. API, Applikations-Programmier-Interface
+4.4. Netzwerk
+4.5. Applikation
+4.6. Security
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 4. Fehlerliste
+4.1. IFH, InterfaceHandler
+10 IFH-0000: INTERNAL ERROR EDIABAS_IFH_0000
+Bedeutung: Dieser Fehler zeigt einen unzulässigen Programmzustand des
+EDIABAS an.
+Ursachen: Ein Programmereignis kann nicht bearbeitet werden.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+11 IFH-0001: UART ERROR EDIABAS_IFH_0001
+Bedeutung: Überlauf eines Datenpuffers im, zum Interface gehörenden,
+Device-Treiber oder undefinierte Fehlermeldung vom Treiber.
+Ursachen: An den Treiber werden mehr Daten gesendet als dessen Puffer
+aufnehmen kann.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+12
+IFH-0002: NO RESPONSE FROM
+INTERFACE
+EDIABAS_IFH_0002
+Bedeutung: Das angeschlossene Diagnosebus-Interface meldet sich nicht.
+Ursachen: Das Interface ist nicht angeschlossen.
+EDIABAS-Benutzerhandbuch Page 56 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Das Interface wird nicht vom Interfacehandler unterstützt.
+Das Interface wird nicht mit Spannung versorgt.
+In das Interface wurde keine Firmware geladen (Download-
+Version des Interfaces).
+Fehlerbehebung: Korrekten Anschluß des richtigen Interfaces überprüfen.
+Zielsystem: WIN, LINUX
+13 IFH-0003: DATATRANSMISSION TO
+INTERFACE DISTURBED
+EDIABAS_IFH_0003
+Bedeutung: Eine Antwort vom Interface wurde nicht korrekt empfangen
+(Zeichen wurden verloren, Protokollrahmen stimmt nicht,
+usw.).
+Ursachen: Kontaktprobleme in der Verkabelung von Host-System und
+Interface.
+Fehlerbehebung: Überprüfung der Verkabelung von Host-System und Interface.
+Zielsystem: WIN, LINUX
+14
+IFH-0004: ERROR IN INTERFACE
+COMMAND
+EDIABAS_IFH_0004
+Bedeutung: Unbekanntes Kommando an das Interface.
+Ursachen: Die angeforderte Interfacefunktion steht im verwendeten
+Interface nicht zur Verfügung.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+15 IFH-0005: INTERNAL INTERFACE
+ERROR
+EDIABAS_IFH_0005
+Bedeutung: Dieser Fehler zeigt einen unzulässigen Programmstatus des
+Diagnosebus-Interfaces an.
+Ursachen: Ein Programmereignis des Interfaces kann nicht bearbeitet
+werden.
+Fehlerbehebung: Tritt der Fehler wiederholt auf, so ist zum Zurücksetzen des
+Interfaces dessen Spannungsversorgung kurzzeitig zu
+unterbrechen.
+Tritt der Fehler nach Unterbrechung der Spannungsversorgung
+immer noch auf, so ist die Firmware des Interfaces neu zu
+laden.
+EDIABAS-Benutzerhandbuch Page 57 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Informieren Sie SOFTING falls der Fehler dann immer noch
+auftritt.
+Zielsystem: WIN, LINUX
+16
+IFH-0006: COMMAND NOT ACCEPTED EDIABAS_IFH_0006
+Bedeutung: Das Interface nimmt das gesendete Kommando nicht an.
+Ursachen: Es wurde ein "Sende Telegramm an Steuergerät" (BEST1:
+xsend; BEST2: send_and_receive) oder "Setze
+Steuergeräteparameter" (BEST1: xsetpar; BEST2:
+set_communication_pars) an das Interface gesendet, während
+noch eine Steuergerätekommunikation läuft. Wurde das
+zyklische Senden eines Telegramms gestartet (BEST1: xsendf;
+BEST2: send_frequent), dann findet ständig
+Steuergerätekommunikation statt und das zyklische Senden
+muss zuerst gestoppt werden.
+Fehlerbehebung: Dieser Modus muß vor dem erneuten Senden eines
+Telegramms oder dem Setzen von Steuergeräteparametern
+abgebrochen werden (BEST1: xstopf; BEST2: stop_frequent).
+Zielsystem: WIN, LINUX
+17
+IFH-0007: WRONG UBATT EDIABAS_IFH_0007
+Bedeutung: Dieser Fehler tritt auf, wenn momentan keine oder eine zu
+niedrige Versorgungsspannung am D-Bus anliegt. Zusätzlich
+kann dieser Fehler auch durch Kurzschlüsse auf dem D-Bus
+entstehen. Die Ausgabe der Fehlermeldung erfolgt nur nach
+BEST-Befehlen, die auf den D-Bus zugreifen. Dies sind:
+Senden und Empfangen eines Telegramms
+Anfordern der Steuergeräte Keybytes und
+Identifikationsdaten
+Bei allen anderen BEST-Befehlen des Interfacehandlers (z.B.
+Auslesen der Ports oder Steuergeräteparameter setzen) wird
+diese Fehlermeldung unterdrückt. Sobald die richtige
+Spannung am D-Bus anliegt erfolgt nach Ausführung obiger
+BEST-Befehle keine Fehlermeldung mehr.
+Ursachen: Keine oder eine zu niedrige Versorgungsspannung am D-Bus.
+Fehlerbehebung: Spannungsversorgung an D-Bus anlegen.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 58 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+18 IFH-0008: CONTROLUNIT CONNECTION
+ERROR
+EDIABAS_IFH_0008
+Bedeutung: Fehlerhafte Verbindung zwischen dem Interface und dem
+Steuergerät.
+Ursachen: Kurzschluß an der TxD- oder der RxD-Leitung.
+Fehlerbehebung: Kurzschluß lösen.
+Zielsystem: WIN, LINUX
+19 IFH-0009: NO RESPONSE FROM
+CONTROLUNIT
+EDIABAS_IFH_0009
+Bedeutung: Steuergerät ist nicht angeschlossen oder meldet sich nicht.
+Ursachen: Das Steuergerät ist nicht oder nicht richtig angeschlossen.
+Das Steuergerät ist nicht mit Spannung versorgt.
+Das Steuergerät wird mit einer falschen Adresse angesprochen.
+Die Steuergeräteparameter stimmen nicht (Konzept, Zeiten,
+usw.).
+Fehlerbehebung: Überprüfung obiger Fehlerursachen.
+Zielsystem: WIN, LINUX
+20 IFH-0010: DATATRANSMISSION TO
+CONTROLUNIT DISTURBED
+EDIABAS_IFH_0010
+Bedeutung: Die Datenübertragung zwischen dem Interface und dem
+Steuergerät ist gestört.
+Ursachen: Störung auf der Diagnoseleitung.
+Das Interface ist nicht mit dem in der SGBD geforderten
+Diagnose-Protokoll geladen.
+Fehlerbehebung: Wiederholung des letzten Jobs.
+Zielsystem: WIN, LINUX
+21
+IFH-0011: UNKNOWN INTERFACE EDIABAS_IFH_0011
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V3.0.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+EDIABAS-Benutzerhandbuch Page 59 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Fehlerbehebung: -
+Zielsystem: WIN
+22 IFH-0012: BUFFER OVERFLOW EDIABAS_IFH_0012
+Bedeutung: Überlauf einer der internen Datenpuffer des Interfacehandlers.
+Ursachen: IFH-interner Pufferüberlauf.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+23 IFH-0013: COMMAND NOT
+IMPLEMETED
+EDIABAS_IFH_0013
+Bedeutung: Der aufgerufene BEST-Befehl wird vom Interfacehandler nicht
+unterstützt.
+Ursachen: Es ist ein Interface angeschlossen, in dem die hinter dem
+BEST-Befehl stehende Funktionalität nicht integriert ist.
+Fehlerbehebung: Austausch des Interfaces.
+Zielsystem: WIN, LINUX
+24 IFH-0014: CONCEPT NOT
+IMPLEMENTED
+EDIABAS_IFH_0014
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V3.0.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Die Fehlermeldung kann Über die BEST2-Funktion
+make_error aus einer SGBD heraus ausgelöst werden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+25 IFH-0015: UBATT ON/OFF ERROR EDIABAS_IFH_0015
+Bedeutung: Diese Fehlermeldung tritt auf, wenn die Spannungsversorgung
+am D-Bus nach dem letzten Zugriff des Interfacehandlers auf
+das Interface unterbrochen wurde, vor dem aktuellen Zugriff
+(der die Fehlermeldung erzeugt) aber bereits wieder hergestellt
+wurde. Wurde die Spannungsversorgung vor dem aktuellen
+Zugriff auf das Interface nicht wieder hergestellt, erfolgt statt
+EDIABAS-Benutzerhandbuch Page 60 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+dessen die Fehlermeldung "IFH-0007: WRONG UBATT".
+Nach der Ausgabe der Fehlermeldung wird das Statusflag im
+Interface, das die Fehlermeldung bewirkte, automatisch vom
+Interfacehandler gelöscht.
+Ursachen: Die Versorgungsspannung am D-Bus wurde kurzzeitig
+unterbrochen.
+Fehlerbehebung: Wiederholen des Jobs.
+Soll der Fehler generell bei allen Anwendungsprogrammen
+unterdrückt werden, so ist das EDIABASKonfigurationselement
+UbattHandling auf 0 zu setzen.
+Zielsystem: WIN, LINUX
+26 IFH-0016: IGNITION ON/OFF ERROR EDIABAS_IFH_0016
+Bedeutung: Diese Fehlermeldung tritt auf, wenn die Zündung nach dem
+letzten Zugriff des Interfacehandlers auf das Interface
+ausgeschaltet wurde, auch wenn sie mittlerweile wieder
+eingeschaltet wurde. Über den aktuellen Status der Zündung
+kann auf Grund dieser Fehlermeldung keine Aussage getroffen
+werden. Der aktuelle Status der Zündung muß mit dem
+entsprechenden BEST-Befehl (BEST1: xignit; BEST2:
+get_ignition_voltage) abgefragt werden. Nach der Ausgabe der
+Fehlermeldung wird das Statusflag im Interface, das die
+Fehlermeldung bewirkte, automatisch vom Interfacehandler
+gelöscht.
+Ursachen: Die Zündung wurde ausgeschaltet.
+Fehlerbehebung: Einschalten der Zündung und wiederholen des letzten Jobs.
+Soll der Fehler generell bei allen Anwendungsprogrammen
+unterdrückt werden, so ist das EDIABASKonfigurationselement
+IgnitionHandling auf 0 zu setzen.
+Zielsystem: WIN, LINUX
+27
+IFH-0017: INTERFACE DEADLOCK
+ERROR
+EDIABAS_IFH_0017
+Bedeutung: Das Interface befindet sich nach dem Senden eines
+Telegramms zu lange im Zustand BUSY (länger als der
+„Deadlock“-Timeout).
+Ursachen: Das Steuergerät antwortet erst nach einer Zeit, die größer als
+der „Deadlock“- Timeout ist.
+Nach dem Senden eines Telegramms an ein Steuergerät, auf
+das das Steuergerät nicht antwortet, werden mehrere
+Antwortblöcke erwartet (über BEST-Befehl "xawlen"
+einstellbar).
+Fehlerbehebung: Erhöhen des „Deadlock“- Timeout entsprechend dem
+Antwortverhalten des Steuergeräts.
+EDIABAS-Benutzerhandbuch Page 61 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Setzen der Antwortlänge auf Null (BEST1: xawlen {0.i,0.i};
+BEST2: set_answer_length).
+Zielsystem: WIN, LINUX
+28 IFH-0018: INITIALIZATION ERROR EDIABAS_IFH_0018
+Bedeutung: Bei der Initialisierung des Interfacehandlers ist ein Fehler
+aufgetreten.
+Ursachen: Eine Funktion des Interfacehandlers wurde aufgerufen, ohne
+daß der Interfacehandlers initialisiert wurde. (Sollte nicht
+auftreten, da die Initialisierung automatisch mit apiInit erfolgt).
+Fehlerbehebung: Installieren Sie das Interface zusammen mit den
+entsprechenden Treibern erneut. Sollte dieser Fehler danach
+immer noch auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+29 IFH-0019: DEVICE ACCESS ERROR EDIABAS_IFH_0019
+Bedeutung: Die Ausführung eines BEST-Befehls, der auf den
+Interfacehandler zugreift, wird verweigert.
+Ursachen: Diese Fehlermeldung erfolgt immer dann, wenn über einen
+BEST-Befehl auf den Interfacehandler zugegriffen wird und
+der zum Interface gehörende Device-Treiber noch nicht
+geöffnet wurde.
+Fehlerbehebung: In der SGBD muß als erstes die Verbindung zum Treiber
+hergestellt werden. (BEST1: xconnect, BEST2:
+open_communication). Deshalb muß dieser Befehl vor dem
+ersten Befehl stehen, der auf den Interfacehandler zugreift.
+D.h. dieser Befehl sollte grundsätzlich im Job
+"INITIALISIERUNG" und im Job „ENDE“ stehen.
+Zielsystem: WIN, LINUX
+30 IFH-0020: DRIVER ERROR EDIABAS_IFH_0020
+Bedeutung: Fehler beim Zugriff auf den zum Interface gehörenden Device-
+Treiber.
+Ursachen: Der Treiber ist nicht oder nicht richtig (Parameter, Version !?)
+installiert.
+Fehlerbehebung: Die Treiberinstallation ist entsprechend der dem verwendeten
+Interface beigelegten Installations-anleitung zu überprüfen.
+Zielsystem: WIN, LINUX
+IFH-0021: ILLEGAL PORT EDIABAS_IFH_0021
+EDIABAS-Benutzerhandbuch Page 62 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+31
+Bedeutung: Angabe einer unzulässigen Portnummer in der SGBD.
+Ursachen: In den BEST-Befehlen (BEST1: xgetport und xsetport,
+BEST2: ifgetport und ifsetport) werden unzulässige
+Portnummern verwendet.
+Fehlerbehebung: Korrektur der Portnummer in der SGBD.
+Zielsystem: WIN, LINUX
+32 IFH-0022: DRIVER STATUS ERROR EDIABAS_IFH_0022
+Bedeutung: Der Interfacehandler kann die Statusmeldung des zum
+Interface gehörenden Device-Treibers nicht interpretieren.
+Ursachen: Der Treiber antwortet mit einer undefinierten Statusmeldung.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+33 IFH-0023: INTERFACE STATUS ERROR EDIABAS_IFH_0023
+Bedeutung: Der Interfacehandler kann die Statusmeldung vom Interface
+nicht interpretieren.
+Ursachen: Das Interface antwortet mit einer undefinierten Statusmeldung.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+34
+IFH-0024: CANCEL FAILED EDIABAS_IFH_0024
+Bedeutung: Fehler beim Zurücksetzen des DPRAM's
+Ursachen: Das DPRAM und/oder der zum Interface gehörende Device-
+Treiber befinden sich in einem undefinierten Zustand.
+Fehlerbehebung: Wiederholen des Jobs.
+Zielsystem: WIN, LINUX
+35 IFH-0025: INTERFACE APPLICATION
+ERROR
+EDIABAS_IFH_0025
+Bedeutung: Fehler beim Öffnen des zum Interface gehörenden Device-
+Treibers (BEST1: xconnect, BEST2: open_communication).
+EDIABAS-Benutzerhandbuch Page 63 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Ursachen:
+Fehlerbehebung: Sollte dieser Fehler auftreten, so informieren Sie bitte
+SOFTING.
+Zielsystem: WIN, LINUX
+36
+IFH-0026: SIMULATION ERROR EDIABAS_IFH_0026
+Bedeutung: Fehler im Zusammenhang mit dem Steuergeräte-Simulator.
+Ursachen: Syntaxfehler in einer der Simulationsdateien.
+Eine der Simulationsdateien fehlt oder steht im falschen
+Directory (Siehe Beschreibung des Steuergeräte-Simulators).
+Unter WINDOWS erstellte Simulationsdateien wurden vor der
+Verwendung unter LINUX nicht ins UNIX-Format konvertiert.
+Fehlerbehebung: Korrektur der fehlerhaften Simulationsdatei(en) (Siehe
+Beschreibung des Steuergeräte-Simulators).
+Zielsystem: WIN, LINUX
+37
+IFH-0027: IFH NOT FOUND EDIABAS_IFH_0027
+Bedeutung: Der Interfacehandler ist nicht installiert.
+Ursachen: Das EDIABAS versucht auf den Interfacehandler zuzugreifen,
+obwohl dieser noch nicht oder fehlerhaft installiert wurde.
+Fehlerbehebung: Überprüfen Sie, ob in der EDIABAS-Konfiguration das
+richtige Interface eingetragen ist.
+Bei korrigierter Konfiguration ist Interfacehandler und
+EDIABAS zu beenden und wieder neu zu starten.
+Starten Sie ihr Anwendungsprogramm erneut.
+Zielsystem: WIN, LINUX
+38
+IFH-0028: ILLEGAL IFH VERSION EDIABAS_IFH_0028
+Bedeutung: Eine falsche Interfacehandler-Version ist installiert.
+Ursachen: Ihr EDIABAS benötigt eine andere Interfacehandler-Version
+als die, die installiert ist.
+Fehlerbehebung: Installieren Sie die benötigte EDIABAS-Version neu.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 64 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+39 IFH-0029: ACCESS DENIED EDIABAS_IFH_0029
+Bedeutung: Der Zugriff auf den Interfacehandler ist zur Zeit nicht möglich.
+Ursachen: Es kann immer nur ein Programm zur gleichen Zeit auf den
+Interfacehandler zugreifen. Während des Zugriffs eines
+Programms auf den Interfacehandler war dieser bereits an ein
+anderes Programm gebunden.
+Fehlerbehebung: Beenden sie alle Programme, die momentan auf den
+Interfacehandler zugreifen.
+Zielsystem: WIN, LINUX
+40
+IFH-0030: TASK COMMUNICATION
+ERROR
+EDIABAS_IFH_0030
+Bedeutung: Die Kommunikation zwischen EDIABAS und Interfacehandler
+ist gestört.
+Ursachen: Die Kommunikationsdaten vom Interfacehandler sind
+fehlerhaft oder das Kommunikationsmedium ist gestört.
+Meldet sich der Interfacehandler nicht in einer bestimmten
+Zeit, so wird ebenfalls dieser Fehler ausgelöst.
+Fehlerbehebung: Tritt dieser Fehler wiederholt auf, so sollten Sie das
+Anwendungsprogramm neu starten. Wenn der Fehler dann
+immer noch nicht behoben ist, muß ihr System neu gestartet
+werden.
+Zielsystem: WIN, LINUX
+41 IFH-0031: DATA OVERFLOW EDIABAS_IFH_0031
+Bedeutung: Der Eingangspuffer ist voll.
+Ursachen: Es werden zu viele Daten vom EDIABAS an den
+Interfacehandler übergeben.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+42
+IFH-0032: IGNITION IS OFF EDIABAS_IFH_0032
+Bedeutung: Diese Fehlermeldung tritt auf, wenn die Zündung während des
+Zugriffs durch den Interfacehandler auf das Steuergerät
+ausgeschaltet ist.
+Ursachen: Die Zündung ist ausgeschaltet.
+Fehlerbehebung: Einschalten der Zündung und wiederholen des letzten Jobs.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 65 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+44 IFH-0034: CONFIGURATION FILE NOT
+FOUND
+EDIABAS_IFH_0034
+Bedeutung: Diese Fehlermeldung tritt auf, wenn die Konfigurationsdateien
+für das Interface nicht gefunden wurden.
+Ursachen: Die Interface-Konfigurationsdateien existieren nicht oder
+liegen im falschen Verzeichnis
+Fehlerbehebung: Installieren Sie das Interface erneut. Sollte dieser Fehler
+danach immer noch auftreten, so informieren Sie bitte
+SOFTING.
+Zielsystem: WIN, LINUX
+45
+IFH-0035: CONFIGURATION ERROR EDIABAS_IFH_0035
+Bedeutung: Mindestens ein Konfigurationselement ist fehlerhaft
+konfiguriert.
+Ursachen: Fehlerhafte Konfiguration eines Konfigurationselements.
+Fehlerbehebung:
+Zielsystem: WIN, LINUX
+46 IFH-0036: LOAD ERROR EDIABAS_IFH_0036
+Bedeutung: Diese Fehlermeldung tritt auf, wenn beim Laden der Firmware
+ein Fehler aufgetreten ist.
+Ursachen: Fehlerhafte Konfiguration.
+Fehlerbehebung:
+Zielsystem: WIN, LINUX
+47
+IFH-0037: LOW UBATT EDIABAS_IFH_0037
+Bedeutung: Dieser Fehler tritt auf, wenn momentan eine zu niedrige
+Versorgungsspannung am D-Bus anliegt und wenn sich ein
+angeschlossenes Steuergerät nicht meldet. Die Ausgabe der
+Fehlermeldung erfolgt nur nach BEST-Befehlen, die auf den
+D-Bus zugreifen. Dies sind:
+Senden und Empfangen eines Telegramms
+Anfordern der Steuergeräte Keybytes und
+EDIABAS-Benutzerhandbuch Page 66 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Identifikationsdaten
+Bei allen anderen BEST-Befehlen des Interfacehandlers (z.B.
+Auslesen der Ports oder Steuergeräteparameter setzen) wird
+diese Fehlermeldung unterdrückt. Sobald die richtige
+Spannung am D-Bus anliegt erfolgt nach Ausführung obiger
+BEST-Befehle keine Fehlermeldung mehr.
+Ursachen: Die Versorgungsspannung am D-Bus ist zu niedrig und das
+Steuergerät meldet sich nicht.
+Fehlerbehebung: Spannungsversorgung am D-Bus erhöhen.
+Zielsystem: WIN, LINUX
+48 IFH-0038: INTERFACE COMMAND NOT
+IMPLEMENTED
+EDIABAS_IFH_0038
+Bedeutung: Das vom Interfacehandler verwendete Kommando an das
+Interface wird vom Interface nicht unterstützt.
+Ursachen: Das Interface unterstützt in der vorliegenden Ausführung oder
+Version das verwendete Kommando nicht.
+Fehlerbehebung: Installieren Sie ein Interface, das die verwendeten Kommandos
+unterstützt.
+Zielsystem: WIN, LINUX
+49 IFH-0039: EDIC USER INTERFACE NOT
+FOUND
+EDIABAS_IFH_0039
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+50 IFH-0040: ILLEGAL EDIC USER
+INTERFACE VERSION
+EDIABAS_IFH_0040
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+EDIABAS-Benutzerhandbuch Page 67 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+51
+IFH-0041: ILLEGAL PARAMETERS EDIABAS_IFH_0041
+Bedeutung: Fehlerhafte Funktionsparameterübergabe.
+Ursachen: Einer Funktion wurden Parameter übergeben, die nicht im
+Wertebereich liegen.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+52 IFH-0042: CARD INSTALLATION ERROR EDIABAS_IFH_0042
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+53 IFH-0043: COMMUNICATION TRACE
+ERROR
+EDIABAS_IFH_0043
+Bedeutung: Fehler im Kommunikationstrace.
+Ursachen: Auf den Kommunikationskanal kann nicht zugegriffen werden.
+Fehlerbehebung: Sollte dieser Fehler danach immer noch auftreten, so
+informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+54
+IFH-0044: FLASH ERROR EDIABAS_IFH_0044
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+55 IFH-0045: RUNBOARD ERROR EDIABAS_IFH_0045
+EDIABAS-Benutzerhandbuch Page 68 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+56 IFH-0046: EDIC API ACCESS ERROR EDIABAS_IFH_0046
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+57
+IFH-0047: PLUGIN ERROR EDIABAS_IFH_0047
+Bedeutung: Eine Plug-in-DLL konnte nicht geladen werden oder der
+Zugriff auf diese DLL war nicht möglich.
+Ursachen: Fehlerhafte EDIC API Konfiguration, Plug-in-DLL nicht
+gefunden oder die Plug-in-DLL benötigt eine weitere DLL, die
+nicht gefunden wurde.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+erneut auftreten, so informieren Sie bitte die Firma, die ihre
+Plug-in-DLL implementiert hat.
+Zielsystem: WIN
+58 IFH-0048: PLUGIN FUNCTION ERROR EDIABAS_IFH_0048
+Bedeutung: Auf eine Funktion in einer Plug-in-DLL konnte nicht
+zugegriffen werden.
+Ursachen: Die Funktion in der Plug-in-DLL fehlt oder ist fehlerhaft
+implementiert.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+erneut auftreten, so informieren Sie bitte die Firma, die ihre
+Plug-in DLL implementiert hat.
+Zielsystem: WIN
+EDIABAS-Benutzerhandbuch Page 69 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+59
+IFH-0049: CSS DEVICE DETECTION
+ERROR
+EDIABAS_IFH_0049
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+200 IFH-0050: ENTRY IN DYNAMIC
+CONFIGURATION NOT FOUND
+EDIABAS_IFH_0050
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden.
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+201
+IFH-0051: INTERNAL DYNAMIC
+PROTOCOL ERROR
+EDIABAS_IFH_0051
+Bedeutung: Diesen Fehler gibt es ab EDIABAS V7.5.0 nicht mehr.
+Der Fehlercode sowie die zugehörigen Konstanten sind aus
+Kompatibilitätsgründen noch vorhanden
+Ursachen: -
+Fehlerbehebung: -
+Zielsystem: WIN
+202 IFH-0052: CONCEPT NOT AVALIABLE EDIABAS_IFH_0052
+Bedeutung: Das ausgewählte Konzept ist nicht verfügbar.
+Ursachen: Das ausgewählte Konzept ist im Interfacetreiber bzw. der
+Interfacefirmware nicht konfiguriert oder nicht vorhanden.
+Fehlerbehebung: Installieren sie die Firmware erneut. Sollte dieser Fehler
+weiterhin auftreten, so informieren Sie bitte die Firma, die ihr
+Anwendungsprogramm implementiert hat.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 70 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+203 IFH-0053: ILLEGAL CONCEPT ID EDIABAS_IFH_0053
+Bedeutung: Unzulässige Konzeptnummer.
+Ursachen: Die ausgewählte Konzeptnummer hat einen unzulässigen
+Wert.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte die Firma, die ihr
+Anwendungsprogramm implementiert hat.
+Zielsystem: WIN, LINUX
+204 IFH-0054: ILLEGAL FUNCTION
+PARAMETER
+EDIABAS_IFH_0054
+Bedeutung: Eine Interfacefunktion wurde mit einem illegalen Parameter
+aufgerufen.
+Ursachen: Ein unzulässiger Programmzustand des Interfacetreibers ist
+aufgetreten.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+205 IFH-0055: CANNOT LOAD PROTOCOL
+TABLES
+EDIABAS_IFH_0055
+Bedeutung: Das dynamische Nachladen von Protokolltabellen ist
+fehlgeschlagen.
+Ursachen: Fehlerhafte Firmwarekonfiguration.
+Fehlerbehebung: Installieren sie die Firmware erneut. Sollte dieser Fehler
+weiterhin auftreten, so informieren Sie bitte die Firma, die ihr
+Anwendungsprogramm implementiert hat.
+Zielsystem: WIN, LINUX
+206 IFH-0056: ILLEGAL CHANNEL EDIABAS_IFH_0056
+Bedeutung: Übergabe einer unzulässigen Kanalnummer an den
+Interfacetreiber.
+Ursachen: Dem Interfacetreiber wurde eine unzulässige Kanalnummer
+übergeben.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte die Firma, die ihr
+Anwendungsprogramm implementiert hat.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 71 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+207 IFH-0057: ERROR READ DIGITAL
+INPUTS
+EDIABAS_IFH_0057
+Bedeutung: Fehler beim Lesen eines digitalen Eingangs.
+Ursachen: Beim Lesen eines digitalen Eingangs ist ein Fehler aufgetreten.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+208 IFH-0058: ERROR SET DIGITAL
+OUTPUTS
+EDIABAS_IFH_0058
+Bedeutung: Fehler beim Setzen eines digitalen Ausgangs eines EDICs.
+Ursachen: Beim Setzen eines digitalen Ausgangs eines EDICs ist ein
+Fehler aufgetreten.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN
+209 IFH-0059: ERROR READ ANALOG
+INPUTS
+EDIABAS_IFH_0059
+Bedeutung: Fehler beim Lesen eines analogen Eingangs.
+Ursachen: Beim Lesen eines analogen Eingängs ist ein Fehler
+aufgetreten.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+210 IFH-0060: RESUME AFTER SUSPEND
+STATE
+EDIABAS_IFH_0060
+Bedeutung: Der Rechner befand sich im Ruhezustand während mit dem
+Interface kommuniziert wurde.
+Ursachen: Siehe oben.
+Fehlerbehebung: Beenden sie ihre Anwendung und starten sie sie erneut.
+Zielsystem: WIN, LINUX
+211 IFH-0061: INVALID ECU PARAMETERS
+FORMAT
+EDIABAS_IFH_0061
+Bedeutung: Es wurden ungültige Steuergeräteparameter verwendet.
+EDIABAS-Benutzerhandbuch Page 72 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Ursachen: Siehe oben.
+Fehlerbehebung: Überprüfen sie die Steuergeräteparameter oder informieren sie
+SOFTING.
+Zielsystem: WIN, LINUX
+212 IFH-0062: BAD ECU PARAMETERS
+BUFFER
+EDIABAS_IFH_0062
+Bedeutung: Bei der Abfragte der Steuergeräteparameter wurde ein zu
+kleiner Puffer übergeben.
+Ursachen: Siehe oben.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+213 IFH-0063: INVALID BUS
+CONFIGURATION
+EDIABAS_IFH_0063
+Bedeutung: Die gewünschte Buskonfiguration (z.B. Baudrate) konnte nicht
+eingestellt werden.
+Ursachen: Die Steuergeräteparameter sind fehlerhaft.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+214 IFH-0064: INVALID CONNECTION
+SETTINGS
+EDIABAS_IFH_0064
+Bedeutung: Es konnte keine Verbindung zum Interface hergestellt werden.
+Ursachen: Das Interface ist nicht angeschlossen oder die
+Netzwerkkonfiguration ist fehlerhaft.
+Fehlerbehebung: Netzwerkkonfiguration überprüfen. Prüfen Sie, ob das
+Interface angeschlossen ist.
+Zielsystem: WIN, LINUX
+215 IFH-0065: FIRMWARE UPDATE ERROR EDIABAS_IFH_0065
+Bedeutung: Beim Aktualisieren der Firmware ist ein Fehler aufgetreten.
+Ursachen: Die Netzwerkverbindung ist schlecht.
+Die Firmwaredateien fehlen oder sind fehlerhaft.
+Fehlerbehebung: Netzwerkkonfiguration überprüfen.
+EDIABAS-Benutzerhandbuch Page 73 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Zielsystem: WIN, LINUX
+216 IFH-0066: CHANNEL ERROR EDIABAS_IFH_0066
+Bedeutung: Es ist kein freier Kommunikationskanal verfügbar.
+Ursachen: Es wurde versucht, einen Kommunikationskanal zu öffnen,
+jedoch sind bereits alle verfügbaren Kommunikationskanäle in
+Benutzung.
+Fehlerbehebung: Schließen belegter Kanäle.
+Zielsystem: WIN, LINUX
+217 IFH-0067: ECU RESPONSE PENDING EDIABAS_IFH_0067
+Bedeutung: Es wird noch auf Steuergeräteantworten gewartet.
+Ursachen: Während der Abarbeitung eines funktionalen Requests wurde
+versucht, ein nicht leeres Telegramm zu senden.
+Fehlerbehebung: Änderung der Steuergerätebeschreibungsdatei.
+Zielsystem: WIN, LINUX
+218 IFH-0068: TESTER ADDRESS ERROR EDIABAS_IFH_0068
+Bedeutung: Die verfügbaren Testeradressen sind bereits in Verwendung.
+Die von der SGBD verwendete bzw. durch den IFH ersetzte
+Testeradresse ist auf dem verbundenen Fahrzeug bereits in
+Verwendung.
+Ursachen: Es konnte keine alternative Testeradressersetzung mehr
+stattfinden, da keine oder nur eine unzureichende
+Testeradressersetzung konfiguriert wurde.
+Fehlerbehebung: Schließen einer der separaten Testerverbindungen zum
+Fahrzeug.
+Erweiterung der Testeradressersetzungskonfiguration.
+Zielsystem: WIN, LINUX
+219 IFH-0069: GATEWAY ERROR EDIABAS_IFH_0069
+Bedeutung: Das zentrale Gatewaysteuergerät hat einen Systemfehler
+gemeldet.
+Ursachen: Die spezifische Ursache des Fehlers liegt im Fahrzeug bzw.
+Gatewaysteuergerät begründet.
+Fehlerbehebung: Wiederholung des letzten Jobs.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 74 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+220 IFH-0070: SYSTEM ERROR EDIABAS_IFH_0070
+Bedeutung: Im Interfacehandler ist ein schwerwiegender Systemfehler
+aufgetreten.
+Ursachen: Es konnten nicht genug Systemressourcen zur einwandfreien
+Funktion erlangt werden.
+Fehlerbehebung: Neustart der EDIABAS-Anwendung.
+Sollte dieser Fehler auftreten, so informieren Sie bitte
+SOFTING.
+Zielsystem: WIN, LINUX
+221 IFH-0071: TELEGRAM FORMAT ERROR EDIABAS_IFH_0071
+Bedeutung: Das übergebene Telegrammformat ist nicht korrekt.
+Ursachen: Es wurde dem Interfacehandler ein nicht protokoll-konformes
+Telegramm zur Übertragung übergeben.
+Fehlerbehebung: Korrektur des zu sendenden Telegramms.
+Zielsystem: WIN, LINUX
+222 IFH-0072: ECU ACCESS COLLISION EDIABAS_IFH_0072
+Bedeutung: Der Zugriff auf ein Steuergerät konnte nicht gewährt werden,
+da bereits ein anderer Kanal mit demselben Steuergerät
+kommuniziert.
+Ursachen: Siehe oben.
+Fehlerbehebung: Überprüfen Sie die Kommunikationszugriffe der eingesetzten
+SGBDen. Vermeiden Sie dabei Zugriffe auf dasselbe
+Steuergerät aus mehreren gleichzeitig laufenden SGBDen
+heraus.
+Zielsystem: WIN, LINUX
+223 IFH-0073: PROXY ERROR EDIABAS_IFH_0073
+Bedeutung: Proxyfehler.
+Ursachen: Bei der internen Verarbeitung und Zuweisung von
+Applikationen zu Kommunikationskanälen ist in der
+Proxykomponente ein Fehler aufgetreten.
+Fehlerbehebung: Beenden sie ihre Anwendung und starten sie sie erneut. Sollte
+dieser Fehler auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN
+EDIABAS-Benutzerhandbuch Page 75 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 4. Fehlerliste
+4.2. Laufzeitsystem
+More:
+4.2.1. BIP, BEST-Interpreter
+4.2.2. SYS, Ablaufsteuerung
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 4. Fehlerliste > 4.2. Laufzeitsystem
+4.2.1. BIP, BEST-Interpreter
+224 IFH-0074: UDS COMMUNICATION
+ERROR
+EDIABAS_IFH_0074
+Bedeutung: UDS Kommunikationsfehler.
+Ursachen: Die spezifische Ursache des Fehlers liegt im UDS
+Kommunikationsprotokoll begründet.
+Fehlerbehebung: Überprüfen Sie die UDS Kommunikation.
+Zielsystem: WIN
+60 BIP-0000: INTERNAL ERROR EDIABAS_BIP_0000
+Bedeutung: Der Fehler zeigt einen unzulässigen Programmzustand des
+EDIABAS an.
+Ursachen: Programmereignis kann nicht bearbeitet werden.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+61 BIP-0001: OUT OF RANGE EDIABAS_BIP_0001
+Bedeutung: Zu langer Job-Parameter oder unzulässiger Index bei Zugriff
+auf String-Register.
+Ursachen: Dieser Fehler tritt insbesondere dann auf, wenn Sie auf eine
+Array-Variable mit einem berechneten Index zugreifen und
+dieser zu groß ist.
+z.B. bei max. Array-Grösse 1024
+i=100;
+array[100*i]=50;
+Fehlerbehebung: Überprüfen Sie alle Array-Zugriffe in Ihrem Job auf einen
+möglicherweise ungültigen Index. Die Indexe dürfen max.
+EDIABAS-Benutzerhandbuch Page 76 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Array-Grösse nicht überschreiten.
+Zielsystem: WIN, LINUX
+62 BIP-0002: IFH FUNCTION ERROR EDIABAS_BIP_0002
+Bedeutung: Interfacehandler-Funktion kann nicht ausgeführt werden.
+Ursachen: Fehler beim Aufruf einer Interfacehandler-Funktion.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+63 BIP-0003: OBJECT FILE ERROR EDIABAS_BIP_0003
+Bedeutung: Fehler beim Lesen der Steuergeräte-Beschreibungsdatei.
+Ursachen: Ihre Steuergeräte-Beschreibunsdatei ist eventuell beschädigt,
+oder beim Zugriff über ein Netzwerk traten
+Übermittlungsfehler auf.
+Fehlerbehebung: Tritt der Fehler wiederholt auf, so übersetzen Sie die
+Beschreibungsdatei neu.
+Zielsystem: WIN, LINUX
+64 BIP-0004: ILLEGAL OPCODE EDIABAS_BIP_0004
+Bedeutung: Fehlerhafte Steuergeräte-Beschreibungsdatei.
+Ursachen: Ihre Steuergeräte-Beschreibunsdatei ist eventuell beschädigt,
+oder beim Zugriff über ein Netzwerk traten
+Übermittlungsfehler auf.
+Fehlerbehebung: Tritt der Fehler wiederholt auf, so übersetzen Sie die
+Beschreibungsdatei neu.
+Zielsystem: WIN, LINUX
+65 BIP-0005: STACK OVERFLOW EDIABAS_BIP_0005
+Bedeutung: Überlauf des BEST-Stacks.
+Ursachen: Der 2kB große Stackbereich im BEST-Interpreter reicht nicht
+aus, um ihren Job durchzuführen. Entweder hat Ihr Job eine zu
+große Schachtelungstiefe, oder eine der Funktionen aus der
+Laufzeitbibliothek ist fehlerhaft und räumt den von ihr
+benutzten Stackbereich nicht auf.
+EDIABAS-Benutzerhandbuch Page 77 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Fehlerbehebung: Vereinfachen Sie den fehlerhaften Job, oder ermitteln Sie die
+Funktion, die diesen Fehler auslöst.
+Zielsystem: WIN, LINUX
+66 BIP-0006: BEST FILE ERROR EDIABAS_BIP_0006
+Bedeutung: Fehler beim Bearbeiten einer BEST-Datendatei.
+Ursachen: Bei einem der BEST Dateibefehle trat ein Fehler auf. Tritt dies
+beim Öffnen der Datei auf (fopen), so ist die Datei entweder
+nicht vorhanden, oder es darf nicht gelesen werden. Tritt der
+Fehler beim Positionieren des Dateizeigers (BEST2-
+Funktionen fseek, fseekln) auf, so wurde versucht außerhalb
+der Datei zu positionieren. Bei einem Lesebefehl deutet der
+Fehler auf ein wirkliches Leseproblem hin.
+Fehlerbehebung: Überprüfen Sie ob die gesuchte Datei vorhanden ist. Wenn ja
+testen Sie die Zugriffe auf die Datei innerhalb des Jobs.
+Zielsystem: WIN, LINUX
+67 BIP-0007: DIVISION BY ZERO EDIABAS_BIP_0007
+Bedeutung: Division durch 0.
+Ursachen: Beim Ablauf des Jobs trat eine Division durch 0 auf.
+Fehlerbehebung: Überprüfen Sie, ob im Code des Jobs eine Division durch 0
+auftreten kann. Fangen Sie diese Fälle vor der Divsion ab!
+z.B.:
+if(a==0)
+b=1000;
+else
+b=1000/a;
+Zielsystem: WIN, LINUX
+68 BIP-0008: BEST BREAK EDIABAS_BIP_0008
+Bedeutung: Unterbrechung durch Beschreibungsdatei.
+Ursachen: In der Beschreibungsdatei wurde der Befehl "break" (BEST/1)
+aufgerufen. Dieser Befehl kann z.B. zu Testzwecken in die
+SGBD eingebaut worden sein.
+Fehlerbehebung: Entfernen Sie diesen Befehl aus der Beschreibungsdatei.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 78 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+69 BIP-0009: BEST VERSION ERROR EDIABAS_BIP_0009
+Bedeutung: Fehlerhafte BEST-Version der Steuergeräte-
+Beschreibungsdatei.
+Ursachen: Die angesprochene Steuergeräte-Beschreibungsdatei wurde
+von einem Compiler übersetzt, der nicht mit dieser EDIABAS
+Version kompatibel ist.
+Fehlerbehebung: Übersetzen Sie die Steuergeräte-Beschreibungsdatei mit dem
+zu dieser EDIABAS-Version gehörenden Compiler.
+Zielsystem: WIN, LINUX
+70 BIP-0010: CONSTANT DATA ACCESS
+ERROR
+EDIABAS_BIP_0010
+Bedeutung: Fehler beim Zugriff auf Konstanten (Tabellen).
+Ursachen: Dieser Fehler tritt bei den Tabellenbefehlen auf. Ist die
+angegebene Tabelle oder Tabellenspalte nicht vorhanden, so
+wird diese Fehlermeldung ausgegeben.
+Fehlerbehebung: Überprüfen Sie die in der Steuergeräte-Beschreibungsdatei
+angegebenen Tabellen- und Spaltennamen mit den tatsächlich
+vorhandenen Tabellen.
+Zielsystem: WIN, LINUX
+71 BIP-0011: REAL ERROR EDIABAS_BIP_0011
+Bedeutung: Über- oder Unterlauf einer mathematischen Funktion.
+Ursachen: Dieser Fehler tritt in Zusammenhang mit den Real-
+Verarbeitungsfunktionen auf. Bei einer Rechenoperation
+wurde der darstellbare Zahlenbereich über- oder unterschritten.
+Fehlerbehebung: Überprüfen Sie die in der Steuergeräte-Beschreibungsdatei
+angegebenen Funtionsparameter, die den Realfunktionen zur
+Berechnung von Realwerten übergeben werden.
+WIN, LINUX
+72 BIP-0012: PLUG IN NOT FOUND EDIABAS_BIP_0012
+Bedeutung: Plug-In-Komponente wurde nicht gefunden.
+Ursachen: Bevor eine Steuergeräte-Beschreibungsdatei auf eine Plug-In-
+Komponente zugreifen kann muß diese auf ihrem System
+installiert sein.
+Der Fehler tritt wegen einer nicht existierenden Plug-In-
+Komponente auf.
+EDIABAS-Benutzerhandbuch Page 79 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Fehlerbehebung: Setzen Sie sich wegen des Fehlers mit dem Entwickler der
+Steuergeräte-Beschreibungsdatei in Verbindung.
+WIN, LINUX
+73 BIP-0013: PLUG IN ERROR EDIABAS_BIP_0013
+Bedeutung: Fehlerhafter Aufruf der Plug-In-Komponente.
+Ursachen: In der Plug-In-Komponente ist ein Fehler aufgetreten.
+Fehlerbehebung: Setzen Sie sich wegen des Fehlers mit dem Entwickler der
+Steuergeräte-Beschreibungsdatei in Verbindung.
+WIN
+74 BIP-0014: PLUG IN VERSION ERROR EDIABAS_BIP_0014
+Bedeutung: Falsche Version der Plug-In-Komponente
+Ursachen: Die installierte Plug-In-Komponente passt nicht zur
+verwendeten Steuergeräte-Beschreibungsdatei.
+Fehlerbehebung: Das EDIABAS-System wurde nicht korrekt installiert oder die
+Installation wurde nachträglich durch manuelles Kopieren von
+Dateien geändert.
+WIN
+75 BIP-0015: PLUG IN STACK ERROR EDIABAS_BIP_0015
+Bedeutung: Fehler in der Plug-In-Komponente.
+Ursachen: In der Plug-In-Komponente ist ein Fehler aufgetreten.
+Fehlerbehebung: Durch den Anwender nicht möglich. Setzen Sie sich wegen des
+Fehlers mit dem Entwickler des Plug-Ins in Verbindung.
+WIN
+76 BIP-0016: PLUG IN FUNCTION NOT
+FOUND
+EDIABAS_BIP_0016
+Bedeutung: Fehler in der Plug-In-Komponente.
+Ursachen: In der Plug-In-Komponente ist ein Fehler aufgetreten.
+Fehlerbehebung: Durch den Anwender nicht möglich. Setzen Sie sich wegen des
+Fehlers mit dem Entwickler des Plug-Ins in Verbindung.
+WIN
+77 BIP-0017: IFH CHANNEL ERROR EDIABAS_BIP_0017
+Bedeutung: Fehlerhafter Interface-Kommunikationskanal.
+Ursachen: Dieser Fehler tritt bei den Interface-Befehlen auf. Ist der
+angegebene Interface-Kanal nicht vorhanden oder die
+maximale Anzahl verfügbarer Interface-Kanäle überschritten,
+so wird diese Fehlermeldung ausgegeben.
+Fehlerbehebung: Überprüfen Sie die in der Steuergeräte-Beschreibungsdatei
+angegebenen Interface-Kanäle.
+Zielsystem: WIN, LINUX
+EDIABAS-Benutzerhandbuch Page 80 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+EDIABAS-Benutzerhandbuch > Fehlerreferenz > 4. Fehlerliste > 4.2. Laufzeitsystem
+4.2.2. SYS, Ablaufsteuerung
+78 BIP-0018: SYSTEM ERROR EDIABAS_BIP_0018
+Bedeutung: Resource-Problem des Betriebssystems.
+Ursachen: Die Anwendungen benötigen zu viele System-Resourcen.
+Fehlerbehebung: Tritt dieser Fehler wiederholt auf, so sollten Sie andere
+Anwendungsprogramme beenden. Wenn der Fehler dann
+immer noch nicht behoben ist, muß ihr System neu gestartet
+werden.
+Zielsystem: WIN, LINUX
+90 SYS-0000: INTERNAL ERROR EDIABAS_SYS_0000
+Bedeutung: Der Fehler zeigt einen unzulässigen Programmzustand des
+EDIABAS an.
+Ursachen: Ein Programmereignis kann nicht bearbeitet werden.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+91 SYS-0001: ILLEGAL FUNCTION EDIABAS_SYS_0001
+Bedeutung: Der Fehler zeigt einen unzulässigen Programmzustand des
+EDIABAS an.
+Ursachen: Das Anwendungsprogramm hat unzulässige
+Kommunikationsdaten dem EDIABAS übermittelt.
+Fehlerbehebung: Durch den Anwender nicht möglich. Sollte dieser Fehler
+auftreten, so informieren Sie bitte SOFTING.
+Zielsystem: WIN, LINUX
+92 SYS-0002: ECU OBJECT FILE NOT
+FOUND
+EDIABAS_SYS_0002
+Bedeutung: Die Steuergeräte-Variantenbeschreibungsdatei wurde nicht
+gefunden.
+Ursachen: Entweder existiert im Suchpfad von EDIABAS die
+Beschreibungsdatei nicht oder der Suchpfad ist falsch.
+Suchpfad von EDIABAS:
+EDIABAS-Benutzerhandbuch Page 81 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Das EDIABAS-Konfigurationselement EcuPath beschreibt den
+Suchpfad von EDIABAS. Bei nicht vorhandener
+Konfigurationseinstellung wird von EDIABAS das aktuelle
+Verzeichnis als Suchpfad angenommen.
+Fehlerbehebung: Beschreibungsdatei existiert nicht:
+Kopieren Sie die geforderte Beschreibungsdatei in den
+Suchpfad von EDIABAS.
+Suchpfad ist falsch:
+Anwendungsprogramm beenden und Konfigurationselement
+EcuPath mit dem richtigen Pfad belegen.
+Bei geänderter Konfiguration ist EDIABAS zu beenden und
+wieder neu zu starten.
+Starten Sie ihr Anwendungsprogramm erneut.
+Zielsystem: WIN
+93 SYS-0003: ECU OBJECT FILE ERROR EDIABAS_SYS_0003
+Bedeutung: Fehler beim Lesen der Steuergeräte-
+Variantenbeschreibungsdatei.
+Ursachen: Ihre Beschreibungsdatei ist eventuell beschädigt oder beim
+Zugriff über ein Netzwerk traten Übermittlungsfehler auf.
+Fehlerbehebung: Tritt der Fehler wiederholt auf, so sollten Sie die
+Beschreibungsdatei neu übersetzen.
+Zielsystem: WIN, LINUX
+94 SYS-0004: ILLEGAL FORMAT OF ECU
+OBJECT FILE
+EDIABAS_SYS_0004
+Bedeutung: Unzulässiges Format der Steuergeräte-
+Variantenbeschreibungsdatei.
+Ursachen: Ihre Beschreibungsdatei ist beschädigt.
+Fehlerbehebung: Übersetzen Sie die Beschreibungsdatei neu.
+Zielsystem: WIN, LINUX
+95 SYS-0005: OBJECT FILE NOT FOUND EDIABAS_SYS_0005
+Bedeutung: Die Steuergeräte-Beschreibungsdatei wurde nicht gefunden.
+Ursachen: Entweder existiert im Suchpfad von EDIABAS die
+Beschreibungsdatei nicht oder der Suchpfad ist falsch.
+EDIABAS-Benutzerhandbuch Page 82 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Suchpfad von EDIABAS:
+Das EDIABAS-Konfigurationselement EcuPath beschreibt den
+Suchpfad von EDIABAS. Bei nicht vorhandener
+Konfigurationseinstellung wird von EDIABAS das aktuelle
+Verzeichnis als Suchpfad angenommen.
+Fehlerbehebung: Beschreibungsdatei existiert nicht:
+Kopieren Sie die geforderte Beschreibungsdatei in den
+Suchpfad von EDIABAS.
+Suchpfad ist falsch:
+Anwendungsprogramm beenden und Konfigurationselement
+EcuPath mit dem richtigen Pfad belegen.
+Bei geänderter Konfiguration ist EDIABAS zu beenden und
+wieder neu zu starten.
+Starten Sie ihr Anwendungsprogramm erneut.
+Zielsystem: WIN, LINUX
+96 SYS-0006: GROUP OBJECT FILE ERROR EDIABAS_SYS_0006
+Bedeutung: Fehler beim Lesen der Steuergeräte-
+Gruppenbeschreibungsdatei.
+Ursachen: Ihre Beschreibungsdatei ist eventuell beschädigt oder beim
+Zugriff über ein Netzwerk traten Übermittlungsfehler auf.
+Fehlerbehebung: Tritt der Fehler wiederholt auf, so sollten Sie die
+Beschreibungsdatei neu übersetzen.
+Zielsystem: WIN, LINUX
+97 SYS-0007: ILLEGAL FORMAT OF GROUP
+OBJECT FI LE
+EDIABAS_SYS_0007
+Bedeutung: Unzulässiges Format der Steuergeräte-
+Gruppenbeschreibungsdatei.
+Ursachen: Ihre Beschreibungsdatei ist beschädigt.
+Fehlerbehebung: Übersetzen Sie die Beschreibungsdatei neu.
+Zielsystem: WIN, LINUX
+98 SYS-0008: JOB NOT FOUND EDIABAS_SYS_0008
+Bedeutung: Der Job wurde in der Steuergeräte-Beschreibungsdatei nicht
+gefunden.
+EDIABAS-Benutzerhandbuch Page 83 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Ursachen: Der Job fehlt in der Beschreibungsdatei oder es ist die falsche
+Beschreibungsdatei.
+Fehlerbehebung: Prüfen Sie die Beschreibungsdatei auf das Vorhandensein des
+gewünschten Jobs.
+Überprüfen Sie auch die genaue Schreibweise des Jobs.
+Ist in der Beschreibungsdatei der gewünschte Job nicht
+vorhanden, so ist die Beschreibungsdatei um den Job zu
+erweitern.
+Zielsystem: WIN, LINUX
+99 SYS-0009: NO INITIALIZATION JOB EDIABAS_SYS_0009
+Bedeutung: Der Job INITIALISIERUNG wurde in der Steuergeräte-
+Beschreibungsdatei nicht gefunden.
+Ursachen: Der Job INITIALISIERUNG wird automatisch von EDIABAS
+ausgeführt, der Job fehlt jedoch in der Beschreibungsdatei.
+Fehlerbehebung: Die Beschreibungsdatei ist um den Job INITIALISIERUNG zu
+erweitern.
+Zielsystem: WIN, LINUX
+100 SYS-0010: INITIALIZATION ERROR EDIABAS_SYS_0010
+Bedeutung: Der Job INITIALISIERUNG zeigt eine fehlerhafte
+Initialisierung an.
+Ursachen: Der Job INITIALISIERUNG wird automatisch von EDIABAS
+ausgeführt, der Erfolg der Initialisierung wird mit dem
+Ergebnis DONE gemeldet:
+DONE = 0 Fehler bei Initialisierung
+DONE <> 0 erfolgreiche Initialisierung
+Beim Job INITIALISIERUNG trat ein Fehler auf, das
+Ergebnis DONE war also 0.
+Fehlerbehebung: Tritt der Fehler wiederholt auf, so sollten Sie sich wegen des
+Fehlers mit dem Entwickler der Beschreibungsdatei in
+Verbindung setzen.
+Zielsystem: WIN, LINUX
+101 SYS-0011: NO IDENTIFICATION JOB EDIABAS_SYS_0011
+Bedeutung: Der Job IDENTIFIKATION wurde in der Steuergeräte-
+Gruppenbeschreibungsdatei nicht gefunden.
+EDIABAS-Benutzerhandbuch Page 84 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Ursachen: Der Job IDENTIFIKATION wird automatisch von EDIABAS
+ausgeführt, der Job fehlt jedoch in der Beschreibungsdatei.
+Fehlerbehebung: Die Beschreibungsdatei ist um den Job IDENTIFIKATION zu
+erweitern.
+Zielsystem: WIN, LINUX
+102 SYS-0012: IDENTIFICATION ERROR EDIABAS_SYS_0012
+Bedeutung: Der Job IDENTIFIKATION in der Steuergeräte-
+Gruppenbeschreibungsdatei konnte die Steuergeräte-Variante
+nicht identifizieren.
+Ursachen: Der Job IDENTIFIKATION wird automatisch von EDIABAS
+ausgeführt, der Erfolg der Identifikation wird mit dem
+Ergebnis VARIANTE angezeigt:
+Variante nicht identifizierbar:
+VARIANTE = <leer>
+Variante erfolgreich identifiziert:
+VARIANTE = <Name der Steuergeräte-
+Variantenbeschreibungsdatei ohne
+Extension>
+Beim Job IDENTIFIKATION trat ein Fehler auf, das Ergebnis
+VARIANTE war also leer.
+Fehlerbehebung: Tritt der Fehler wiederholt auf, so sollten Sie sich wegen des
+Fehlers mit dem Entwickler der Beschreibungsdatei in
+Verbindung setzen.
+Zielsystem: WIN, LINUX
+103 SYS-0013: UNEXPECTED RESULT EDIABAS_SYS_0013
+Bedeutung: Im Job IDENTIFIKATION der Steuergeräte-
+Gruppenbeschreibungsdatei oder im Job INITIALISIERUNG
+der Gruppen- oder Variantenbeschreibungsdatei wurde ein
+unzulässiges Ergebnis zurückgegeben.
+Ursachen: Der Job IDENTIFIKATION darf nur das Ergebnis
+VARIANTE und der Job INITIALISIERUNG nur das
+Ergebnis DONE zurückgeben.
+In einem der genannten Jobs wurde jedoch ein anderes
+Ergebnis zurückgegeben.
+Fehlerbehebung: Setzen Sie sich wegen des Fehlers mit dem Entwickler der
+Beschreibungsdatei in Verbindung.
+EDIABAS-Benutzerhandbuch Page 85 of 128
+file:///C:/Users/QXZ5QJN/AppData/Local/Temp/~hh446C.htm 8/28/2025
+Zielsystem: WIN, L

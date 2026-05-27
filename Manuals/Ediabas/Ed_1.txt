@@ -1,0 +1,3786 @@
+EDIABAS-BEST / 1 Handbuch Version 1.18
+SOFTING AG Richard-Reitzner-Allee 6 Datum 30.11.2007
+85540 Haar
+Tel.: (0 89) 4 56 56 - 0
+Im Auftrag und in Zusammenarbeit mit der BMW AG, München
+BEST/1
+SPRACHE & INTERPRETER
+erstellt von
+SOFTING AG
+Autor:
+Dipl.-Ing.(FH) B.Osenstätter
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 2
+1. Einführung in BEST/1...........................................................................3
+2. Einführung in verwendete Begriffe.......................................................3
+3. Einführung in die Prozessorarchitektur ...............................................4
+4. Auflistungen aller möglichen Fehler des BIP........................................5
+5. Definition von Traps ..............................................................................7
+6. Darstellung eines Opcodes im OBJ Format ..........................................8
+7. Darstellung der Adressierungscodes und Ihrer Längen.......................8
+8. Berechnung der effektiven Adresse ......................................................9
+9. Aufruf des Übersetzers ........................................................................ 10
+10. Steuergerätebeschreibung mit BEST/1............................................... 10
+11. Tabellenbearbeitung mit BEST/1........................................................ 12
+12. Auflistung aller Prozessorbefehle nach Kategorien............................ 12
+12.1 Standard Prozessorbefehle .............................................................. 12
+12.2 Stringbehandlungsbefehle............................................................... 13
+12.3 C-Stringbehandlungsbefehle........................................................... 13
+12.4 Wandlungsbefehle .......................................................................... 14
+12.5 Floatingpoint-Befehle ..................................................................... 14
+12.6 Kommunikationsbefehle................................................................. 14
+12.7 Interfacebefehle .............................................................................. 14
+12.8 Ergebnisbehandlungsbefehle........................................................... 15
+12.9 Exceptionbehandlungsbefehle......................................................... 15
+12.10 Dateibehandlungsbefehle................................................................ 16
+12.10 Zeitbefehle...................................................................................... 16
+12.11 Tabellenbefehle .............................................................................. 16
+12.12 Informationsbefehle........................................................................ 16
+12.13 Plug-In-Befehle .............................................................................. 16
+13. Alphabetisches Befehlsverzeichnis ...................................................... 17
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 3
+1. Einführung in BEST/1
+BEST heißt BEschreibungssprache für STeuergeräte. Diese Beschreibungssprache soll im
+Rahmen des Projekts EDIABAS eingesetzt werden, um die Forderung nach einer
+applikationsunabhängigen Beschreibungsmöglichkeit zu erfüllen. Zur Programmlaufzeit werden
+Beschreibungsdateien geladen und interpretiert, in denen das Wissen über die Steuergeräte, wie
+Adressen und Umrechnungen, verborgen ist (encapsuling). Die Beschreibungssprache BEST/1
+stellt also Mittel und Wege zur Verfügung um die in den Steuergeräten abgelegten Daten in
+steuergeräteunabhängige Werte wie z.B. Drehzahl oder Gerätenummer zu wandeln. Dabei
+werden nur die wirklich von der Applikation benötigten Daten weitergeleitet (information
+hiding).
+Diese Sprache sollte auch unabhängig vom jeweiligen Hostsystem sein und deswegen eine
+maschinenunabhängige eigene Verarbeitung aufweisen. Aus diesem Grunde bietet sich ein
+virtueller Prozessor an. Dieser virtuelle Prozessor (im folgenden VP genannt) arbeitet wie ein
+richtiger Prozessor eine Folge von einfachen Befehlen (Opcodes) ab. Durch dieses Konzept ist es
+möglich höhere Sprachebenen zu definieren, die dann mit Hilfe eines Compilers auf diese
+Prozessorebene gebracht werden kann. Damit kann diese höhere Sprachebene im Rahmen des
+möglichen Compilerbaus problemorientiert und nicht sprachorientiert geplant werden.
+Diese vorliegende BEST/1 Beschreibung enthält genau den Befehlsumfang des virtuellen
+Prozessors. Für jeden Prozessorbefehl (OPCODE), der ja eigentlich nur durch eine
+Bitkombination dargestellt wird, ist ein kurzes Schlüsselwort (Mnemonic) definiert. Die dem
+Befehl übergebenen Parameter, sind Namen von Registern oder Konstanten. Diese Sprache ist
+also ein genaues Abbild der im virtuellen Prozessor ablaufenden Befehle und seiner Architektur.
+2. Einführung in verwendete Begriffe
+Register Prozessorinterener Speicherplatz mit einem Namen, definierter Länge und
+Eigenschaften. In diesem Register können Daten abgelegt werden, die die Größe
+des Registers nicht überschreiten. Diese können dann mit dem Namen des
+Registers angesprochen werden.
+immediate Der Wert mit dem eine Operation ausgeführt werden soll steht nicht in einem
+Register, sondern wird bei der Operation direkt mit angegeben.
+indiziert In einem Feld von Daten wird mit einem Index (fortlaufende Zahl, mit der von 0
+zählend jedes Element in diesem Feld ettikettiert wird) auf ein bestimmtes Element
+zugegriffen.
+Effektive
+Adresse Diejenigen Daten, auf die der Prozessor dann wirklich zugreift. (An einem realen
+Prozessor würde ein bestimmtes Muster an den Adressleitungen anliegen.)
+byte,char Ein Datum mit einer Länge von 8 Bit. Es sind Zahlen im Bereich von 0 bis 255
+oder von -128 bis 127 darstellbar Die Elemente in Telegrammen sind von dieser
+Größe.
+word,integer Ein Datum mit einer Länge von 16 Bit. Es sind Zahlen im Bereich von 0 bis
+65.535 oder von -32.768 bis + 32.767 darstellbar
+dword,long Ein Datum mit einer Länge von 32 Bit. Es sind Zahlen im Bereich von 0 bis
+4.294.967.295 oder von -2.147.483.648 bis 2.147.483.647 darstellbar
+double,real Ein Fließkommadatum mit einer Länge von 64 Bit. Es sind Zahlen im Bereich von
+±1.7E ± 308 (15 Stellen genau) darstelbar.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 4
+3. Einführung in die Prozessorarchitektur
+Der Adressraum des VP ist eine Objektdatei, die die Opcodes in binärer Form enthält. Durch
+Absetzen eines Jobs aus der API-Schnittstelle wird dieser Prozessor auf eine bestimmte Adresse
+in diesem Adressraum gesetzt und die Abarbeitung gestartet. Es wird sequentiell ein Opcode
+nach dem anderen abgearbeitet, bis ein Befehl zum Abbruch, oder ein Fehler erfolgt. Die
+Verwaltung der Aufrufe, übernimmt ein übergeordnetes Laufzeitsystem, das direkt von der API
+gesteuert wird.
+Der VP kennt keinerlei Speicherzugriffe, deshalb konnten Zeiger und Arrayzugriffe vermieden
+werden, was wesentlich zu einem sicheren Betrieb beiträgt. Der VP verfügt über 2 verschiedene
+Registersätze, deren Größe den Anforderungen angepaßt werden kann. Es gibt zum einen den
+universal-Registersatz, der für arithmtische Operationen benützt wird und einen
+Stringregistersatz, der das Arbeiten mit Strings und Telegrammen ermöglicht.
+F0 F1 F2 F3 F4 F5 F6 F7
+Double Registersatz
+L0 L1 L2 L3 L4 L5 L6 L7
+I0 I1 I2 I3 I4 I5 I6 I7 I8 I9 IA IB IC ID IE IF
+B0/1 B2/3 B4/5 B6/7 B8/9 BA/
+B
+BC/
+D
+BE/
+F
+A0/1 A2/3 A4/5 A6/7 A8/9 AA/
+B
+AC/
+D
+AE/
+F
+Ax = Bx = 8 Bit ; Ix = 16Bit ; Lx = 32Bit ;
+Universaler Registersatz
+1024byte S0 Länge0 32bit
+1024byte S1 Länge1 32bit
+1024byte S2 Länge2 32bit
+1024byte S3 Länge3 32bit
+1024byte S4 Länge4 32bit
+1024byte S5 Länge5 32bit
+1024byte S6 Länge6 32bit
+1024byte S7 Länge7 32bit
+1024byte S8 Länge8 32bit ab EDIABAS V7.1.0
+1024byte S9 Länge9 32bit ab EDIABAS V7.1.0
+1024byte SA LängeA 32bit ab EDIABAS V7.1.0
+1024byte SB LängeB 32bit ab EDIABAS V7.1.0
+1024byte SC LängeC 32bit ab EDIABAS V7.1.0
+1024byte SD LängeD 32bit ab EDIABAS V7.1.0
+1024byte SE LängeE 32bit ab EDIABAS V7.1.0
+1024byte SF LängeF 32bit ab EDIABAS V7.1.0
+String Registersatz
+Bei den Stringregistern, wird die Länge mitgeführt, da Telegramme keine eindeutige
+Stringendekennung haben. Dadurch können auch Tabellen, Texte oder ähnliches in diesen
+Registern abgelegt werden. Die Verwendung der String-Register S8..SF erfordert EDIABAS
+V7.1.0 oder höher.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 5
+Zusätzlich zu oben genannten Registern gibt es auch noch ein Condition Code Register, das die
+Flags enthält, die bei arithmetischen Operationen gesetzt werden. Das Zeroflag wird gesetzt,
+wenn nach einer Operation der Zieloperand=0 ist. Das Carryflag wird gesetzt, wenn bei einer
+Operation ein Überlauf über 0 auftritt. Das Negativflag entspricht dem höchstwertigen Bit des
+Zieloperanden nach der Operation. Das OVerflowflag wird gesetzt, wenn das Negativflag bei der
+Operation wechselt, und kein Überlauf über 0 aufgetreten ist (d.h. Der Überlauf ist bei 7FH - 80H
+aufgetreten).
+Z C N V S T TRAP # CCR
+CCR Condition Code Register
+Das S-Flag wird beim ersten JTSR in einem Job gesetzt. Wird der letzte RET ausgewertet, der
+wieder auf diese Ebene führt, so wird es wieder gelöscht. Es wird auch bei jedem neuem Job
+gelöscht. Wenn dieses Flag gesetzt ist, werden die Ergebnisbefehle, außer EERR ignoriert.
+32 Bit Flags (pro Trap 1) TPM
+TPM Trap Mask Register
+2048 Bytes
+Stack
+SP
+Stack und Stackpointer
+4. Auflistungen aller möglichen Fehler des BIP
+BIP_0000 No Error. Never occurs!
+BIP_0001 Internal Error. Programming Error, undefined State
+BIP_0002 IFH not present, or calling Error.
+BIP_0003 OBJ File read Error.
+BIP_0004 Illegal Opcode Error.
+BIP_0005 Internal Stack Overflow Error.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 6
+BIP_0006 String Register Overflow Error.
+BIP_0007 Division by Zero Error.
+BIP_0008 User Break.
+BIP_0009 Versionsfehler
+BIP_0010 Fehler bei Tabellenbearbeitung
+BIP_0011 Math Error !
+BIP_0012 Plugin nicht gefunden
+BIP_0013 Plugin-Fehler
+BIP_0014 Plugin-Versionsfehler
+BIP_0015 Plugin-Stack-Fehler
+BIP_0016 Plugin-Funktion nicht gefunden
+BIP_0017 IFH-Channel-Fehler
+IFH_0001 bis IFH_0027 Fehler des Interfacehandlers
+(Beschreibung siehe API-FEHLERREFERENZ).
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 7
+5. Definition von Traps
+Traps sind Ausnahmebedingungen die keine Fehler auslösen, sondern abgefangen werden
+(trap=Falle). In diesem Fall wird das Trapflag im Condition Code Register gesetzt, und die
+enstprechende Trapnummer eingtragen. Das Auslösen eines Fehlers oder einer TRAP wird durch
+ein Trapmaskregister gesteuert. Ist ein Bit in diesem Register gesetzt, so wird dieser Fehler nicht
+weitergeleitet.
+TRAPBIT AUSLÖSER Trapnummer
+BIT 00 ---------undefiniert---------- --
+BIT 01 reserviert 01
+BIT 02 BIP_0002: IFH Aufruf fehlerhaft 02
+BIT 03 reserviert 03
+BIT 04 reserviert 04
+BIT 05 reserviert 05
+BIT 06 BIP_0006: User File Fehler 06
+BIT 07 reserviert 07
+BIT 08 reserviert 08
+BIT 09 BIP_0009: Versionsfehler 09
+BIT 10 IFH_0000: IFH ist nicht installiert ! 10
+BIT 11 IFH_0001: Fehler an Schnittstelle Host-Interface 11
+BIT 12 IFH_0002: Interface meldet sich nicht 12
+BIT 13 IFH_0003: Datenübertragung zum Interface gestört 13
+BIT 14 IFH_0004: Kommando an Interface fehlerhaft 14
+BIT 15 IFH_0005: Interface interner Fehler (Defekt) 15
+BIT 16 IFH_0006: Interface nimmt Kommando nicht an 16
+BIT 17 IFH_0007: Falsche Versorgungsspannung am D-Bus 17
+BIT 18 IFH_0008: Fehler an Schnittstelle zum SG 18
+BIT 19 IFH_0009: Steuergerät meldet sich nicht 19
+BIT 20 IFH_0010: Datenübertragung Interface - SG gestört 20
+BIT 21 IFH_0011: Unbekanntes Interface 21
+BIT 22 IFH_0012: Datenpuffer Überlauf 22
+BIT 23 IFH_0013: Funktion im Interface nicht vorhanden 23
+BIT 24 IFH_0014: Konzept wird nicht unterstützt! 24
+BIT 25 IFH_0015: U-Batt wurde kurz unterbrochen 25
+BIT 26 IFH_0016: Die Zündung wurde ausgeschaltet 26
+BIT 27 reserviert 27
+BIT 28 reserviert 28
+BIT 29 reserviert 29
+BIT 30 reserviert 30
+BIT 31 reserviert 31
+Tabelle 1: Definition der Traps
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 8
+6. Darstellung eines Opcodes im OBJ Format
+In der Beschreibungsdatei werden Opcodes in einem fest definierten Format abgelegt. Es wurde
+eine gleiche Länge aller Befehlsrümpfe vereinbart. Ein Befehlsrumpf besteht immer aus zwei
+Bytes. Das erste Byte codiert den eigentlichen Befehl, das zweite Byte enthält die
+Adressierungsarten.
+BEFEHLSCODE DADR SADR
+4 Bit Quelladressierung
+4 Bit Zieladressierung
+8 Bit Opcode
+Bild 4: Opcodedarstellung
+An den Befehlsrumpf werden dann die entsprechenden Datenbytes angehängt (ohne Alignment).
+Zuerst folgen die Daten der Zieladressierung und darauf die Daten der Quelladressierung. Nach
+dem letzten Byte, d.h am Ende des gesammten Opcodes, folgt sofort der nächste Opocde!
+7. Darstellung der Adressierungscodes und Ihrer Längen
+ADDR-ART CODE BYTES BEST/1 Syntax
+- 0 0
+S,F 1 1 RN S0, F0
+B 2 1 RN B1
+I 3 1 RN I2
+L 4 1 RN L3
+#B 5 1 # #0.B, #'A'
+#I 6 2 # #1.I, #1
+#L 7 4 # #5.L
+{} 8 1 LEN +LEN*( 1 #) {0.b,"AB",'A'} "HALLO"
+S[#] 9 1 RN +2 # S0[#4]
+S[R] A 1 RN +1 RN S1[L2]
+S[R,#] B 1 RN +1 RN +2 # S2[I0,#2]
+S[#]# C 1 RN +2 # +2 # S3[#1]#3
+S[#]R D 1 RN +2 # +1 RN S4[#2]B0
+S[R]# E 1 RN +1 RN +2 # S5[I1]#4
+S[R]R F 1 RN +1 RN ++1 RN S6[B0]B1
+Tabelle 1: Alle möglichen Adressierungsarten
+Es gibt 16 Arten der Adressierung. Bei 4 Bit sind somit alle Codiermöglichkeiten ausgereizt. Die
+Adressierungsart 0 heißt, daß kein Operand angegeben wird. Bei den Adressierungsarten 1 bis 4
+wird ein Register angegeben. Die Adressierungsarten 5 bis 8 definieren immediate Operanden.
+Die Länge des Operanden, und damit auch die Adressierungsart wird durch ein Suffix, d.h. durch
+einen mit einem Punkt abgetrennten Buchstaben bestimmt. Fehlt dieser wird von der
+Adressierungsart 6 (Integer) ausgegangen. Mit 9 bis B wird ein Element aus einem Stringregister
+indiziert, und mit C bis F werden n-Elemente aus einem Stringregister ab Position m adressiert.
+Für jeden Opcode ist eine genaue Liste festgelegt, auf welche Zieladressierung, welche
+Quelladressierung folgen darf. Jede andere Kombination führt zu einer Fehlermeldung.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 9
+8. Berechnung der effektiven Adresse
+ADDR-ART CODE EA OPLEN OPLEN WIRD DURCH SADR BESTIMMT
+WENN DIE SADR:
+- 0 0 0
+S 1 &S LEN(S) S B I L S[#]# S[#]R S[R]# S[R]R {} #B #I #L
+F 1 &F 8
+B 2 &B 1
+I 3 &I 2
+L 4 &L 4
+#B 5 &# 1
+#I 6 &# 2
+#L 7 &# 4
+{} 8 &# LEN({})
+S[#] 9 &S+# 1 S B I L S[#]# S[#]R S[R]# S[R]R {} #B #I #L
+S[R] A &S+*R 1 S B I L S[#]# S[#]R S[R]# S[R]R {} #B #I #L
+S[R,#] B &S+*R+# 1 S B I L S[#]# S[#]R S[R]# S[R]R {} #B #I #L
+S[#1]#2 C &S+#1 #2
+S[#]R D &S+# R
+S[R]# E &S+*R #
+S[R1]R2 F &S+*R1 *R2
+Tabelle 2: Berechnung von Effektiver Adresse und Operationslänge
+Die Berechnung der effektiven Adresse ist sehr einfach, weil es nur Register Adressen gibt. Bei
+einigen Adressierungsarten muß jedoch noch ein Offset hinzugerechnet werden. Bei den
+immediate Adressierungsarten, wird ein Hilfspeicher dazu benutzt um eine sinnvolle effektive
+Adresse zu generieren. Die Operationslänge wird im allgemeinen durch die Zieladressierungsart
+bestimmt. Bei einigen Kombinationen wird die durch die Zieladresse vorgegebene
+Operationslänge durch die Quelladressierung überschrieben. Nähreres ist aus oben stehender
+Tabelle zu entnehmen. Die Länge der Stringregsiter ergibt sich aus dem Byte mit dem höchsten
+Index, das beschrieben wurde. Mit CLEAR, SERASE oder mit SCUT kann die Länge wieder
+verringert werden.
+Beispiele einiger Adressierungsarten:
+B1 Register B1
+S0[#3] Byte Nr 3 in Register S0
+L3 Register L3
+S7[B3]#10 10 Byte ab Index aus B3 aus S7
+{"HALLO"} String "HALLO" nicht mit 0 abgeschlossen
+{"HALLO",0.b} String "HALLO" mit 0 abgeschlossen
+"HALLO" String "HALLO" mit 0 abgeschlossen
+#12345678.L Long Zahl 12345678
+#'A' #$41.b #65.b Byte 'A' = $41 = 65
+{0,1,2,3,4,5,6} Feld mit Inhalt 0 bis 6 als Integer
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 10
+9. Aufruf des Übersetzers
+Der Assembler wird durch folgende Befehlszeile aufgerufen:
+BEST1 [-M] [-R RevMAJ.RevMIN username] sourcefile [outdir]
+sourcefile = basenamepattern.B1V | basenamepattern.B1G
+-M creates a mapfile
+Die Option -R fügt Versionsinformation in die Zieldatei ein.
+Es sind folgende Fehler definiert:
+A1000 Syntax Error
+A1001 Double defined Table
+A1002 Double defined Column
+A1003 Too Few Elements defined
+A1004 Too Many Elements defined
+A1005 Double defined Jobname
+A1006 Double defined Label
+A1007 Undefined Label
+A1008 Illegal Adressing for Opcode
+A9003 unable to open infile
+A9004 unable to open outfile
+A9005 unable to open mapfile
+A9006 fatal lex error
+A9999 memory allocation error
+A9998 memory free error
+A9997 memory heap error
+10. Steuergerätebeschreibung mit BEST/1
+In der Beschreibungsdatei werden mit Hilfe von BEST/1 Steuergerätefunktionen formuliert.
+Sourcefiles sind Textfiles, im ASCII-Code erstellt, in denen die BEST/1 Befehle niedergelegt
+sind. Hier ist ein Beispiel eines solchen Sourcefiles:
+1. initialisierung# ;JOBNAME
+1. move s0,{2.i,0.i,$10.i,0.i,0.i,500.i,100.i,50.i,5.i,0.i}
+;laden des s0 registers mit den
+2. ;Kommunikationsparametern, die das
+;Steuergerät verlangt. Die Parameter
+;sind bei XSETPAR genau definiert.
+3. xconnect ;Öffnen des Treibers
+4. xsetpar s0 ;Einstellen der
+;Kommunikationsparameter
+5. xreps #5 ;5 Wiederholungen bei Fehlern
+6. move i0,#1 ;i0 Register soll 1 enthalten
+7. ergw "DONE",i0 ;Rückgabe des Integer-Ergebisses
+;"DONE" mit dem Wert "1" aus
+;Register i0
+8. eoj ;JOBENDE
+10.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 11
+9. identifikation# ;JOBNAME
+10. move s1,"FEHLER" ;Defaultergebnis ist "Fehler"
+11. clear s0 ;Antwortbuffer löschen
+12. xawlen {5.i,0.i} ;5 antwortblöcke
+13. xsend s0,{3,0,0} ;03 00 00 03
+14. comp s0[#3],#0 ;Antowrt ID ?
+15. jnz id_erg ;wenn nein Ergebnis "Fehler"
+;behalten
+16. move s1,{"DME17M42",0} ;Ergebnis "DME17M42" festlegen
+17. id_erg: ergs s1,{"VARIANTE",0} ;Ergebnis mit Name "Variante"
+;zurückgeben
+18. eoj ;JOBENDE
+19. drehzahl#
+clear s0 ;Antwortbuffer löschen
+xawlen {1.i,0.i} ;1 Block Antwort
+20. xsend s0,{6,0,1,1,0,$3b} ; 06 00 01 01 00 3b 03
+clear i0 ;i0 löschen
+21. move b0,s0[#3] ;drehzahl lesen
+22. mult i0,#40 ; * 40 ist Drehzahl
+23. ergw i0,{"DREHZAHL",0} ;in 1/min
+eoj
+Beispiel eines Sourcefiles
+Diese Beispieldatei definiert zwei Jobs, INITIALISIERUNG" und "IDENTIFIKATION". Die
+Jobnamen stehen in der ersten Spalte und enden mit einem Gartenzaun '#' (1,11). Diese Jobs
+können dann aus der Applikation heraus aufgerufen werden. Eine Zeile kann einen Kommentar
+enthalten, der dann nicht berücksichtigt wird (2,3). Ein Kommentar beginnt mit einem ';' und
+endet am Ende der Zeile. Leere Zeilen werden nicht berücksichtigt (10).
+Im allgemeinen haben alle Zeilen das folgende Format:
+{ { {Label:} OPCODE { Zieladresse {,Quelladresse} } } {;Kommentar} }
+oder
+{ COMPILER CODE Datalist }
+Labels sind Sprungmarken, auf die sich alle Sprungbefehle beziehen können. Der Befehl "JNZ
+id_erg" (17) überspringt also die nächsten Befehl und setzt bei "id_erg:" (19) wieder auf, wenn
+das Zeroflag nicht gesetzt ist.
+Nur wenn eine Zieladresse angegeben ist, kann es eine Quelladresse geben. Es gibt auch Befehle,
+die weder Quell- noch Zieladresse besitzten (4,5,9).
+Am Beginn des Jobs INITIALISIERUNG wird eine Parameterliste in das Register S0 geladen
+(2). Der Treiber wird geöffnet (4). Die Kommunikationsparameter werden mit den vorher
+geladenen Werten eingestellt (5). Im Fehlerfall werden 5 Wiederholungen gemacht (6). Das
+Register i0 wird mit 1 geladen (7). Dieser Wert wird dann in (8) als Ergebnis "DONE"
+zurückgegeben. Dieser Job ist beendet bei (9).
+Am Begin des Jobs IDENTIFIKATION wird das Register S1 mit dem Wert "FEHLER\0" geladen
+(12). Der Antwortpuffer S0 wird gelöscht (13). Die Antwortlänge wird auf 5 zu erwartende
+Blöcke eingestellt (14) und das Telegramm "03,00,00" an das Steuergerät gschickt (15). Im
+dritten Byte der Antwort (von 0 an gezählt) muß dann das Kontrollbyte 00 stehen, um als
+korrektes Empfangstelegramm identifiziert werden zu können (16). Wenn dies so ist, wurde beim
+Vergleich das Zeroflag gesetzt, und die Abarbeitung wird nach (17) einfach fortgesetzt. Dabei
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 12
+wird der Wert "DME17M42\0" in das Register S1 geschrieben (18). Dieser Wert wird dann als
+Ergebnis "VARIANTE\0" aus S1 zurückgegeben (19). Wenn der Vergleich nicht erfolgreich war
+steht in S1 ja noch der Wert "FEHLER\0" und dieser wird zurückgegeben. Der Job endet sofort
+anschließend (20).
+Der Job DREHZAHL liest die Adresse 3BH des Steuergeräterams (22). Dieser Wert wird in das
+Register I0 geschrieben (23) und mit 40 multipliziert (24). Der resultierende Wert wird dann als
+Ergebnis Drehzahl zurückgegeben (25).
+11. Tabellenbearbeitung mit BEST/1
+Es können Stringtabellen definiert werden. Auf diese Kann dann mit den Tabellenbefehlen
+zugegriffen werden. Eine Tabelle hat folgende Syntax:
+TBEG "tabellenname"
+HEAD "spaltenname1","spaltenname2",...,"spaltennamen"
+LINE "element1,1","element1,2",...,"element1,n"
+LINE "element2,1","element2,2",...,"element2,n"
+...
+LINE "elementm,1","elementm,2",...,"elementm,n"
+TEND
+Mit dem Befehl 'TABSET "tabellename"' wird die Tabellenbearbeitung für diese Tabelle
+initialisiert. Danach kann mit dem Befehl 'TABSEEK "element2,1","spaltenname1"' z.B.: in der
+Spalte 1 nach dem Element "element2,1" gesucht werden. Daraufhin kann mann sich mit den
+Befehl 'TABGET s0,"spaltennamex" jedes beliebige Element der Zeile ansprechen, in der das
+gesuchte Element vorhanden war.
+12. Auflistung aller Prozessorbefehle nach Kategorien
+12.1 Standard Prozessorbefehle
+MOVE Bewegen von Daten in Registern
+CLEAR Löschen von Registern
+COMP Vergleichen von 2 (nicht String) Registern
+SUBB Subtraktion von Registern ohne Carry
+SUBC Subtraktion von Registern mit Carry
+ADDC Addition von Registern mit Carry
+ADDS Addition von Registern ohne Carry
+MULT Multiplizieren von Registern
+DIVS Dividieren von Registern
+AND AND von 2 Registern
+OR OR von 2 Registern
+XOR XOR von 2 Registern
+NOT NOT auf ein Register
+CLRC Löschen des Carry-Flags
+SETC Setzen des Carry-Flags
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 13
+ASL=LSL Arithmetisches / Logisches Linksschieben
+LSR Logisches Rechtsschieben
+ASR Arithmetisches Rechttsschieben
+JUMP Sprung zur angegebenen Adresse
+JTSR Sprung in Unterroutine
+RET Rückkehr aus Unterroutine
+JC Sprung zur angegebenen Adresse wenn C = 1
+JNC Sprung zur angegebenen Adresse wenn C = 0
+JZ Sprung zur angegebenen Adresse wenn Z = 1
+JNZ Sprung zur angegebenen Adresse wenn Z = 0
+JV Sprung zur angegebenen Adresse wenn V = 1
+JNV Sprung zur angegebenen Adresse wenn V = 0
+JMI Sprung zur angegebenen Adresse wenn N = 1
+JPL Sprung zur angegebenen Adresse wenn N = 0
+JA Sprung zur angegebenen Adresse wenn Z = 0 und C = 0 (unsigned)
+JAE Sprung zur angegebenen Adresse wenn C = 0 (unsigned)
+JBE Sprung zur angegebenen Adresse wenn Z = 1 oder C = 1 (unsigned)
+JB Sprung zur angegebenen Adresse wenn C = 1 (unsigned)
+JG Sprung zur angegebenen Adresse wenn Z = 0 und N = V (signed)
+JGE Sprung zur angegebenen Adresse wenn N = V (signed)
+JLE Sprung zur angegebenen Adresse wenn Z = 1 oder N != V (signed)
+JL Sprung zur angegebenen Adresse wenn N != V (signed)
+NOP No Operation
+EOJ Ende eines Job
+ATSP Holt einen Wert relativ zum SP
+TOSP Schreibt einen Wert relativ zum SP
+CLRV Das Overflowflag löschen
+POPF Die Flags vom Stack holen
+PUSHF Die Flags auf den Stack schieben
+SWAP Vertauschen von Nibbles, Bytes, oder Ints
+PUSH Register auf Stack schieben
+POP Register vom Stack holen
+TEST Test auf gesetzte Bits
+GENERR EDIABAS-Fehler auslösen
+12.2 Stringbehandlungsbefehle
+SCAT Aneinanderreihen von Strings
+SCUT Abschneiden von Strings
+SCMP Vergleichen von Strings
+SETSPC Setzen von Tokentrennern
+SLEN Bestimmen der StringlängeSERASE Löschen eines Strings in einem String
+SPASTE Einfügen eines Strings in einen String
+SREVRS String umdrehen
+STOKEN Nächstes Token einlesen
+SHMSET String in globalen Datenspeicher kopieren
+SHMGET String aus globalen Datenspeicher kopieren
+SSIZE Bestimmen der maximalen Stringregisterlänge
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 14
+12.3 C-Stringbehandlungsbefehle
+STRCAT Aneinanderreihen von C-Strings (0-terminiert)
+STRCMP Vergleichen von C-Strings
+STRLEN Bestimmen der C-Stringlänge
+12.4 Wandlungsbefehle
+A2FIX String zu Byte o. Integer o. Long
+A2FLT String zu Double
+FIX2FLT Byte, Integer o. Long zu Double
+FIX2DEZ Byte, Integer o. Long zu Dezimalstring
+FIX2HEX Byte, Integer o. Long zu Hexadezimalstring
+UFIX2DEZ Unsigned Byte, Unsigned Integer o. Unsigned Long zu Dezimalstring
+FLT2FIX Double zu Byte, Integer o. Long
+HEX2Y Hexadezimalstring zu Bytefolge
+Y2BCD Bytefolge zu BCD-String
+Y2HEX Bytefolge zu Hexadezimalstring
+FLT2Y4 Double zu Bytefolge (4 Byte)
+FLT2Y8 Double zu Bytefolge (8 Byte)
+Y42FLT Bytefolge (4 Byte) zu Double
+Y82FLT Bytefolge (8 Byte) zu Double
+12.5 Floatingpoint-Befehle
+FADD Addieren von zwei Doublewerten
+FSUB Subtrahieren von zwei Doublewerten
+FMUL Multiplizieren von zwei Doublewerten
+FDIV Dividieren von zwei Doublewerten
+FCOMP Vergleichen von 2 Doublewerten
+12.6 Kommunikationsbefehle
+XCONNECT Initialisieren des Interfacehandles und Bestimmung des Interfacetyps
+XHANGUP Deinitialisieren des Interfacehandles
+XOPEN Öffnen eines Interface-Kanals
+XCLOSE Schliessen des Interface-Kanals
+XCLOSEEX Schliessen aller Interface-Kanäle
+XSWITCH Wechsel des Interface-Kanals
+XSETPAR Setzen der Kommunikationsparameter
+XAWLEN Setzen der Telegrammantwortlänge
+XSEND Senden und Empfangen eines Telegramms
+XSENDF Senden eines Telgramms im frequent Modus
+XREQUF Anfordern eines Telgramms im frequent Modus
+XSTOPF Stoppen des frequent Modus
+XKEYB Anfordern der Keybytes
+XSTATE Anfordern des Interfaces Status
+XREPS Setzen des Wiederholungszählers
+XRECVEX Empfangen eines Telegramms
+XSENDEX Senden eines Telegramms
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 15
+12.7 Interfacebefehle
+XBOOT Rücksetzten des Interfaces
+XRESET Löschen der Kommunikationsparameter im Interface
+XTYPE Auslesen des Interfacetyps als String
+XVERS Auslesen der Interfaceversionsnummer
+XBATT Lesen der Batteriespannung
+XIGNIT Lesen der Spannung an der Zündung
+XDOWNL Laden des Interface
+XGETPORT Lesen eines Ports
+XLOOPT Testen der Diagnoseleitung
+XPROG Setzen der Programmierspannung
+XRAW Ungeprüften Auftrag ans Interface senden
+XSETPORT Setzen eines Ports
+XSIRESET Schalten des Service Intervall Relais
+XSTOPTR Unterbricht die Communcation mit dem Host
+XINFO Austauschen von Kontrollinformationen mit dem Interface
+12.8 Ergebnisbehandlungsbefehle
+ERGB Gibt ein BYTE als Ergebnis zurück
+ERGW Gibt ein WORD als Ergebnis zurück
+ERGD Gibt ein DWORD als Ergebnis zurück
+ERGI Gibt einen INTEGER als Ergebnis zurück
+ERGL Gibt ein LONG als Ergebnis zurück
+ERGS Gibt einen STRING als Ergebnis zurück
+ERGR Gibt einen DOUBLE-Wert als Ergebnis zurück
+ERGY Gibt einen BINARY-Wert als Ergebnis zurück
+ENEWSET Markiert einen neuen Ergebnissatz
+ETAG Überprüft auf Ergebnisanforderung
+EERR Fehlerergebnis
+PARB Holt Parameterbyte
+PARL Holt Parameterlong
+PARS Holt Parameterstring
+PARW Holt Parameterword
+PARR Holt Parameterreal
+PARY Holt Parameter binär
+PARN Holt Parameteranzahl
+12.9 Exceptionbehandlungsbefehle
+BREAK Breakpoint
+CLRT Löschen des Trapflags
+GETTMR Lesen des Trap Mask Registers
+JNT Jump if not Trap #
+JT Jump if Trap #
+SETTMR Setzen des Trap Mask Registers
+SETT Setzen des Trapflags #
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 16
+12.10 Dateibehandlungsbefehle
+FCLOSE Schließen einer Datei
+FOPEN Öffnet eine Datei
+FREAD Lesen eines Bytes
+FREADLN Lesen einer Zeile
+FSEEK Setzen des Lesezeigers auf ein Byte
+FSEEKLN Setzen des Lesezeigers auf eine Zeile
+FTELL Auslesen des Lesezeigers (Byte)
+FTELLLN Auslesen des Lesezeigers (Zeile)
+12.10 Zeitbefehle
+DATE Gibt die Kalenderwoche und das Jahr zurück
+TIME Gibt einen Zeitstring zurück
+TICKS Gibt einen Millisekundenzähler zurück
+WAIT Wartet n Sekunden
+WAITEX Wartet n Millisekunden
+12.11 Tabellenbefehle
+TABSET Setzt die aktuell zu bearbeitende Tabelle
+TABSETEX Setzt die aktuell zu bearbeitende Tabelle einer externen SGBD
+TABSEEK Setzt die zu bearbeitende Zeile in der Tabelle
+TABSEEKU Setzt die zu bearbeitende Zeile in der Tabelle
+TABGET Holt Elemente aus der Tabelle
+TABCOLS Ermittelt die Spaltenanzahl in der aktuellen Tabelle
+TABROWS Ermittelt die Zeilenanzahl in der aktuellen Tabelle
+12.12 Informationsbefehle
+IUPDATE Informiert über den Bearbeitungszustand
+IRANGE Bestimmt den Fortschrittsbereich
+IINCPOS Inkrementiert die Fortschrittsposition
+12.13 Plug-In-Befehle
+PLINK Plug-In-Komponente ohne Versionsprüfung anfordern
+PLINKV Plug-In-Komponente mit Versionsprüfung anfordern
+PPUSH Register auf Plug-In-Stack schieben
+PPUSHFLT Doublewert auf Plug-In-Stack schieben
+PPUSHY Bytefolge auf Plug-In-Stack schieben
+PPOP Register vom Plug-In-Stack holen
+PPOPFLT Doublewert vom Plug-In-Stack holen
+PPOPY Bytefolge vom Plug-In-Stack holen
+PJTSR Sprung in Plug-In-Subroutine
+PCALL Plug-In-Komponente aufrufen
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 17
+13. Alphabetisches Befehlsverzeichnis
+Das alphabetische Befehlsverzeichnis enthält für jeden Befehl eine kurze Funktionsbeschreibung
+und eine Liste aller möglichen Adressierungsarten.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 18
+A2FIX
+Konvertiert von Ascii nach Fixpunkt
+Assembler Syntax:
+A2FIX <ea>,<ea>
+Operation
+<ziel> = atoi (<Quelle>)
+Flags
+C
+Adressierungsarten
+Ziel Quelle
+B S {} S[#]# S[#]R S[R]# S[R]R
+I S {} S[#]# S[#]R S[R]# S[R]R
+L S {} S[#]# S[#]R S[R]# S[R]R
+Beschreibung
+Konvertiert einen Wert aus <Quelle> nach Fix. Das Carryflag wird gesetzt, wenn der Wert nicht
+in das Register paßt. Zahlenstrings, die mit "0x" beginnen werden als Hex-Zahlen interpretiert.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 19
+A2FLT
+Konvertiert von Ascii nach Doubleformat
+Assembler Syntax:
+A2FLT <ea>,<ea>
+Operation
+<ziel> = atof (<quelle>)
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F S {}
+Beschreibung
+Konvertiert einen Wert aus <Quelle> ins Doubleformat. Der String in Quelle hat folgendes
+Format:
+[-][0123456789][,|.][0123456789]+[[e|E||d|D][0123456789]+]
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 20
+ADDC
+Addiere Quelle zu Ziel, Ergebnis nach Ziel
+Assembler Syntax:
+ADDC <ea>,<ea>
+Operation
+<Ziel> + <Quelle> + <Carry> -> <Ziel>
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Adiert die beiden Operanden und das Carrybit. Das Ergebnis wird in Ziel abgelegt. Wenn keine
+fortlaufende Addition beabsichtigt ist, sollte zur Sicherheit das Carryflag vor dieser Operation
+gelöscht werden. Tritt ein Überlauf auf, so wird das Carryflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 21
+ADDS
+Addiere Quelle zu Ziel, Ergebnis nach Ziel
+Assembler Syntax:
+ADDS <ea>,<ea>
+Operation
+<Ziel> + <Quelle> + <Carry> -> <Ziel>
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Adiert die beiden Operanden ohne das Carrybit. Das Ergebnis wird in Ziel abgelegt. Tritt ein
+Überlauf auf, so wird das Carryflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 22
+AND
+Logisches UND zwischen Quelle und Ziel, Ergebnis nach Ziel
+Assembler Syntax:
+AND <ea>,<ea>
+Operation
+<Ziel> & <Quelle> -> <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Führt ein logisches UND mit den beiden Operanden aus. Das Ergebnis wird in Ziel abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 23
+ASL=LSL
+Arithmetisches Linksschieben des Ziels um Quelle Stellen
+Assembler Syntax:
+ASL <ea>,<ea>a
+Operation
+<Ziel> << <Quelle> -> <Ziel>
+MSB(Ziel) -> C
+Flags
+N Z C
+Bemerkung
+Es werden nur die untersten 8 Bit des Quell-Operanden ausgewertet!
+Adressierungsarten
+Ziel Quelle
+B B I L S[#] S[R] S[R,#] #B #I #L
+I B I L S[#] S[R] S[R,#] #B #I #L
+L B I L S[#] S[R] S[R,#] #B #I #L
+S[#] B I L S[#] S[R] S[R,#] #B #I #L
+S[R] B I L S[#] S[R] S[R,#] #B #I #L
+S[R,#] B I L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Schiebt den Zieloperanden um soviele Stellen nach Links, wie im Quelloperanden angegeben ist.
+Dabei werden von rechts Nullen nachgeschoben.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 24
+ASR
+Arithmetisches Rechtsschieben des Ziels um Quelle Stellen
+Assembler Syntax:
+ASR <ea>,<ea>
+Operation
+MSB(Ziel) >> <Ziel> >> <Quelle> -> <Ziel>
+LSB(Ziel) -> C
+Flags
+N Z C
+Bemerkung
+Es werden nur die untersten 8 Bit des Quell-Operanden ausgewertet!
+Adressierungsarten
+Ziel Quelle
+B B I L S[#] S[R] S[R,#] #B #I #L
+I B I L S[#] S[R] S[R,#] #B #I #L
+L B I L S[#] S[R] S[R,#] #B #I #L
+S[#] B I L S[#] S[R] S[R,#] #B #I #L
+S[R] B I L S[#] S[R] S[R,#] #B #I #L
+S[R,#] B I L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Schiebt den Zieloperanden um soviele Stellen nach Rechts, wie im Quelloperanden angegeben
+ist. Dabei werden von links Vorzeichenbits, d.h. das höchstwertige Bit, nachgeschoben.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 25
+ATSP
+Liest Wert Relativ zum SP
+Assembler Syntax:
+ATSP <ea>,<ea>
+Operation
+<SP> + <Quelle> -> <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B #I #L
+I I S[#] S[R] S[R,#] #B #I #L
+L L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Liest relativ zum Stackpointer.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 26
+BREAK
+Abbruch der Bearbeitung
+Assembler Syntax:
+BREAK
+Operation
+Fehler Trap # 31 auslösen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Beendet die Abarbeitung an dieser Stelle
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 27
+CLEAR
+Löschen des Zielregisters
+Assembler Syntax:
+CLEAR <ea>
+Operation
+0 -> <Ziel>
+Flags
+N=0 Z=1 V=0 C=0
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+S -
+S[#] -
+S[R] -
+S[R,#] -
+S[#]# -
+S[#]R -
+S[R]# -
+S[R]R -
+Beschreibung
+Löscht den Zieloperanden. D.h. setzt ihn definiert auf 0 bzw einen Nullstring. Die Flags werden
+dementsprechend gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 28
+CLRC
+Löschen des Carryflags
+Assembler Syntax:
+CLRC
+Operation
+C=0
+Flags
+C=0
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Löscht das Carryflag !.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 29
+CLRT
+Löschen des Trapflags
+Assembler Syntax:
+CLRT
+Operation
+T=0, TNR=0
+Flags
+T=0
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Löscht das Trapflag und das Trapnummernregister.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 30
+CLRV
+Löschen des Overflowflags
+Assembler Syntax:
+CLRV
+Operation
+V=0
+Flags
+V=0
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Löscht das Overflowflag !
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 31
+COMP
+Vergleich von Ziel und Quelle
+Assembler Syntax:
+COMP <ea>,<ea>
+Operation
+<Ziel> - <Quelle> -> FLAGS
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Vergleicht die 2 Operanden, indem der Quelloperand vom Ziel subtrahiert wird. Das Ergebnis
+wird allerdings nicht gespeichert, sonder es werden nur die Flags beeinflußt.
+Ziel > Quelle C=0 Z=0
+Ziel >= Quelle C=0
+Ziel = Quelle C=0 Z=1
+Ziel < Quelle C=1 Z=0
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 32
+DATE
+Gibt das Datum zurück
+Assembler Syntax:
+DATE <ea>
+Operation
+Datum -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Gibt das aktuelle Datum in folgendem Format zurück:
+S[0]=Tag [1-31]
+S[1]=Monat [1-12]
+S[2]=Jahr [0-99]
+S[3]=Kalenderwoche [1-52]
+S[4]=Wochentag [1-7] (1=Montag .. 7=Sonntag)
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 33
+DIVS
+Dividiere Ziel durch Quelle, Ergebnis nach Ziel
+Assembler Syntax:
+DIVS <ea>,<ea>
+Operation
+<Ziel> / <Quelle> -> <Ziel>
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Das Ziel wird durch Quelle dividiert. Das Ergebnis wird in Ziel abgelegt. Der verbleibende Rest
+wird in Quelle abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 34
+EERR
+Siemuliert eine Fehler
+Assembler Syntax:
+EERR
+Operation
+Auslösen des Fehlers, der im Trapregister steht.
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Mit diesem Befehl kann eine API-Fehlermeldung aus einer Beschreibungsdatei heraus erzeugt
+werden. Der Befehl liest die Trapnummer aus dem CCR-Register und gibt den zu dieser Nummer
+passenden Fehler an das API.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 35
+ENEWSET
+Definiert einen neuen Ergebnissatz
+Assembler Syntax:
+ENEWSET
+Operation
+Setzt das Flag neuer Ergebnissatz beim nächsten Ergebnis
+Flags
+-
+Adressierungsarten
+-
+Beschreibung
+Setzt ein Flag, daß dem Laufzeitsystem den Beginn eines neuen Ergebnissatzes anzeigt. Dieses
+Flag wird nach der Übergabe des ersten Ergebnisses dieses Satzes gelöscht. Dieser Befehl kann
+entfallen, wenn nur ein Ergebnissatz zurückgegeben wird.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 36
+EOJ
+Ende eines Jobs
+Assembler Syntax:
+EOJ
+Operation
+Set EOJ Flag
+Abbruch der Bearbeitung
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Dieser Befehl zeigt das Ende eines Jobs an.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 37
+ERGB
+Trägt ein Byte in das Ergebnis ein
+Assembler Syntax:
+ERGB <ea>,<ea>
+Operation
+Trägt ein Byte aus <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf Byte
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S B #B S[#] S[R] S[R,#]
+{} B #B S[#] S[R] S[R,#]
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ Byte für das Laufzeitsystem. Dieses
+holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird dann vom API
+zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 38
+ERGD
+Trägt ein Doppelwort in das Ergebnis ein
+Assembler Syntax:
+ERGD <ea>,<ea>
+Operation
+Trägt vier Byte aus <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf DWord
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S L #L S[#] S[R] S[R,#]
+{} L #L S[#] S[R] S[R,#]
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ Double Word für das
+Laufzeitsystem. Dieses holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird
+dann vom API zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 39
+ERGI
+Trägt einen Integer in das Ergebnis ein
+Assembler Syntax:
+ERGI <ea>,<ea>
+Operation
+Trägt zwei Byte aus <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf Integer
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S I #I S[#] S[R] S[R,#]
+{} I #I S[#] S[R] S[R,#]
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ Integer für das Laufzeitsystem.
+Dieses holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird dann vom API
+zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 40
+ERGL
+Trägt ein Long in das Ergebnis ein
+Assembler Syntax:
+ERGL <ea>,<ea>
+Operation
+Trägt vier Byte aus <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf Long
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S L #L S[#] S[R] S[R,#]
+{} L #L S[#] S[R] S[R,#]
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ Long für das Laufzeitsystem.
+Dieses holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird dann vom API
+zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 41
+ERGR
+Trägt einen Realwert in das Ergebnis ein
+Assembler Syntax:
+ERGR <ea>,<ea>
+Operation
+Trägt vier Byte aus <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf Real
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S F
+{} F
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ Real für das Laufzeitsystem. Dieses
+holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird dann vom API
+zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 42
+ERGS
+Trägt eine Bytefolge (String) in das Ergebnis ein
+Assembler Syntax:
+ERGS <ea>,<ea>
+Operation
+Trägt den String <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf String
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {} S[#]# S[#]R S[R]# S[R]R
+{} S {} S[#]# S[#]R S[R]# S[R]R
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ String für das Laufzeitsystem.
+Dieses holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird dann vom API
+zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 43
+ERGW
+Trägt ein Wort in das Ergebnis ein
+Assembler Syntax:
+ERGW <ea>,<ea>
+Operation
+Trägt zwei Byte aus <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf Word
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S I #I S[#] S[R] S[R,#]
+{} I #I S[#] S[R] S[R,#]
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ Word für das Laufzeitsystem.
+Dieses holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird dann vom API
+zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 44
+ERGY
+Trägt binäre Daten in das Ergebnis ein
+Assembler Syntax:
+ERGY <ea>,<ea>
+Operation
+Trägt Binäre Daten aus <Quelle> in das Ergebnis ein
+Setzt den Ergebnistyp auf Binary
+Setzt das Ergebnisflag
+Ergebnisname aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {}
+{} S {}
+Beschreibung
+Kennzeichnet das Vorhandensein eines Ergebnisses vom Typ Binary für das Laufzeitsystem.
+Dieses holt das Ergebnis ab und legt es in seinen Puffer. Auf diesen Puffer wird dann vom API
+zugegriffen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 45
+ETAG
+Relativer Sprung wenn Ergebnis in <Quelle> nicht angegeben
+Assembler Syntax:
+ETAG <ea>,<ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L {} S
+#L {} S
+Beschreibung
+Wenn beim Jobaufruf nicht "" angegeben wurde oder der in <Quelle> stehende Ergebisname
+nicht übergeben wurde, dann wird weitergesprungen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 46
+FADD
+Addition von Realwerten
+Assembler Syntax:
+FADD <ea>,<ea>
+Operation
+<Ziel> + <Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F F
+Beschreibung
+Addiert die Zahlen in <Ziel> und in <Quelle>. Das Ergebnis steht in <Ziel>.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 47
+FCLOSE
+Schließen eines Files
+Assembler Syntax:
+FCLOSE <ea>
+Operation
+Close(<Ziel>)
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B -
+S[#] -
+S[R] -
+S[R,#] -
+Beschreibung
+Schließt das File mit dem Handle <Ziel>.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 48
+FCOMP
+Vergleich von Realwerten
+Assembler Syntax:
+FCOMP <ea>,<ea>
+Operation
+<Ziel> - <Quelle> -> FLAGS
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+F F
+Beschreibung
+Vergleicht die 2 Operanden, indem der Quelloperand vom Ziel subtrahiert wird. Das Ergebnis
+wird allerdings nicht gespeichert, sondern es werden nur die Flags beeinflußt.
+Ziel = Quelle C=0 Z=1
+Ziel != Quelle Z=0
+Ziel > Quelle C=0 Z=0 N=V
+Ziel >= Quelle C=0 Z=1 N=V
+Ziel < Quelle C=1 Z=0 N=!V
+Ziel <= Quelle C=1 Z=1 N=!V
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 49
+FDIV
+Division von Realwerten
+Assembler Syntax:
+FDIV <ea>,<ea>
+Operation
+<Ziel> / <Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F F
+Beschreibung
+Dividiert die Zahl in <Ziel> durch <Quelle>. Das Ergebnis steht in <Ziel>.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 50
+FIX2DEZ
+Dezimalen Wert in ASCII-String konvertieren
+Assembler Syntax:
+FIX2DEZ <ea>,<ea>
+Operation
+sprintf( <ziel> "%d", <quelle> )
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Konvertiert einen Wert aus <Quelle> in eine String (dezimal). Das S Register wird vorher
+gelöscht.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 51
+FIX2FLT
+Byte/Integer/Long nach Double konvertieren
+Assembler Syntax:
+FIX2FLT <ea>,<ea>
+Operation
+Wert in Double konvertieren
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Konvertiert einen Wert aus <Quelle> in eine String (double). Das S Register wird vorher
+gelöscht.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 52
+FIX2HEX
+Hexadezimalen Wert in ASCII-String konvertieren
+Assembler Syntax:
+FIX2HEX <ea>,<ea>
+Operation
+sprintf( <ziel> "0x%x", <quelle> )
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Konvertiert einen Wert aus <Quelle> in eine String (hexadezimal). Das S Register wird vorher
+gelöscht.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 53
+FLT2FIX
+Double nach Byte/Integer/Long konvertieren
+Assembler Syntax:
+FLT2FIX <ea>,<ea>
+Operation
+Double in Wert konvertieren
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B I L S[#] S[R] S[R,#] F
+Beschreibung
+Konvertiert einen Double <Quelle> und legt den entsprechenden Wert in <Ziel> ab.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 54
+FLT2Y4
+Double in Bytefolge konvertieren (4 Byte) und in <Ziel> kopieren
+Assembler Syntax:
+FLT2Y4 <ea>,<ea>
+Operation
+<Quelle> --> 4 Byte --> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S[#] S[R] S[R,#] F
+Beschreibung
+Konvertiert einen Double <Quelle> in eine 4 Bytefolge und legt den entsprechenden Wert in
+<Ziel> ab.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 55
+FLT2Y8
+Double in Bytefolge konvertieren (8 Byte) und in <Ziel> kopieren
+Assembler Syntax:
+FLT2Y8 <ea>,<ea>
+Operation
+<Quelle> --> 8 Byte --> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S[#] S[R] S[R,#] F
+Beschreibung
+Konvertiert einen Double <Quelle> in eine 8 Bytefolge und legt den entsprechenden Wert in
+<Ziel> ab.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 56
+FMUL
+Multiplikation von Realwerten
+Assembler Syntax:
+FMUL <ea>,<ea>
+Operation
+<Ziel> * <Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F F
+Beschreibung
+Multipliziert die Zahl in <Ziel> mit <Quelle>. Das Ergebnis wird in <Ziel> abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 57
+FOPEN
+Öffnen eines Files zum Lesen
+Assembler Syntax:
+FOPEN <ea>,<ea>
+Operation
+Open(<Quelle>)
+<Handle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B {} S
+S[#] {} S
+S[R] {} S
+S[R,#] {} S
+Beschreibung
+Öffnet ein File mit Namen <Quelle> zum Lesen und gibt einen Filehandle in <Ziel> zurück.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 58
+FREAD
+Byteweise Lesen eines Files
+Assembler Syntax:
+FREAD <ea>,<ea>
+Operation
+Byte of File(<Quelle>) -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#]
+Beschreibung
+Liest ein Byte aus dem File mit Handle <Quelle>. Das Byte wird in <Ziel> abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 59
+FREADLN
+Zeilenweise Lesen eines Files
+Assembler Syntax:
+FREADLN <ea>,<ea>
+Operation
+Line of File(<Quelle>) -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S B S[#] S[R] S[R,#]
+Beschreibung
+Liest eine Zeile aus dem File mit Handle <Quelle>. Die Zeile wird in <Ziel> abgelegt. Der
+Zeilentrenner wird nicht mitgelesen. Es wird immer eine ganze Zeile gelesen, auch wenn sie
+nicht in <Ziel> paßt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 60
+FSEEK
+Setzen des Lesezeigers eines Files
+Assembler Syntax:
+FSEEK <ea>,<ea>
+Operation
+File(<Ziel>) -> Byte<Quelle>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B B I L #B #I #L
+S[#] B I L #B #I #L
+S[R] B I L #B #I #L
+S[R,#] B I L #B #I #L
+Beschreibung
+Setzt den Lesezeiger des Files mit dem Handle, der in <Ziel> steht auf das Byte mit der in
+<Quelle> stehenden Nummer.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 61
+FSEEKLN
+Setzen des Lesezeigers eines Files
+Assembler Syntax:
+FSEEKLN <ea>,<ea>
+Operation
+File(<Ziel>) -> Zeile<Quelle>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B B I L #B #I #L
+S[#] B I L #B #I #L
+S[R] B I L #B #I #L
+S[R,#] B I L #B #I #L
+Beschreibung
+Setzt den Lesezeiger des Files mit dem Handle, der in <Ziel> steht auf die Zeile mit der in
+<Quelle> stehenden Nummer.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 62
+FSUB
+Subtraktion von Realwerten
+Assembler Syntax:
+FSUB <ea>,<ea>
+Operation
+<Ziel> - <Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F F
+Beschreibung
+Subtrahiert die Zahl in <Quelle> von <Ziel>.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 63
+FTELL
+Lesen der aktuellen Zeilennummer eines Files
+Assembler Syntax:
+FTELL <ea>,<ea>
+Operation
+Bn<Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L B S[#] S[R] S[R,#]
+Beschreibung
+Gibt die aktuelle Zeilennummer in dem Files mit dem Handle, der in <Quelle> steht, in <Ziel>
+zurück.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 64
+FTELLLN
+Lesen der Bytenummer in einem Files
+Assembler Syntax:
+FTELLLN <ea>,<ea>
+Operation
+Zn<Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L B S[#] S[R] S[R,#]
+Beschreibung
+Gibt die aktuelle Bytenummer in dem Files mit dem Handle, der in <Quelle> steht, in <Ziel>
+zurück.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 65
+GENERR
+EDIABAS-Fehler auslösen
+Assembler Syntax:
+GENERR <EA>
+Operation
+<Stack> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+Beschreibung
+Löst einen anwendungsspezifischen EDIABAS-Fehler <ea> aus. Der Fehlercode muß im Bereich
+EDIABAS_RUN_0000 und EDIABAS_RUN_LAST liegen, ansonsten wird der Fehler EOOR
+ausgelöst.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 66
+GETTMR
+Lesen des Trap Mask Registers
+Assembler Syntax:
+GETTMR <ea>
+Operation
+<TMR> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Liest den Wert des Trap Mask Registers.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 67
+HEX2Y
+Konvertiert von Hexadezimalstring nach Bytes
+Assembler Syntax:
+HEX2Y <ea>,<ea>
+Operation
+Für jeweils 2 Zeichen von <Quelle> ein Byte in <Ziel> ablegen:
+2 Zeichen (Quelle) -> 1 Byte (Ziel) mit hexadezimalem Wert
+Flags
+C
+Adressierungsarten
+Ziel Quelle
+S S {} S[#]# S[#]R S[R]# S[R]R
+Beschreibung
+Konvertiert einen nullterminierten C-String (hexadezimal, ohne Trennzeichen) in eine
+entsprechende Bytefolge. Bei nichtkonvertierbaren Zeichen oder ungerader Zeichenanzahl wird
+die Konvertierung abgebrochen, bei nichtkonvertierbaren Zeichen zudem das Carry-Flag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 68
+IUPDATE
+Informiert über den Bearbeitungszustand
+Assembler Syntax:
+IUPDATE <ea>
+Operation
+Der Bearbeitungszustand wird mit dem String <ea> aktualisiert.
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Das Laufzeitsystem wird über den neuen Bearbeitungszustand <Ziel> informiert.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 69
+IRANGE
+Bestimmt die Größe des Fortschrittbereichs
+Assembler Syntax:
+IRANGE <ea>
+Operation
+Fortschrittsbereich = <Ziel>
+Fortschrittsposition = 0
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Definiert die Größe des Fortschrittsbereichs bzw. die größte Fortschrittsposition (nur positive
+Werte sind zulässig). Die aktuelle Fortschrittsposition wird auf undefiniert gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 70
+IINCPOS
+Inkrementiert die Fortschrittsposition
+Assembler Syntax:
+IINCPOS <ea>
+Operation
+Fortschrittsposition = Fortschrittsposition + <Ziel>.
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Die Fortschrittsposition wird um den Wert <Ziel> erhöht. Bei Überschreitung des
+Fortschrittsbereichs wird die Fortschrittsposition auf die Bereichsgrenze gesetzt.
+Eine Erhöhung der Fortschrittsposition ist nur möglich, wenn vor IINCPOS mindestens 1x
+IRANGE aufgerufen wurde.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 71
+JA
+Relativer Sprung wenn C=0 und Z=0
+Assembler Syntax:
+JA <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier unsigned Werte, dort der Wert in <Ziel> größer
+<Quelle> war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 72
+JAE
+Relativer Sprung wenn C=0
+Assembler Syntax:
+JAE <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier unsigned Werte, dort der Wert im Ziel >= Quelle war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 73
+JB
+Relativer Sprung wenn C=1
+Assembler Syntax:
+JB <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier signed Werte, dort der Wert im Ziel < Quelle war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 74
+JBE
+Relativer Sprung wenn C=1 oder Z=1
+Assembler Syntax:
+JBE <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier unsigned Werte, dort der Wert im Ziel <= Quelle war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 75
+JC
+Relativer Sprung wenn C=1
+Assembler Syntax:
+JC <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Carryflag im CCR gesetzt ist, sonst wird im
+Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 76
+JG
+Relativer Sprung wenn Z=0 und N=V
+Assembler Syntax:
+JG <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier signed Werte, dort der Wert im Ziel > Quelle war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 77
+JGE
+Relativer Sprung wenn N=V
+Assembler Syntax:
+JGE <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier signed Werte, dort der Wert im Ziel >= Quelle war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 78
+JL
+Relativer Sprung wenn N!=V
+Assembler Syntax:
+JL <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier signed Werte, dort der Wert im Ziel < Quelle war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 79
+JLE
+Relativer Sprung wenn Z=1 oder N!=V
+Assembler Syntax:
+JLE <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt wenn nach einem Compare zweier signed Werte, dort der Wert im Ziel <= Quelle war.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 80
+JMI
+Relativer Sprung wenn N=1
+Assembler Syntax:
+JMI <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Negativflag im CCR gesetzt ist, sonst wird im
+Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 81
+JNC
+Relativer Sprung wenn C=0
+Assembler Syntax:
+JNC <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Carryflag im CCR gelöscht ist, sonst wird im
+Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 82
+JNT
+Relativer Sprung wenn Trap # nicht auftrat
+Assembler Syntax:
+JNT <ea>,<ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L B I L #B #I #L -
+#L B I L #B #I #L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Trapflag im CCR gelöscht ist, und die
+angegebene Nummer mit der <Quelle> übereinstimmt. Ist keine Quelle angegeben wird auf die
+Nummer nicht Überprüft.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 83
+JNV
+Relativer Sprung wenn V=0
+Assembler Syntax:
+JNV <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Overflowflag im CCR gelöscht ist, sonst wird
+im Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 84
+JNZ
+Relativer Sprung wenn Z=0
+Assembler Syntax:
+JNZ <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Zeroflag im CCR gelöscht ist, sonst wird im
+Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 85
+JPL
+Relativer Sprung wenn N=0
+Assembler Syntax:
+JPL <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Negativflag im CCR gelöscht ist, sonst wird im
+Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 86
+JT
+Relativer Sprung wenn Trap # auftrat
+Assembler Syntax:
+JT <ea>,<ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L B I L #B #I #L -
+#L B I L #B #I #L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Trapflag im CCR gesetzt ist, und die
+angegebene Nummer mit der <Quelle> übereinstimmt. Ist keine Quelle angegeben wird auf die
+Nummer nicht Überprüft.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 87
+JTSR
+Relativer unbedingter Unterprogrammaufruf
+Assembler Syntax:
+JTSR <ea>
+Operation
+<PC> -> <STACK>
+<PC> + <Ziel> -> <PC>
+SF++
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter in ein Unterprogramm. Vor dem Sprung wird der aktuelle
+Programmcounter auf den Stack gelegt. (vegl. RET). Incrementiert das Subflag, um in
+Unterprogrammen keine Ergebniss zuzulassen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 88
+JUMP
+Relativer unbedingter Sprung
+Assembler Syntax:
+JUMP <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+# -
+Beschreibung
+Springt immer relativ zum Programmcounter.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 89
+JV
+Relativer Sprung wenn V=1
+Assembler Syntax:
+JV <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Overflowflag im CCR gesetzt ist, sonst wird im
+Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 90
+JZ
+Relativer Sprung wenn Z=1
+Assembler Syntax:
+JZ <ea>
+Operation
+<PC> + <Ziel> -> <PC>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Springt relativ zum Programmcounter, wenn das Zeroflag im CCR gesetzt ist, sonst wird im
+Code fortgefahren.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 91
+LSL=ASL
+Logisches Linksschieben des Ziels um <Quelle> Stellen
+Assembler Syntax:
+ASL <ea>,<ea>
+Operation
+<Ziel> << <Quelle> -> <Ziel>
+MSB(Ziel) -> C
+Flags
+N Z C
+Bemerkung
+Es werden nur die unteren 8 Bit des Quell-Operanden ausgewertet !
+Adressierungsarten
+Ziel Quelle
+B B I L S[#] S[R] S[R,#] #B #I #L
+I B I L S[#] S[R] S[R,#] #B #I #L
+L B I L S[#] S[R] S[R,#] #B #I #L
+S[#] B I L S[#] S[R] S[R,#] #B #I #L
+S[R] B I L S[#] S[R] S[R,#] #B #I #L
+S[R,#] B I L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Schiebt den Zieloperanden um soviele Stellen nach Links, wie im Quelloperanden angegeben ist.
+Dabei werden von rechts Nullen nachgeschoben.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 92
+LSR
+Logisches Rechtsschieben des Ziels um <Quelle> Stellen
+Assembler Syntax:
+LSR <ea>,<ea>
+Operation
+0 >> <Ziel> >> <Quelle> -> <Ziel>
+LSB(Ziel) -> C
+Flags
+N Z C
+Bemerkung
+Es werden nur die untersten 8 Bit des Quell-Operanden ausgewertet!
+Adressierungsarten
+Ziel Quelle
+B B I L S[#] S[R] S[R,#] #B #I #L
+I B I L S[#] S[R] S[R,#] #B #I #L
+L B I L S[#] S[R] S[R,#] #B #I #L
+S[#] B I L S[#] S[R] S[R,#] #B #I #L
+S[R] B I L S[#] S[R] S[R,#] #B #I #L
+S[R,#] B I L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Schiebt den Zieloperanden um soviele Stellen nach Rechts, wie im Quelloperanden angegeben
+ist. Dabei werden von links Nullen nachgeschoben.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 93
+MOVE
+Daten von <Quelle> nach <Ziel> bewegen
+Assembler Syntax:
+MOVE <ea>,<ea>
+Operation
+<Quelle> -> <Ziel>
+Flags
+N Z V=0 C=0
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S S S[#]# S[#]R S[R]# S[R]R {}
+S[#] B I L S S[#]# S[#]R S[R]# S[R]R {} #B #I #L
+S[R] B I L S S[#]# S[#]R S[R]# S[R]R {} #B #I #L
+S[R,#] B I L S S[#]# S[#]R S[R]# S[R]R {} #B #I #L
+Beschreibung
+Bewegt Daten von der Quelle zum Ziel. Das Carry- und das Overflowflag werden immer
+gelöscht. Das Negativ und das Zeroflag werden entsprechend des Inhalts im Zieloperanden nach
+der Operation gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 94
+MULT
+Multipliziere Quelle und Ziel, Ergebnis nach Ziel
+Assembler Syntax:
+MULT <ea>,<ea>
+Operation
+<Ziel> * <Quelle> -> <Ziel>
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Multiplizert den Zieloperanden mit dem Quelloperanden. Die niederwertigen Bytes des
+Ergebnisses stehen dann im Zieloperanden. Die höherwertigen Bytes im Quelloperanden. Bei
+einer Multiplikation von zwei LONG Werten, steht im höchstwertigen Byte immer 0. Es wird
+kein Überlauf angezeigt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 95
+NOP
+Tue nichts
+Assembler Syntax:
+NOP
+Operation
+-
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Tut nichts. Dieser Befehl verändert nichts außer dem Programcounter.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 96
+NOT
+Logisches NICHT des Ziels
+Assembler Syntax:
+NOT <ea>
+Operation
+~<Ziel> -> <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+S[#] -
+S[R] -
+S[R,#] -
+Beschreibung
+Invertiert alle Bits im Zielooperanden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 97
+OR
+Logisches ODER zwischen Quelle und Ziel, Ergebnis nach Ziel
+Assembler Syntax:
+OR <ea>,<ea>
+Operation
+<Ziel> | <Quelle> -> <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Verknüpft alle Bits des Zieloperanden mit den Bits des Quelloperanden durch ein bitweises
+ODER.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 98
+PARB
+Holt einen Parameter als Byte
+Assembler Syntax:
+PARB <ea>,<ea>
+Operation
+Parameter <Quelle> -> <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+B B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Liest den Parameter mit der Nummer <Quelle> (1..) und schreibt ihn nach <Ziel>. Falls der
+Parameter nicht vorhanden oder nicht übersetzbar ist, wird eine 0 zurückgegeben und das
+Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 99
+PARL
+Holt einen Parameter als Long
+Assembler Syntax:
+PARL <ea>,<ea>
+Operation
+Parameter <Quelle> -> <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+L B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Liest den Parameter mit der Nummer <Quelle> (1..) und schreibt ihn nach <Ziel>. Falls der
+Parameter nicht vorhanden oder nicht übersetzbar ist, wird eine 0 zurückgegeben und das
+Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 100
+PARN
+Holt die Anzahl der Parameter
+Assembler Syntax:
+PARN <ea>
+Operation
+Parameteranzahl -> <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+S[#] -
+S[R] -
+S[R,#] -
+Beschreibung
+Liest die Anzahl der Parameter in das Register <Ziel>. Falls kein Parameter vorhanden ist, wird
+0 eingesetzt und das Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 101
+PARR
+Holt einen Parameter als Realwert
+Assembler Syntax:
+PARL <ea>,<ea>
+Operation
+Parameter <Quelle> -> <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+F B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Liest den Parameter mit der Nummer <Quelle> (1..) und schreibt ihn nach <Ziel>. Falls der
+Parameter nicht vorhanden oder nicht übersetzbar ist, wird eine 0 zurückgegeben und das
+Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 102
+PARS
+Holt einen Parameter als String
+Assembler Syntax:
+PARS <ea>,<ea>
+Operation
+Parameter <Quelle> -> <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+S B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Liest den Parameter mit der Nummer <Quelle> (1..) und schreibt ihn nach <Ziel>. Falls der
+Parameter nicht vorhanden ist, wird ein Nullstring zurückgegeben, und das Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 103
+PARW
+Holt einen Parameter als Word
+Assembler Syntax:
+PARW <ea>,<ea>
+Operation
+Parameter <Quelle> -> <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+I B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Liest den Parameter mit der Nummer <Quelle> (1..) und schreibt ihn nach <Ziel>. Falls der
+Parameter nicht vorhanden oder nicht übersetzbar ist, wird eine 0 zurückgegeben und das
+Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 104
+PARY
+Holt Parameter als binäres Objekt
+Assembler Syntax:
+PARY <ea>
+Operation
+Parameter -> <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Liest die Parameter oder den binären Parameter als ein binäres Array in das Register <Ziel>.
+Falls der Parameter nicht vorhanden ist, wird ein Nullstring zurückgegeben und das Zeroflag
+gesetzt. Es gibt immer nur einen binären Parameter !
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 105
+PCALL
+Plug-In-Komponente aufrufen
+Assembler Syntax:
+PCALL <ea>,<ea>
+Operation
+<Ziel> = Plug-In(<Quelle>)
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {}
+Beschreibung
+Ruft die Plug-In-Komponente mit <Quelle> auf, das Ergebnis wird in <Ziel> abgelegt. Die
+aufgerufene Plug-In-Komponente muß vor dem 1. PCALL-Aufruf mit PLINK(V) festgelegt bzw.
+angefordert werden. PPUSH(FLT/Y)/PPOP(FLT/Y)-Aufrufe werden bei PCALL nicht
+unterstützt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 106
+PJTSR
+Plug-In-Subroutine aufrufen
+Assembler Syntax:
+PJTSR <ea>
+Operation
+Plug-In-Subroutine <Ziel> aufrufen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Ruft die Funktion <Ziel> der Plug-In-Komponente auf. Die aufgerufene Plug-In-Komponente
+muß vor dem 1. PJTSR-Aufruf mit PLINK(V) festgelegt bzw. angefordert werden.
+Funktionsargumente sind vor dem PJTSR-Aufruf mit entsprechenden PPUSH(FLT/Y)-Aufrufen
+zu übergeben (von rechts nach links). Die aufgerufene Plug-In-Funktion legt die
+Funktionsergebnisse (und ggf. Funktionsrückgabewert) auf den Plug-In-Stack ab, welche nach
+dem PJTSR-Aufruf mit entsprechenden PPOP(FLT/Y)-Aufrufen (von links nach rechts)
+abzuholen sind. Der Funktionsrückgabewert ist nach Abholung der Funktionsergebnisse ggf. mit
+einem PPOP(FLT/Y)-Aufruf abzuholen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 107
+PLINK
+Plug-In-Komponente anfordern
+Assembler Syntax:
+PLINK <EA>
+Operation
+Verbindung zur Plug-In-Komponente <Ziel> aufbauen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Die mit <Ziel> benannte Plug-In-Komponente anfordern.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 108
+PLINKV
+Plug-In-Komponente anfordern
+Assembler Syntax:
+PLINKV <EA>,<EA>
+Operation
+Verbindung zur Plug-In-Komponente <Ziel> aufbauen und Komponentenversion prüfen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S L #L S[#] S[R] S[R,#]
+{} L #L S[#] S[R] S[R,#]
+Beschreibung
+Die mit <Ziel> benannte Plug-In-Komponente anfordern und Kompatiblität mit <Quelle> prüfen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 109
+POP
+Holt Ziel vom Stack
+Assembler Syntax:
+POP <EA>
+Operation
+<Stack> -> <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+S[#] -
+S[R] -
+S[R,#] -
+Beschreibung
+Holt entsprechend des Zieloperanden ein bis vier Byte vom Stack. Diese Bytes werden neuer
+Inhalt des Zieloperanden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 110
+POPF
+Holt die Flags vom Stack
+Assembler Syntax:
+POPF
+Operation
+<Stack> -> <CCR>
+Flags
+N Z V C T
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Holt die Flags vom Stack und legt sie im CCR ab.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 111
+PPOP
+Holt Ziel vom Plug-In-Stack
+Assembler Syntax:
+PPOP <EA>
+Operation
+<Stack> -> <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+Beschreibung
+Holt den Zieloperanden vom Plug-In-Stack. Diese Bytes werden neuer Inhalt des Zieloperanden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 112
+PPOPFLT
+Holt Ziel vom Plug-In-Stack
+Assembler Syntax:
+PPOPFLT <EA>
+Operation
+<Stack> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F -
+Beschreibung
+Holt den Doublewert vom Plug-In-Stack. Diese Bytes werden neuer Inhalt des Zieloperanden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 113
+PPOPY
+Holt Ziel vom Plug-In-Stack
+Assembler Syntax:
+PPOPY <EA>
+Operation
+<Stack> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Holt den Zieloperanden vom Plug-In-Stack. Diese Bytes werden neuer Inhalt des Zieloperanden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 114
+PPUSH
+Legt Ziel auf Plug-In-Stack
+Assembler Syntax:
+PPUSH <EA>
+Operation
+<Ziel> -> <Plug-In-Stack>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+#B -
+#I -
+#L -
+Beschreibung
+Schiebt den Inhalt des Zieloperanden auf den Plug-In-Stack. Der Inhalt von <Ziel> bleibt
+erhalten.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 115
+PPUSHFLT
+Legt Ziel auf Plug-In-Stack
+Assembler Syntax:
+PPUSHFLT <EA>
+Operation
+<Ziel> -> <Plug-In-Stack>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F -
+Beschreibung
+Schiebt den Doublewert auf den Plug-In-Stack. Der Inhalt von <Ziel> bleibt erhalten.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 116
+PPUSHY
+Legt Ziel auf Plug-In-Stack
+Assembler Syntax:
+PPUSHY <EA>
+Operation
+<Ziel> -> <Plug-In-Stack>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Schiebt den Inhalt des Zieloperanden auf den Plug-In-Stack. Der Inhalt von <Ziel> bleibt
+erhalten.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 117
+PUSH
+Legt Ziel auf Stack
+Assembler Syntax:
+PUSH <EA>
+Operation
+<Ziel> -> <Stack>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+#B -
+#I -
+#L -
+S[#] -
+S[R] -
+S[R,#] -
+Beschreibung
+Schiebt den Inhalt des Zieloperanden auf den Stack. Der Inhalt von <Ziel> bleibt erhalten.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 118
+PUSHF
+Legt das CCR auf den Stack
+Assembler Syntax:
+PUSHF
+Operation
+<CCR> -> <Stack>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Schiebt den Inhalt des CCR auf den Stack. Der Inhalt des CCRs bleibt erhalten.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 119
+RET
+Rückkehr aus Unterprogrammaufruf
+Assembler Syntax:
+RET
+Operation
+<STACK> -> <PC>
+SF--
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Holt sich einen vier Byte lange Adresse vom Stack und verzweigt dorthin. Das Subflag wird
+decrementiert, um Ergebnisse wieder zuzulassen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 120
+SCAT
+Hängt Zeichen an den bestehenden String an
+Assembler Syntax:
+SCAT <EA>,<EA>
+Operation
+strcat(<Ziel>,<Quelle>)
+Flags
+C
+Adressierungsarten
+Ziel Quelle
+S S S[#]# S[#]R S[R]# S[R]R {}
+Beschreibung
+An den Inhalt eines Stringregisters, das in <Ziel> steht, wird der Quelloperand angehängt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 121
+SCMP
+Vergleicht zwei Strings
+Assembler Syntax:
+SCMP <EA>,<EA>
+Operation
+memcmp(<Ziel>,<Quelle>)
+Flags
+C Z
+Adressierungsarten
+Ziel Quelle
+S S {}
+Beschreibung
+Vergleicht zwei Strings. Sind sie gleich, wird das Zeroflag gesetzt. Ist <Ziel> kleiner als
+<Quelle> wird das Carryflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 122
+SCUT
+Kürzt einen String um <Quelle> Bytes
+Assembler Syntax:
+SCUT <EA>,<EA>
+Operation
+LEN(Ziel) - <Quelle> -> LEN(Ziel)
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+S B I L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Verkürzt den String <Ziel> um <Quelle> Bytes. Der Rest wird mit 0 aufgefüllt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 123
+SEREASE
+Löscht <Quelle> Bytes aus <Ziel>
+Assembler Syntax:
+SERASE <EA>,<EA>
+Operation
+<Quelle> Bytes aus <Ziel> löschen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S[#] B I L S[#] S[R] S[R,#] #B #I #L
+S[R] B I L S[#] S[R] S[R,#] #B #I #L
+S[R,#] B I L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Löscht ein Stück aus einem String, und führt die Reste zusammen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 124
+SETC
+Setzen des Carryflags
+Assembler Syntax:
+SETC
+Operation
+C=1
+Flags
+C=1
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Setzt das Carryflag.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 125
+SETSPC
+Setzen der Tokentrenners
+Assembler Syntax:
+SETSPC <ea>,<ea>
+Operation
+Tokentrenner=<Ziel>
+Tokennummer=<Quelle>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S B I L #B #I #L S[#] S[R] S[R,#]
+{} B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Tokentrenner setzt den String , der diejenigen Zeichen enthält, die zwischen Token liegen
+(Tokentrennzeichen). Tokennummer legt fest, welches Token von der STOKEN Funktion zuerst
+zurückgegeben werden soll. SETSPC setzt die Token-Bearbeitung zurück.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 126
+SETT
+Setzen des Trapflags und der Trapnummer
+Assembler Syntax:
+SETT <ea>
+Operation
+T=1,TNR=<Ziel>
+Flags
+T=1
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+#B -
+#I -
+#L -
+Beschreibung
+Setzt das Trapflag und die Trapnummer mit <Ziel >.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 127
+SETTMR
+Setzen des Trap Mask Registers
+Assembler Syntax:
+SETTMR <ea>
+Operation
+<Ziel> -> <TMR>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Setzt den Wert des Trap Mask Registers.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 128
+SHMGET
+Daten von globalen Datenspeicher <Quelle> in <Ziel> kopieren
+Assembler Syntax:
+SHMGET <ea>,<ea>
+Operation
+<Quelle> -> <Ziel> falls <Quelle> existiert
+Flags
+C=0 bei bekannten globalen Datenspeicher <Quelle>, Daten wurden in <Ziel> kopiert
+C=1 bei unbekannten globalen Datenspeicher <Quelle>, Daten wurden nicht in <Ziel>
+kopiert
+Adressierungsarten
+Ziel Quelle
+S S {}
+Beschreibung
+Kopiert Daten des globalen Datenspeichers <Quelle> in <Ziel>, falls der angegebene
+Datenspeicher existiert. Vor dem Kopieren der Daten wird das Zielregister gelöscht. Die Existenz
+des globalen Datenspeichers <Quelle> und somit der korrekte Kopiervorgang wird über das
+Carry-Flag angezeigt.
+Als globaler Datenspeicher <Quelle> ist ein ASCIIZ-String (C-String) anzugeben, von welchem
+nur max. 32 Byte berücksichtigt werden. Stellt <Quelle> einen leeren String dar, so werden die
+Daten des zuletzt belegten globalen Datenspeichers in <Ziel> kopiert und das Carry-Flag auf 0
+gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 129
+SHMSET
+Daten von <Quelle> in globalen Datenspeicher <Ziel> kopieren
+Assembler Syntax:
+SHMSET <ea>,<ea>
+Operation
+<Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S S[#]# S[#]R S[R]# S[R]R {}
+{} S S[#]# S[#]R S[R]# S[R]R {}
+Beschreibung
+Kopiert Daten von <Quelle> zum globalen Datenspeicher <Ziel>. Der globale Datenspeicher
+<Ziel> wird vorher gelöscht.
+Der globale Datenspeichers <Ziel> ist als ASCIIZ-String (C-String) anzugeben, von welchem
+nur max. 32 Byte berücksichtigt werden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 130
+SLEN
+Bestimmt die Länge eines Strings
+Assembler Syntax:
+SLEN <EA>,<EA>
+Operation
+LEN(<Quelle>) -> <Ziel>
+Flags
+Z N
+Adressierungsarten
+Ziel Quelle
+I S {}
+L S {}
+Beschreibung
+Die Länge des Quelloperanden wird nach <Ziel> geschrieben.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 131
+SPASTE
+Fügt <Quelle> Bytes in Ziel
+Assembler Syntax:
+SPASTE <EA>,<EA>
+Operation
+<Quelle> Bytes in <Ziel> einfügen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S[#] S {} S[#]# S[#]R S[R]# S[R]R
+S[R] S {} S[#]# S[#]R S[R]# S[R]R
+S[R,#] S {} S[#]# S[#]R S[R]# S[R]R
+Beschreibung
+Fügt einen den String (<Quelle>) an der angebenen Position in einen String (<Ziel>) ein.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 132
+SREVRS
+Dreht einen String um
+Assembler Syntax:
+SREVRS <EA>
+Operation
+Umdrehen eines Strings
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+S[#]# -
+S[R]# -
+S[#]R -
+S[R]R -
+Beschreibung
+Dreht den String in <Ziel> um.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 133
+SSIZE
+Bestimmt die maximale Länge von Stringregistern
+Assembler Syntax:
+SSIZE <EA>
+Operation
+Maximale S-Registerlänge -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Die maximale Länge eines S-Registers wird nach <Ziel> geschrieben.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 134
+STOKEN
+Liefert einen Token aus einem String zurück.
+Assembler Syntax:
+STOKEN <ea>,<ea>
+Operation
+Nächstes Token aus <Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S
+S {}
+Beschreibung
+Schreibt beim ersten Aufruf nach SETSPC das dort angegebene Token aus <Quelle> nach
+<Ziel>. Bei wiederholtem Aufruf werden dann die jeweils nächsten Token geholt. Ist kein Token
+mehr vorhanden, wird das Zeroflag gesetzt, und das <Ziel> enthält 0 Bytes.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 135
+STRCAT
+Hängt an einen bestehenden C-String an
+Assembler Syntax:
+STRCAT <EA>,<EA>
+Operation
+strcat(<Ziel>,<Quelle>)
+Flags
+C
+Adressierungsarten
+Ziel Quelle
+S S S[#]# S[#]R S[R]# S[R]R {}
+Beschreibung
+An den Inhalt eines Stringregisters, das in Ziel steht, wird der Quelloperand angehängt. Die
+beiden Register werden als C-Strings betrachtet d.h. Die beiden Strings werden nur jeweils bis
+zur ersten '\0' behandelt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 136
+STRCMP
+Vergleicht zwei C-Strings
+Assembler Syntax:
+STRCMP <EA>,<EA>
+Operation
+strcmp(<Ziel>,<Quelle>)
+Flags
+C Z
+Adressierungsarten
+Ziel Quelle
+S S {}
+Beschreibung
+Vergleicht zwei nullterminierte Strings. Sind sie gleich, wird das Zeroflag gesetzt. Ist <Ziel>
+kleiner als <Quelle> wird das Carryflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 137
+STRLEN
+Bestimmt die Länge eines C-Strings
+Assembler Syntax:
+STRLEN <EA>,<EA>
+Operation
+LEN(<Quelle>) -> <Ziel>
+Flags
+Z N
+Adressierungsarten
+Ziel Quelle
+I S {}
+L S {}
+Beschreibung
+Die Länge des nullterminierten Quelloperanden wird nach <Ziel> geschrieben.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 138
+SUBB
+Subtrahiere <Quelle> von <Ziel>, Ergebnis nach Ziel
+Assembler Syntax:
+SUBB <ea>,<ea>
+Operation
+<Ziel> - <Quelle> -> <Ziel>
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Subtrahiert <Quelle> von <Ziel>. Das Ergebnis wird in <Ziel> abgelegt. Tritt ein Überlauf auf,
+so wird das Carryflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 139
+SUBC
+Subtrahiere <Quelle> von <Ziel>, Ergebnis nach Ziel
+Assembler Syntax:
+SUBB <ea>,<ea>
+Operation
+<Ziel> - <Quelle> - <Carry> -> <Ziel>
+Flags
+N Z V C
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Subtrahiert <Quelle> und das Carrybit von <Ziel>. Das Ergebnis wird in <Ziel> abgelegt. Tritt
+ein Überlauf auf, so wird das Carryflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 140
+SWAP
+Vertausche Bytes (Nibbles) in <Ziel>
+Assembler Syntax:
+SWAP <ea>
+Operation
+Umdrehen der Byte, bzw. Nibble Ordnung.
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+S[#] -
+S[R] -
+S[R,#] -
+S[#]# -
+S[R]# -
+S[#]R -
+S[R]R -
+Beschreibung
+Vertauscht die Nibbles in einem Byte oder vertauscht die Bytereihenfolge in einem
+Integerregister, Longregister oder String-Register:
+Nibble-Tausch, falls Zieladressierung = B, S[#], S[R], S[R,#]
+Byte-Tausch, falls Zieladressierung = I, L, S[#]#, S[R]#, S[#]R, S[R]R
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 141
+TABSET
+Setzt die Tabellenbearbeitung auf die angegebene Tabelle.
+Assembler Syntax:
+TABSET <ea>
+Operation
+Aktuelle Tabelle = <Ziel>-
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Die Tabellenbearbeitung wird für die Tabelle mit dem angegeben Namen initialisiert. Falls diese
+nicht existiert, wird der Fehler BIP_0010 ausgelöst.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 142
+TABSETEX
+Setzt die Tabellenbearbeitung auf die angegebene Tabelle einer externen Beschreibungsdatei.
+Assembler Syntax:
+TABSETEX <ea>,<ea>
+Operation
+Aktuelle Tabelle = Tabelle <Ziel> der externen Steuergeräte-Beschreibungsdatei <Quelle>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S
+{} {}
+Beschreibung
+Die Tabellenbearbeitung wird für die Tabelle mit dem angegeben Namen <Ziel> initialisiert. In
+<Quelle> ist der Dateititel (ohne Pfad und ohne Extension) der Steuergeräte-Beschreibungsdatei
+anzugeben, in welcher sich die Tabelle <Ziel> befindet. Die externe Steuergeräte-
+Beschreibungsdatei wird im aktuellen ECU-Pfad gesucht. Falls diese nicht existiert, wird der
+Fehler BIP_0010 ausgelöst.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 143
+TABSEEK
+Sucht einen String in der Tabelle.
+Assembler Syntax:
+TABSEEK <ea>,<ea>
+Operation
+Suche <Quelle> in Spalte <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+S S
+{} S
+Beschreibung
+Sucht in der aktuellen Tabelle in der Spalte <Ziel> nach dem String <Quelle>. Danach können
+die einzelnen Elemente dieser Zeile mit TABGET gelesen werden. Wird der Eintrag nicht
+gefunden, so wird das Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 144
+TABSEEKU
+Sucht einen Wert in der Tabelle.
+Assembler Syntax:
+TABSEEKU <ea>,<ea>
+Operation
+Suche den Wert <Quelle> in Spalte <Ziel>
+Flags
+Z
+Adressierungsarten
+Ziel Quelle
+S B I L #B #I #L
+{} B I L #B #I #L
+Beschreibung
+Sucht in der aktuellen Tabelle in der Spalte <Ziel> nach dem unsigned-Wert <Quelle>. Hierzu
+wird intern jeder Tabelleneintrag in einen unsigned-Wert konvertiert. Danach können die
+einzelnen Elemente dieser Zeile mit TABGET gelesen werden. Wird der Eintrag nicht gefunden,
+so wird das Zeroflag gesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 145
+TABGET
+Gibt ein Element aus der aktuellen Zeile der aktuellen Tabelle zurück.
+Assembler Syntax:
+TABGET <ea>,<ea>
+Operation
+Spalte <Quelle> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {}
+Beschreibung
+Schreibt das Element aus der Spalte <Quelle> aus der aktuellen Zeile in der aktuellen Tabelle
+nach <Ziel>. Das S Register wird vorher gelöscht.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 146
+TABCOLS
+Gibt die Spaltenanzahl der aktuellen Tabelle zurück.
+Assembler Syntax:
+TABCOLS <ea>
+Operation
+Spaltenanzahl -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Schreibt die Spaltenanzahl der aktuellen Tabelle in <Ziel>.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 147
+TABROWS
+Gibt die Zeilenanzahl der aktuellen Tabelle zurück.
+Assembler Syntax:
+TABROWS <ea>
+Operation
+Zeilenanzahl -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Schreibt die Zeilenanzahl der aktuellen Tabelle in <Ziel>.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 148
+TEST
+Logisches UND zwischen <Quelle> und <Ziel>
+Assembler Syntax:
+TEST <ea>,<ea>
+Operation
+<Ziel> & <Quelle>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Führt ein logisches UND mit den beiden Operanden aus. Es werden nur die Flags beeinflußt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 149
+TICKS
+Abfrage von Millisekundenzähler
+Assembler Syntax:
+TICKS <ea>
+Operation
+<Zähler> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Schreibt den aktuellen Wert eines systeminternen Millisekundenzählers in <Ziel>.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 150
+TIME
+Gibt die Zeit zurück !
+Assembler Syntax:
+TIME <ea>
+Operation
+Uhrzeit -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Gibt die aktuelle Zeit in folgendem Format zurück:
+S[#0]=HH (Stunde 0-24)
+S[#1]=MM (Minuten 0-59)
+S[#2]=SS (Sekunden 0-59)
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 151
+TOSP
+Schreibt Wert Relativ zum SP
+Assembler Syntax:
+TOSP <ea>,<ea>
+Operation
+<Quelle> -> <SP> + <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B #I #L
+I I S[#] S[R] S[R,#] #B #I #L
+L L S[#] S[R] S[R,#] #B #I #L
+Beschreibung
+Schreibt relativ zum Stackpointer.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 152
+UFIX2DEZ
+Dezimalen Wert in ASCII-String konvertieren
+Assembler Syntax:
+UFIX2DEZ <ea>,<ea>
+Operation
+sprintf( <ziel> "%u", <quelle> )
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Konvertiert einen vorzeichenlosen Wert aus <Quelle> in einen String (dezimal). Das S Register
+wird vorher gelöscht.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 153
+WAIT
+Wartet n Sekunden
+Assembler Syntax:
+WAIT <ea>
+Operation
+Wartet n Sekunden
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+I -
+#B -
+#I -
+#L -
+S[#] -
+S[R] -
+S[R,#] -
+Beschreibung
+Der Befehl wartet <Ziel> Sekunden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 154
+WAITEX
+Wartet n Millisekunden
+Assembler Syntax:
+WAITEX <ea>
+Operation
+Wartet n Millisekunden
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+I -
+#B -
+#I -
+#L -
+S[#] -
+S[R] -
+S[R,#] -
+Beschreibung
+Der Befehl wartet <Ziel> Millisekunden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 155
+XAWLEN
+Einstellen der Antwortlänge des Empfangstelegramms
+Assembler Syntax:
+XAWLEN <ea>
+Operation
+Einstellen der Sonderparameter <Ziel>
+Parameterliste: INT Antwortlänge
+Mit der Antwortlänge wird angegeben, wie lange die
+erwartete SG-Antwort ist.
+Konzept 1, DS1, DS2, Konzept 3:
+positiv: Zahl der erwarteten Bytes im Antworttelegramm des
+SG (Antwortlänge ist konstant)
+negativ: Position der Antwortlänge im Antworttelegramm (ab
+Byte 0).
+Konzept 2 und 4:
+Anzahl der Blöcke, die die gewünschte Information enthalten.
+INT Antwortoffset
+Wird bei negativer Antwortlänge zum ausgelesenen Wert
+hinzuaddiert (sonst 0).
+Länge = (Antwortlänge + 1) + Antwortoffset
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Definiert die gewünschte Antwortlänge für ein spezielles Telegramm. Durch XSETPAR wird
+normalerweise eine Antwortlänge als Default eingestellt, die mit diesem Befehle verändert
+werden kann.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 156
+XBATT
+Ermitteln der Versorgungsspannung
+Assembler Syntax:
+XBATT <ea>
+Operation
+Gibt die Versorgungsspannung in <Ziel> zurück
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Die Versorgungsspannung in Millivolt wird im Register <Ziel> abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 157
+XBOOT
+Löscht alle Einstellungen im Interface
+Assembler Syntax:
+XBOOT
+Operation
+Einstellungen im Interface löschen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Rücksetzen aller eingestellten Parameter, die im Interface gespeichert sind.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 158
+XCLOSE
+Schliessen des aktuellen Interface-Kanals
+Assembler Syntax:
+XCLOSE
+Operation
+Interface-Kanal schliessen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Schliessen des aktuellen Interface-Kanals, falls dieser nicht der Default-Interface-Kanal ist. Der
+Default-Interface-Kanal wird zum aktuellen Kanal.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 159
+XCLOSEEX
+Schliessen aller Interface-Kanäle
+Assembler Syntax:
+XCLOSEEX
+Operation
+Interface-Kanäle schliessen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Schliessen aller Interface-Kanäle mit Ausnahme des Default-Interface-Kanals. Der Default-
+Interface-Kanal wird zum aktuellen Kanal.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 160
+XCONNECT
+Eröffnen einer Kommunikation ("Session")
+Assembler Syntax:
+XCONNECT
+Operation
+Rücksetzen des Kommunikationsinterfaces
+Öffnen der Kommunikationskanäle
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Stellt eine Verbindung zum Interfacehandler her. Dieser öffnet den Treiber um eine
+Kommunikation mit dem Interface zu ermöglichen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 161
+XDOWNL
+Laden des Interface
+Assembler Syntax:
+XDOWNL <ea>
+Operation
+<Ziel> wird ins Interface geladen
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Lädt die Daten aus <Ziel> in das Interface. Die Daten müssen im passenden Format vorliegen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 162
+XGETPORT
+Auslesen eines Ports
+Assembler Syntax:
+XGETPORT <ea>,<ea>
+Operation
+Port[<Quelle>] -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L B I L #B #I #L S[#] S[R] S[R,#]
+Beschreibung
+Auslesen des in <Quelle> (Modulo 256) angebenen Ports. Das Ergebnis steht in <Ziel>.
+EIDBSS: Port 0-5 Analog0 bis Analog5
+6 Klemme15
+7 Klemme30
+8 Jumperfeld
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 163
+XHANGUP
+Schließen der Kommunikation ("Session")
+Assembler Syntax:
+XHANGUP
+Operation
+Schließen der Kommunikationskanäle
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Gegenstück zu XCONNECT. Schließt den Treiber, eine Kommunkiation mit dem Interface ist ab
+diesem Zeitpunkt nicht mehr möglich.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 164
+XIGNIT
+Ermitteln der Spannung an der Klemme 15 (Zündung)
+Assembler Syntax:
+XIGNIT <ea>
+Operation
+Gibt die Zündungsspannung in <Ziel> zurück
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Die Zündungsspannung in Millivolt wird im Register <Ziel> abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 165
+XINFO
+Austausch von Kontrollinformationen mit dem IFH
+Assembler Syntax:
+XINFO <ea>,<ea>
+Operation
+Steuerung des IFH.
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S
+Beschreibung
+Abfrage von Informationen aus dem IFH oder Steuerung des IFH. Im ersten Byte der
+Anforderung muß die Nummer der auszuführenden Funktion stehen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 166
+XKEYB
+Anfordern der Steuergeräte Keybytes (nur bei Konzept 2,3,4)
+Assembler Syntax:
+XKEYB <ea>
+Operation
+Anfordern von Keybytes
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Gibt die im Interface gespeicherten Keybytes und Identifikationsbytes zurück, die beim Reizen
+vom Steuergerät ausgelesen wurden. (Konzept abhängig).
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 167
+XLOOPT
+Testet die Diagnoseleitung
+Assembler Syntax:
+XLOOPT <ea>
+Operation
+Testet die Diagnoseleitung und gibt das Ergebnis der Prüfung in <Ziel> zurück
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+I -
+Beschreibung
+Testet die Diagnoseleitung. Das Ergebis des Tests wird in Register <Ziel> abgelegt. 0 heißt
+defekt, 1 heißt i.O.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 168
+XOPEN
+Öffnen eines Interface-Kanals
+Assembler Syntax:
+XOPEN <ea
+Operation
+<Kanal> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+Beschreibung
+Öffnen eines Kommunikationskanals zum Interface und Rückgabe des Kanal-Handles in <Ziel>.
+Der geöffnete Interface-Kanal wird zum aktuellen Interface-Kanal.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 169
+XOR
+Logisches EXCLUSIV ODER zwischen <Quelle> und <Ziel>
+Assembler Syntax:
+XOR <ea>,<ea>
+Operation
+<Ziel> ^ <Quelle> -> <Ziel>
+Flags
+N Z
+Adressierungsarten
+Ziel Quelle
+B B S[#] S[R] S[R,#] #B
+I I S[#] S[R] S[R,#] #I
+L L S[#] S[R] S[R,#] #L
+S[#] B S[#] S[R] S[R,#] #B
+S[R] B S[#] S[R] S[R,#] #B
+S[R,#] B S[#] S[R] S[R,#] #B
+Beschreibung
+Verknüpft alle Bits des Zieloperanden mit den Bits des Quelloperanden durch ein bitweises
+EXCLUSIV ODER.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 170
+XPROG
+Setzen der Programmierspannung
+Assembler Syntax:
+XPROG <ea>
+Operation
+Setzt die Programmierspannung mit dem Wert aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+I -
+#I -
+Beschreibung
+Die Programmierspannung wird mit dem Wert in <Ziel> (in Millivolt) gesetzt. Ein Wert von 0
+bedeutet Programmierspannung aus.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 171
+XRAW
+Ungeprüften Auftrag (Bytefolge) ans Interface senden
+Assembler Syntax:
+XRAW <ea>,<ea>
+Operation
+Interfaceauftrag in <Quelle> ausführen. Ergebnis nach <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {}
+Beschreibung
+Es wird eine Bytefolge ungeprüft an das Interface geschickt. Es findet keine Überprüfung oder
+Umrechnung der Bytes statt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 172
+XRECVEX
+Empfangen eines SG-Telegramms
+Assembler Syntax:
+XRECVEX <ea>
+Operation
+Empfängt die Antwort in <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Empfang eines Steuergeräte-Telegramms in <Ziel>. Liegt kein Telegramm vor, so wird in <Ziel>
+ein leeres Telegramm abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 173
+XREPS
+Setzen des Wiederholungszählers für Kommunikationsfehler
+Assembler Syntax:
+XREPS <ea>
+Operation
+Repcounter = Quelle
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B -
+I -
+L -
+#B -
+#I -
+#L -
+Beschreibung
+Bei Kommunikationsfehlern, wiederholt EDIABAS mehrmal. Die Anzahl der Wiederholungen
+kann mit diesem Befehl auf <Ziel> eingestellt werden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 174
+XREQUF
+Empfangen eines Telegramms im frequent Modus
+Assembler Syntax:
+XREQUF <ea>
+Operation
+Empfängt im frequent Modus das aktuelle Telegramm in <Ziel>.
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Wurde der frequent Modus mit XSENDF gestartet; kann das jeweils letzte SGAntworttelegramm
+mit diesem Befehl abgeholt werden.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 175
+XRESET
+Löschen der Steuergeräteparameter im Interface
+Assembler Syntax:
+XRESET
+Operation
+Rücksetzen der Steuergeräteparameter
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Rücksetzen der Steuergeräteparameter.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 176
+XSEND
+Senden und Empfangen eines SG-Telegramm
+Assembler Syntax:
+XSEND <ea>,<ea>
+Operation
+Sendet das Telegramm aus <Quelle>
+Empfängt die Antwort in <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {}
+Beschreibung
+Senden des in <Quelle> liegenden Telegramms. Die Antwort steht danach in <Ziel>. <Quelle>
+bleibt unberührt. Bei Konzept 1, Konzept 3, DS1 und DS2 wird die Prüfsumme des Telegramms
+in <Quelle> weggelassen. Bei Konzept 2 und 4 wird das abschließende ETX weggelassen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 177
+XSENDEX
+Senden eines SG-Telegramms (ohne auf Antwort zu warten)
+Assembler Syntax:
+XSENDEX <ea>
+Operation
+Sendet das Telegramm aus <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S {} -
+Beschreibung
+Senden des in <Ziel> liegenden Telegramms. Bei Konzept 1, Konzept 3, DS1 und DS2 wird die
+Prüfsumme des Telegramms in <Ziel> weggelassen. Bei Konzept 2 und 4 wird das abschließende
+ETX weggelassen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 178
+XSENDF
+Senden eines Telegramms im frequent Modus
+Assembler Syntax:
+XSENDF <ea>
+Operation
+Sendet das Telegramm <Quelle> im frequent Modus
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Senden des in <Ziel> liegenden Telegramms im frequent Modus. Die Antwort kann dann mit
+XREQUF abgeholt werden. Bei Konzept 1, Konzept 3, DS1 und DS2 wird die Prüfsumme des
+Telegramms in <Ziel> weggelassen. Bei Konzept 2 und 4 wird das abschließende ETX
+weggelassen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 179
+XSETPAR
+Einstellen der Kommunikationsparameter
+Assembler Syntax:
+XSETPAR <ea>
+Operation
+Einstellen der Kommunikationsparameter <Ziel>
+Parameterliste: INT Konzept: BMW-Konzept 1 = 1
+BMW-Konzept 2 = 2
+BMW-Konzept IHK = 3
+BMW-Konzept DDE = 4
+BMW-Konzept DS1 = 5
+BMW-Konzept DS2 = 6
+INT Baudrate
+INT Reizadresse
+INT Wakeupzeit in 1ms
+(0 ist kein Wakeup)
+INT Idletime in 1ms
+(Zeit zwischen Wakeup und Telegramm)
+INT Timeouttime in 1ms
+(Zeit in der das SG antworten muß)
+INT Regenerationtime in 1ms
+(Zeit zwischen den Telegrammen)
+INT Telegramendtime in 1ms
+(Wartezeit nach dem letzten Byte, nach der auf
+Telegrammenden entschieden wird)
+Optional:
+Bytezwischenzeit
+Checksum
+Angabe wie die Telegrammchecksumme gebildet und
+überprüft werden soll. Wird hier nichts angegeben, wird die
+Checksumme automatisch vom Interface gebildet und die
+Checksumme des empfangenen Telegramms überprüft. Die
+Checksumme ist bitcodiert.
+Bit 0 = 0: Die Checksumme des zu sendenden Telegramms
+muß vom Benutzer gebildet werden.
+Bit 0 = 1: Die Checksumme des zu sendenden Telegramms
+wird vom Interface gebildet.
+Bit 1 = 0: Die Checksumme des empfangenen Telegramms
+wird vom Interface überprüft.
+Bit 1 = 1: Die Checksumme des empfangenen Telegramms
+wird vom Interface nicht überprüft.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 180
+Defaultwerte für den Telegrammvorspann:
+Konzept 1 3 DS1,DS2 (5,6) 2,4 sonst
+Länge -2 52 -1 1 1
+Offset 0 0 0 0 0
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+{} -
+Beschreibung
+Mit diesem Befehl werden die für die Kommunikation mit einem Steuergerät erforderlichen
+Kommunikationsparameter gesetzt. Die Parameter in <Ziel> haben ein interfaceunabhängiges
+Format. Dieser Befehl muß vor dem ersten Ansprechen eines Steuergerätes aufgerufen werden.
+Zusätzlich zu den Kommunikationsparametern wird im EDIABAS entsprechend dem
+eingestellten Konzept der Telegrammvorspann mit Defaultwerten belegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 181
+XSETPORT
+Setzen eines Ports
+Assembler Syntax:
+XSETPORT <ea>,<ea>
+Operation
+<Quelle> -> Port[<Ziel>]
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+B B I L #B #I #L
+I B I L #B #I #L
+L B I L #B #I #L
+#B B I L #B #I #L
+#I B I L #B #I #L
+#L B I L #B #I #L
+S[#] B I L #B #I #L
+S[R] B I L #B #I #L
+S[R,#] B I L #B #I #L
+Beschreibung
+Der in <Ziel> (Modulo 256) angegebene Port wird mit dem Wert aus Quelle gesetzt.
+EIDBSS: 9 Digitale Ausgänge
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 182
+XSIRESET
+Service Intervall Reset
+Assembler Syntax:
+XSIRESET <ea>
+Operation
+Setzt das SI-Relais für <Ziel> ms
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+I -
+#I -
+Beschreibung
+Dieser Befehl schaltet das SI-Relais, für die Zeit (in Millisekunden) von <Ziel>, ein.
+Wert 0xffff: dauerhaft ein
+Wert 0x0000: dauerhaft aus
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 183
+XSTATE
+Anfordern des Interfacestatus
+Assembler Syntax:
+XSTATE <ea>
+Operation
+Anfordern des Interfacestatus
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Auslesen des Interfacezustands. Wenn im Interface ein Telegramm liegt, wird es mit nach <Ziel>
+übertragen.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 184
+XSTOPF
+Stoppen des frequent Modus
+Assembler Syntax:
+XSTOPF
+Operation
+Stoppt das Senden und Empfangen im frequent Modus
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Beendet das Senden und Empfangen von Telegrammen im frequent Modus. Muß gesendet
+werden bevor ein neues Telegramm gesendet werden kann.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 185
+XSTOPTR
+Unterbricht die Kommunikation mit dem Host
+Assembler Syntax:
+XSTOPTR
+Operation
+Kommunikation beenden
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+- -
+Beschreibung
+Das Interface soll die Schnittstelle zum Host nicht mehr benutzen !
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 186
+XSWITCH
+Wechsel des Interface-Kanals
+Assembler Syntax:
+XSWITCH <ea>
+Operation
+<aktueller Kanal> -> <Ziel>
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+L -
+#L -
+Beschreibung
+Wechsel zum Interface-Kanal <Ziel>. Durch Übergabe des Werts 0 kann zum Default-Interface-
+Kanal gewechselt werden. Der Interface-Kanal <Ziel> wird zum aktuellen Interface-Kanal.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 187
+XTYPE
+Ermitteln des Interfacetyps
+Assembler Syntax:
+XTYPE <ea>
+Operation
+Gibt den Interfacetyp in <Ziel> zurück
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Der Interfacetyp wird in <Ziel> als Text abgelegt.
+Mögliche Interfaces: "EIDBSS"
+"IDBSS"
+"PICO"
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 188
+XVERS
+Ermitteln der Interfaceversion
+Assebler Syntax:
+XVERS <ea>
+Operation
+Gibt die Interfaceversion in <Ziel> zurück
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S -
+Beschreibung
+Die Interfaceversion wird in Ziel abgelegt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 189
+Y2BCD
+Bytefolge in BCD-String konvertieren
+Assembler Syntax:
+Y2BCD <ea>,<ea>
+Operation
+Für jeweils ein Byte von <Quelle> 2 Zeichen in <Ziel> ablegen:
+Bit 0-3 (Quelle) -> 1. Zeichen (Ziel)
+Bit 4-7 (Quelle) -> 2. Zeichen (Ziel)
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {} S[#]# S[#]R S[R]# S[R]R
+Beschreibung
+Konvertiert eine Bytefolge in einen nullterminierten String (BCD-codiert). Das S Register wird
+vorher gelöscht. Für jedes nichtkonvertierbare Byte werden die Zeichen "**" abgelegt und die
+Konvertierung fortgesetzt.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 190
+Y42FLT
+Bytefolge (4 Byte) nach Double konvertieren
+Assembler Syntax:
+Y42FLT <ea>,<ea>
+Operation
+<Quelle> in Double konvertieren und in <Ziel> speichern
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F S {} S[#] S[R] S[R,#]
+Beschreibung
+Interpretiert eine 4 Bytefolge als Double und legt den entsprechenden Wert in <Ziel> ab.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 191
+Y82FLT
+Bytefolge (8 Byte) nach Double konvertieren
+Assembler Syntax:
+Y82FLT <ea>,<ea>
+Operation
+<Quelle> in Double konvertieren und in <Ziel> speichern
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+F S {} S[#] S[R] S[R,#]
+Beschreibung
+Interpretiert eine 8 Bytefolge als Double und legt den entsprechenden Wert in <Ziel> ab.
+EDIABAS-BEST / 1 Handbuch Version 1.18
+Seite 192
+Y2HEX
+Bytefolge in Hexadezimalstring konvertieren
+Assembler Syntax:
+Y2HEX <ea>,<ea>
+Operation
+Für jeweils ein Byte von <Quelle> 2 Zeichen in <Ziel> ablegen:
+Bit 0-3 (Quelle) -> 1. Zeichen (Ziel)
+Bit 4-7 (Quelle) -> 2. Zeichen (Ziel)
+Flags
+-
+Adressierungsarten
+Ziel Quelle
+S S {} S[#]# S[#]R S[R]# S[R]R
+Beschreibung
+Konvertiert eine Bytefolge in einen nullterminierten String (hexadezimal). Das S Register wird
+vorher gelöscht.
